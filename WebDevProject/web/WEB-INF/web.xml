@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	 version="3.1">
+
+
+    <servlet>
+        <servlet-name>Courses</servlet-name>
+        <servlet-class>/#</servlet-class>
+    </servlet>
+
+    <!-- NavBar Elements -->     
+    <servlet>
+        <servlet-name>Payment</servlet-name>
+        <jsp-file>payment.jsp</jsp-file>    
+    </servlet>  
+    <servlet>
+        <servlet-name>CourseSelect</servlet-name>
+        <jsp-file>courseSelect.jsp</jsp-file>       
+    </servlet>
+    <servlet>
+        <servlet-name>AcademicRecords</servlet-name>
+        <jsp-file>academicRecords.jsp</jsp-file>      
+    </servlet>
+    <servlet>
+        <servlet-name>FinancialRecords</servlet-name>
+        <jsp-file>financialRecords.jsp</jsp-file>      
+    </servlet>
+    <servlet>
+        <servlet-name>GradeEntry</servlet-name>
+        <jsp-file>gradeEntry.jsp</jsp-file>     
+    </servlet> 
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <jsp-file>index.jsp</jsp-file>     
+    </servlet>
+    <!-- End NavBar Elements -->
+    
+    <servlet-mapping>
+        <servlet-name>Courses</servlet-name>
+        <url-pattern>/#</url-pattern>
+    </servlet-mapping>
+    
+    <!-- NavBar Elements -->
+    <servlet-mapping>
+        <servlet-name>CourseSelect</servlet-name>
+        <url-pattern>/courseSelect</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Payment</servlet-name>
+        <url-pattern>/payment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AcademicRecords</servlet-name>
+        <url-pattern>/academicRecords</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FinancialRecords</servlet-name>
+        <url-pattern>/financialRecords</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GradeEntry</servlet-name>
+        <url-pattern>/gradeEntry</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <!-- End NavBar Elements -->
+    
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.php</welcome-file>
+    </welcome-file-list>   
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

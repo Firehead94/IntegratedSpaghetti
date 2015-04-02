@@ -1,0 +1,16 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 22, 2015, 1:32:03 AM
+    Author     : Justin
+*/
+
+.bottomBar {
+    text-align: right;
+    background-color: #888888;
+    padding: 5px;
+    float: clear;
+}
