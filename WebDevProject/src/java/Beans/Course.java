@@ -6,125 +6,87 @@
 package Beans;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 /**
  *
  * @author Justin
  */
-public class Course implements Serializable, Comparable<Course> {
+public class Course implements Serializable {
     
-    private String title;
-    private int regCode;
-    private String instructor;
-    private String courseNum;
-    private double credits;
-    private String day;
-    private String time;
-    private String term;
-    private char campusCode;
-    
-    public char getCampusCode() {
-        return campusCode;
-    }
-    
-    public String getTime() {
-        return time;
-    }
-    
-    public String getTerm() {
-        return term;
-    }
-    
-    public String getTitle() {
-        return title;
-    }
-    
-    public int getRegCode() {
-        return regCode;
-    }
-    
-    public String getInstructor() {
-        return instructor;
-    }
-    
-    public String getCourseNum() {
-        return courseNum;
-    }
-    
-    public double getCredits() {
-        return credits;
-    }
-    
-    public String getDay() {
-        return day;
-    }
-    
-    public void setCampusCode(char campusCode) {
-        this.campusCode = campusCode;
-    }
-    
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    
-    public void setRegCode(String regCode) {
-        String newRegCode;
-        if (regCode.charAt(0) <= '/' ||  regCode.charAt(0) >= ':') {
-            setCampusCode(regCode.charAt(0));
-            newRegCode = regCode.substring(1);
-        }else {
-            newRegCode = regCode;
-        }
-        try {
-            this.regCode = Integer.parseInt(newRegCode);
-        } catch (NumberFormatException e) {
-            System.out.println(regCode + " is Not a valid registration code");
-        }
-    }
-    
-    public void setInstructor(String instructor) {
-        this.instructor = instructor;
-    }
-    
-    public void setCourseNum(String courseNum) {
-        this.courseNum = courseNum;
-    }
-    
-    public void setCredits(double credits) {
-        this.credits = credits;
-    }
-    
-    public void setDay(String day) {
-        this.day = day;
-    }
-    
-    public void setTerm(String term) {
-        this.term = term;
-    }
-    
-    public void setTime(String time) {
-        this.time = time;
+    private int course_ID;
+    private String course_title;
+    private int course_credits;
+    private int course_cost;
+    private int dept_ID;
+
+    /**
+     * @return the course_ID
+     */
+    public int getCourse_ID() {
+        return course_ID;
     }
 
-    @Override
-    public int compareTo(Course other) {
-        return this.regCode != other.regCode ? this.regCode > other.regCode ? 1 : -1 : 0;
+    /**
+     * @return the course_title
+     */
+    public String getCourse_title() {
+        return course_title;
+    }
+
+    /**
+     * @return the course_credits
+     */
+    public int getCourse_credits() {
+        return course_credits;
+    }
+
+    /**
+     * @return the course_cost
+     */
+    public int getCourse_cost() {
+        return course_cost;
+    }
+
+    /**
+     * @return the dept_ID
+     */
+    public int getDept_ID() {
+        return dept_ID;
+    }
+
+    /**
+     * @param course_ID the course_ID to set
+     */
+    public void setCourse_ID(int course_ID) {
+        this.course_ID = course_ID;
+    }
+
+    /**
+     * @param course_title the course_title to set
+     */
+    public void setCourse_title(String course_title) {
+        this.course_title = course_title;
+    }
+
+    /**
+     * @param course_credits the course_credits to set
+     */
+    public void setCourse_credits(int course_credits) {
+        this.course_credits = course_credits;
+    }
+
+    /**
+     * @param course_cost the course_cost to set
+     */
+    public void setCourse_cost(int course_cost) {
+        this.course_cost = course_cost;
+    }
+
+    /**
+     * @param dept_ID the dept_ID to set
+     */
+    public void setDept_ID(int dept_ID) {
+        this.dept_ID = dept_ID;
     }
     
-    @Override
-    public int hashCode() {
-         return Arrays.hashCode(new Object[]{new String(title), new String(time), new String(day),
-             new String(instructor), new String(courseNum), new String(term), new Integer(regCode),
-             new Double(credits), new Character(campusCode)});
-    }
-    
-    @Override 
-    public boolean equals(Object other) {
-         if (!(other instanceof Course)){
-             return false;
-         }
-         Course otherCourse = (Course) other;
-         return this.regCode == otherCourse.regCode;
-    }
 }
