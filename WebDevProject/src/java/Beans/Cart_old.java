@@ -9,12 +9,12 @@ import java.io.Serializable;
 import java.util.TreeSet;
 
 /**
- *
+ * Needs to be redone once we settle on reg_code shit.
  * @author Justin
  */
 public class Cart_old implements Serializable {
-    
-    private TreeSet<Course_old> cart;
+    /*
+    private TreeSet<Section> cart;
     
     public Cart_old() {
         cart = new TreeSet<>();
@@ -32,6 +32,6 @@ public class Cart_old implements Serializable {
         return cart.size();
     }
     
-    
+    */
     
 }
