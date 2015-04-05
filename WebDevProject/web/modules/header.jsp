@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="css/header.css" type="text/css" />
 
 <header class="bar">
-    <form>
+    <form action="login" method="post">
         <input type="submit" value="Login:" />
         <input type="textbox" size="10" name="loginInfo" placeholder="username" />
         <input type="password" size="5" name="loginInfo" placeholder="password" />

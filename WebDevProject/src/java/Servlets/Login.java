@@ -48,6 +48,13 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String url = "";
         
+        String action = request.getParameterValues("action")[0];
+        
+        if (action.equals("login")) {
+            
+            
+        }
+        
         
         
         
