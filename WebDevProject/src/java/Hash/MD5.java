@@ -18,11 +18,20 @@ public class MD5 {
     
     private final String md5pass;
     
-    public MD5(String pass) throws NoSuchAlgorithmException, UnsupportedEncodingException
+    public MD5(String pass) // throws NoSuchAlgorithmException, UnsupportedEncodingException
+	// swapped out for internal handling
     {
-        MessageDigest md5 = MessageDigest.getInstance("MD5");
-        md5.update(pass.getBytes("UTF-8"),0,pass.length());
-        md5pass = new BigInteger(1, md5.digest()).toString(16);
+        try {
+		MessageDigest md5 = MessageDigest.getInstance("MD5");
+	        md5.update(pass.getBytes("UTF-8"),0,pass.length());
+        	md5pass = new BigInteger(1, md5.digest()).toString(16);
+	} catch(NoSuchAlgorithmException nsa) {
+		System.err.println("Algorithm doesn't exist. This should never happen because "
+			+ "the algorithm is predefinied in the Java library. "
+			+ "All hell must have broken loose.";
+	} catch(UnsupportedEncodingException uee) { 
+		Systme.err.println("Unsupported Encoding. Some done messed up.");
+	}
     }
     
     public String getHash()
