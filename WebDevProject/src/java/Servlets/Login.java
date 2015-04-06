@@ -5,7 +5,7 @@
  */
 package Servlets;
 
-import hash.MD5;
+import Hash.MD5;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
@@ -59,16 +59,13 @@ public class Login extends HttpServlet {
             String username = request.getParameterValues("loginInfo")[0];
             String password = request.getParameterValues("loginInfo")[1];
             
-            try {
-                hash = new MD5(password);                
-            } catch (NoSuchAlgorithmException e) {
-                System.out.println(e.getStackTrace());
-            }
+            hash = new MD5(password);
             
             if(hash != null) {
                 
                 
-                
+                // good catch on the null. took out try/catch blocks,
+                // it's internally handled by MD5.
                 
             }
 

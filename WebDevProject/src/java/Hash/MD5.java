@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hash; //this package name may need to be modified to fit the correct package location in the project
+package Hash; //this package name may need to be modified to fit the correct package location in the project
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -16,7 +16,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class MD5 {
     
-    private final String md5pass;
+    private String md5pass;
     
     public MD5(String pass) // throws NoSuchAlgorithmException, UnsupportedEncodingException
 	// swapped out for internal handling
@@ -28,9 +28,9 @@ public class MD5 {
 	} catch(NoSuchAlgorithmException nsa) {
 		System.err.println("Algorithm doesn't exist. This should never happen because "
 			+ "the algorithm is predefinied in the Java library. "
-			+ "All hell must have broken loose.";
+			+ "All hell must have broken loose.");
 	} catch(UnsupportedEncodingException uee) { 
-		Systme.err.println("Unsupported Encoding. Some done messed up.");
+		System.err.println("Unsupported Encoding. Some done messed up.");
 	}
     }
     
