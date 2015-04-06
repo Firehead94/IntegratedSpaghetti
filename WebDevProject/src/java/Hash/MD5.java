@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hash;
+package hash; //this package name may need to be modified to fit the correct package location in the project
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
