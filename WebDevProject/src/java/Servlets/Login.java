@@ -5,8 +5,10 @@
  */
 package Servlets;
 
+import hash.MD5;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,6 +54,28 @@ public class Login extends HttpServlet {
         
         if (action.equals("login")) {
             
+            MD5 hash = null;
+            
+            String username = request.getParameterValues("loginInfo")[0];
+            String password = request.getParameterValues("loginInfo")[1];
+            
+            try {
+                hash = new MD5(password);                
+            } catch (NoSuchAlgorithmException e) {
+                System.out.println(e.getStackTrace());
+            }
+            
+            if(hash != null) {
+                
+                
+                
+                
+            }
+
+            
+            
+            //Check db for username and password
+            //set logged in true and display username
             
         }
         
