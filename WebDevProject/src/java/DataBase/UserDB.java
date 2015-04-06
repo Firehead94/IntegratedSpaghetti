@@ -24,7 +24,7 @@ import java.util.logging.Logger;
  */
 public class UserDB {
     
-    public static User validateLogin(String username, String hash) {
+    public static User getUser(String username, String hash) {
         
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -63,6 +63,35 @@ public class UserDB {
         } catch (ParseException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
             return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        
+    }
+    
+    public static boolean validateUser(String username, String hash) {
+        
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String query = "SELECT COUNT(*) FROM USERS " +
+                       "WHERE USERNAME = ? AND PASSWORD = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, hash);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            return false;
         } finally {
             DBUtil.closeResultSet(rs);
             DBUtil.closePreparedStatement(ps);

@@ -73,10 +73,6 @@ public class Login extends HttpServlet {
             }
 
             
-            
-            //Check db for username and password
-            //set logged in true and display username
-            
         }
         
         
