@@ -32,18 +32,19 @@ public class UserDB {
         ResultSet rs = null;
         
         String query = "SELECT * FROM USERS " +
-                       "WHERE PASSWORD = ?";
+                       "WHERE USERNAME = ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, hash);
+            ps.setString(1, username);
             rs = ps.executeQuery();
             User user = null;
-            if (rs.next() && rs.getString(username.toLowerCase()).equals(username.toLowerCase())) {
+            if (rs.next() && rs.getString(hash).equals(hash)) {
+                user = new User();                
                 String date = rs.getString("USER_CREATION_DATE");
                 DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
                 user.setUser_creation_date(format.parse(date));
 
-                user = new User();
+                user.setUsername(rs.getString("USERNAME"));
                 user.setUser_ID(Integer.parseInt(rs.getString("USER_ID")));
                 user.setStu_ID(Integer.parseInt(rs.getString("STU_ID")));
                 user.setFaculty_ID(Integer.parseInt(rs.getString("FACULTY_ID")));

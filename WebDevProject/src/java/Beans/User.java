@@ -26,6 +26,7 @@ public class User implements Serializable {
     private String user_country;
     private String user_password;
     private Date user_creation_date;
+    private String username;
 
     /**
      * @return the user_ID
@@ -193,6 +194,20 @@ public class User implements Serializable {
      */
     public void setUser_creation_date(Date user_creation_date) {
         this.user_creation_date = user_creation_date;
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
     }
     
     
