@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="css/header.css" type="text/css" />
 
 <header class="bar">
-    <form action="login" method="post">
+    <form action="login" method="get">
         <input type="submit" value="Login:" />
-        <input type="textbox" size="10" name="loginInfo" placeholder="username" />
-        <input type="password" size="5" name="loginInfo" placeholder="password" />
+        <input type="textbox" size="10" name="user" placeholder="username" />
+        <input type="password" size="5" name="pass" placeholder="password" />
     </form>
 </header>
 <section class="banner">

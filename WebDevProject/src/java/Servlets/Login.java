@@ -9,6 +9,7 @@ import Hash.MD5;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Justin
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
+@WebServlet(name = "Login", urlPatterns = {"/login"})
 public class Login extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -50,22 +51,23 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String url = "";
         
-        String action = request.getParameterValues("action")[0];
+        //String action = request.getParameterValues("action")[0];
+        Map map = request.getParameterMap();
         
-        if (action.equals("login")) {
+        
+        if (map.containsKey("user") && map.containsKey("pass")) {
             
             MD5 hash = null;
             
-            String username = request.getParameterValues("loginInfo")[0];
-            String password = request.getParameterValues("loginInfo")[1];
+            String username = (String)map.get("user");
+            String password = (String)map.get("pass");
             
             hash = new MD5(password);
             
             if(hash != null) {
                 
                 
-                // good catch on the null. took out try/catch blocks,
-                // it's internally handled by MD5.
+                // placeholder for DB initialization and query
                 
             }
 
