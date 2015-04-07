@@ -52,22 +52,26 @@ public class Login extends HttpServlet {
         String url = "";
         
         //String action = request.getParameterValues("action")[0];
-        Map map = request.getParameterMap();
+        Map<String,String[]> map = request.getParameterMap();
         
         
-        if (map.containsKey("user") && map.containsKey("pass")) {
+        if (map.containsKey("loginInfo")) {
             
-            MD5 hash = null;
+            String hash = null;
+
+            String username = map.get("loginInfo")[0];
+            String password = map.get("loginInfo")[1];
             
-            String username = (String)map.get("user");
-            String password = (String)map.get("pass");
-            
-            hash = new MD5(password);
+            hash = new MD5(password).getHash();            
             
             if(hash != null) {
                 
-                
+                System.err.println("Hash was not null");
                 // placeholder for DB initialization and query
+                url = "/test.jsp";
+                request.setAttribute("username",username);
+                request.setAttribute("hash",hash);
+                // tested this, and it works
                 
             }
 
