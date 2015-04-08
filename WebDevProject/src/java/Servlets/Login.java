@@ -9,6 +9,7 @@ import Hash.MD5;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Justin
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
+@WebServlet(name = "Login", urlPatterns = {"/login"})
 public class Login extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -50,22 +51,27 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String url = "";
         
-        String action = request.getParameterValues("action")[0];
+        //String action = request.getParameterValues("action")[0];
+        Map<String,String[]> map = request.getParameterMap();
         
-        if (action.equals("login")) {
+        
+        if (map.containsKey("loginInfo")) {
             
-            MD5 hash = null;
+            String hash = null;
+
+            String username = map.get("loginInfo")[0];
+            String password = map.get("loginInfo")[1];
             
-            String username = request.getParameterValues("loginInfo")[0];
-            String password = request.getParameterValues("loginInfo")[1];
-            
-            hash = new MD5(password);
+            hash = new MD5(password).getHash();            
             
             if(hash != null) {
                 
-                
-                // good catch on the null. took out try/catch blocks,
-                // it's internally handled by MD5.
+                System.err.println("Hash was not null");
+                // placeholder for DB initialization and query
+                url = "/test.jsp";
+                request.setAttribute("username",username);
+                request.setAttribute("hash",hash);
+                // tested this, and it works
                 
             }
 

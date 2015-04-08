@@ -36,6 +36,10 @@
         <servlet-name>Home</servlet-name>
         <jsp-file>index.jsp</jsp-file>     
     </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>Servlets.Login</servlet-class>
+    </servlet>
     <!-- End NavBar Elements -->
     
     <servlet-mapping>
@@ -67,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <!-- End NavBar Elements -->
     
