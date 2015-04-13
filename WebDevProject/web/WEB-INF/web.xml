@@ -6,10 +6,7 @@
 	 version="3.1">
 
 
-    <servlet>
-        <servlet-name>Courses</servlet-name>
-        <servlet-class>/#</servlet-class>
-    </servlet>
+
 
     <!-- NavBar Elements -->     
     <servlet>
@@ -41,12 +38,7 @@
         <servlet-class>Servlets.Login</servlet-class>
     </servlet>
     <!-- End NavBar Elements -->
-    
-    <servlet-mapping>
-        <servlet-name>Courses</servlet-name>
-        <url-pattern>/#</url-pattern>
-    </servlet-mapping>
-    
+
     <!-- NavBar Elements -->
     <servlet-mapping>
         <servlet-name>CourseSelect</servlet-name>
