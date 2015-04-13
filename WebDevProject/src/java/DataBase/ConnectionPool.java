@@ -18,7 +18,7 @@ public class ConnectionPool {
         
         try {
             InitialContext ic = new InitialContext();
-            dataSource = (DataSource) ic.lookup("jdbc/IntegratedWeb");
+            dataSource = (DataSource) ic.lookup("jdbc/integratedweb");
         } catch (NamingException e) {
             System.out.println(e);
         }
