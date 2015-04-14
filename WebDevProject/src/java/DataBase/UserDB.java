@@ -252,27 +252,22 @@ public class UserDB {
             rs = ps.executeQuery();
             if (rs.next()) {                
                 user = new User();
-        
-                String date = rs.getString("USER_CREATION_DATE");
-                DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
-                user.setUser_creation_date(format.parse(date));
-
+                
+                user.setUser_creation_date(rs.getDate("USER_CREATION_DATE"));
                 user.setUsername(rs.getString("USERNAME"));
-                user.setUser_ID(Integer.parseInt(rs.getString("USER_ID")));
-                user.setStu_ID(Integer.parseInt(rs.getString("STU_ID")));
-                user.setFaculty_ID(Integer.parseInt(rs.getString("FACULTY_ID")));
+                user.setUser_ID(rs.getInt("USER_ID"));
+                user.setStu_ID(rs.getInt("STU_ID"));
+                user.setFaculty_ID(rs.getInt("FACULTY_ID"));
                 user.setUser_address(rs.getString("USER_ADDRESS"));
                 user.setUser_city(rs.getString("USER_CITY"));
                 user.setUser_state(rs.getString("USER_STATE"));
-                user.setUser_zip(Integer.parseInt(rs.getString("USER_ZIP")));
+                user.setUser_zip(rs.getInt("USER_ZIP"));
                 user.setUser_country(rs.getString("USER_COUNTRY"));
                 user.setUser_first_name(rs.getString("USER_FIRST_NAME"));
                 user.setUser_last_name(rs.getString("USER_LAST_NAME"));
 
             }
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
-        } catch (ParseException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closeResultSet(rs);
@@ -298,13 +293,13 @@ public class UserDB {
                 
                 user.setUser_creation_date(rs.getDate("USER_CREATION_DATE"));
                 user.setUsername(rs.getString("USERNAME"));
-                user.setUser_ID(Integer.parseInt(rs.getString("USER_ID")));
-                user.setStu_ID(Integer.parseInt(rs.getString("STU_ID")));
-                user.setFaculty_ID(Integer.parseInt(rs.getString("FACULTY_ID")));
+                user.setUser_ID(rs.getInt("USER_ID"));
+                user.setStu_ID(rs.getInt("STU_ID"));
+                user.setFaculty_ID(rs.getInt("FACULTY_ID"));
                 user.setUser_address(rs.getString("USER_ADDRESS"));
                 user.setUser_city(rs.getString("USER_CITY"));
                 user.setUser_state(rs.getString("USER_STATE"));
-                user.setUser_zip(Integer.parseInt(rs.getString("USER_ZIP")));
+                user.setUser_zip(rs.getInt("USER_ZIP"));
                 user.setUser_country(rs.getString("USER_COUNTRY"));
                 user.setUser_first_name(rs.getString("USER_FIRST_NAME"));
                 user.setUser_last_name(rs.getString("USER_LAST_NAME"));
