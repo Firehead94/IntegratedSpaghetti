@@ -25,6 +25,14 @@ import java.util.logging.Logger;
  */
 public class UserDB {
     
+    /**
+     * Validates a users login information. Will return true if the user has 
+     * entered the correct credentials.
+     * 
+     * @param username Username entered in by user
+     * @param hash UD5 hash generated from password
+     * @return 
+     */
     public static boolean validateUser(String username, String hash) {
         
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -54,6 +62,12 @@ public class UserDB {
         
     }
     
+    /**
+     * Gets a user by their student id.
+     * 
+     * @param student_ID
+     * @return 
+     */
     public static User getUserByStudentID(int student_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -73,6 +87,12 @@ public class UserDB {
         return getFromDB(ps);
     }
     
+    /**
+     * Gets a user by their faculty id.
+     * 
+     * @param faculty_ID
+     * @return 
+     */
     public static User getUserByFacultyID(int faculty_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -92,6 +112,12 @@ public class UserDB {
         return getFromDB(ps);
     }
     
+    /**
+     * Gets a user by their username.
+     * 
+     * @param username
+     * @return 
+     */
     public static User getUserByUsername(String username) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -111,22 +137,113 @@ public class UserDB {
         return getFromDB(ps);
     }
     
+    /**
+     * Gets a list of users enrolled in a certain section of a class. A section 
+     * is specific to date, time, location, room number and course id.
+     * 
+     * @param reg_code
+     * @return 
+     */
     public static ArrayList<User> getUsersByRegistrationCode(String reg_code) {
-        throw new UnsupportedOperationException("Unimplemented yet");
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "SELECT * FROM USERS u, REGISTRATION r " +
+                "WHERE r.REG_CODE = ? && r.STU_ID = u.STU_ID";
+        try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, reg_code);
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }        
+        return getListFromDB(ps);
     }
     
+    /**
+     * Gets a list of users in a specific course (ex. all users in a CIS 2353
+     * class).
+     * 
+     * @param course_ID
+     * @return 
+     */
     public static ArrayList<User> getUsersByCourseID(int course_ID) {
-        throw new UnsupportedOperationException("Unimplemented yet");
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "SELECT * FROM USERS u, REGISTRATION r " +
+                "WHERE u.STU_ID = r.STU_ID && r.COURSE_ID = ?";
+        try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, Integer.toString(course_ID));
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }        
+        return getListFromDB(ps);
     }
     
+    /**
+     * Gets a list of users with like first names.
+     * 
+     * @param name
+     * @return 
+     */
     public static ArrayList<User> getUserByFirstName(String name) {
-        throw new UnsupportedOperationException("Unimplemented yet");
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "SELECT * FROM USERS " +
+                "WHERE USER_FIRST_NAME = ?";
+        try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, name);
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }        
+        return getListFromDB(ps);
     }
     
+    /**
+     * Gets a list of users with like last names.
+     * 
+     * @param name
+     * @return 
+     */
     public static ArrayList<User> getUserByLastName(String name) {
-        throw new UnsupportedOperationException("Unimplemented yet");
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "SELECT * FROM USERS " +
+                "WHERE USER_LAST_NAME = ?";
+        try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, name);
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }        
+        return getListFromDB(ps);
     }
-    
+     
+    /**
+     * Gets a single user bean from the a DB based on a prepared statement
+     * @param ps
+     * @return 
+     */
     private static User getFromDB(PreparedStatement ps) {
 
         ResultSet rs = null;
@@ -134,39 +251,72 @@ public class UserDB {
         try {
             rs = ps.executeQuery();
             if (rs.next()) {                
-                user = getUser(rs);
+                user = new User();
+        
+                String date = rs.getString("USER_CREATION_DATE");
+                DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
+                user.setUser_creation_date(format.parse(date));
+
+                user.setUsername(rs.getString("USERNAME"));
+                user.setUser_ID(Integer.parseInt(rs.getString("USER_ID")));
+                user.setStu_ID(Integer.parseInt(rs.getString("STU_ID")));
+                user.setFaculty_ID(Integer.parseInt(rs.getString("FACULTY_ID")));
+                user.setUser_address(rs.getString("USER_ADDRESS"));
+                user.setUser_city(rs.getString("USER_CITY"));
+                user.setUser_state(rs.getString("USER_STATE"));
+                user.setUser_zip(Integer.parseInt(rs.getString("USER_ZIP")));
+                user.setUser_country(rs.getString("USER_COUNTRY"));
+                user.setUser_first_name(rs.getString("USER_FIRST_NAME"));
+                user.setUser_last_name(rs.getString("USER_LAST_NAME"));
+
             }
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } catch (ParseException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
-            return null;
         } finally {
             DBUtil.closeResultSet(rs);
         }
         return user;
     }
     
-    private static User getUser(ResultSet rs) throws SQLException, ParseException {
-        User user = new User();
-        
-        String date = rs.getString("USER_CREATION_DATE");
-        DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
-        user.setUser_creation_date(format.parse(date));
-
-        user.setUsername(rs.getString("USERNAME"));
-        user.setUser_ID(Integer.parseInt(rs.getString("USER_ID")));
-        user.setStu_ID(Integer.parseInt(rs.getString("STU_ID")));
-        user.setFaculty_ID(Integer.parseInt(rs.getString("FACULTY_ID")));
-        user.setUser_address(rs.getString("USER_ADDRESS"));
-        user.setUser_city(rs.getString("USER_CITY"));
-        user.setUser_state(rs.getString("USER_STATE"));
-        user.setUser_zip(Integer.parseInt(rs.getString("USER_ZIP")));
-        user.setUser_country(rs.getString("USER_COUNTRY"));
-        user.setUser_first_name(rs.getString("USER_FIRST_NAME"));
-        user.setUser_last_name(rs.getString("USER_LAST_NAME"));
-        
-        return user;
+    /**
+     * Gets a list of user beans from a DB based on a prepared
+     * statement.
+     * 
+     * @param ps
+     * @return 
+     */
+    private static ArrayList<User> getListFromDB(PreparedStatement ps) {
+        ResultSet rs = null;
+        ArrayList<User> users = null;
+        try {
+            rs = ps.executeQuery();
+            users = new ArrayList<User>();
+            while (rs.next()) {                                
+                User user = new User();
+                
+                user.setUser_creation_date(rs.getDate("USER_CREATION_DATE"));
+                user.setUsername(rs.getString("USERNAME"));
+                user.setUser_ID(Integer.parseInt(rs.getString("USER_ID")));
+                user.setStu_ID(Integer.parseInt(rs.getString("STU_ID")));
+                user.setFaculty_ID(Integer.parseInt(rs.getString("FACULTY_ID")));
+                user.setUser_address(rs.getString("USER_ADDRESS"));
+                user.setUser_city(rs.getString("USER_CITY"));
+                user.setUser_state(rs.getString("USER_STATE"));
+                user.setUser_zip(Integer.parseInt(rs.getString("USER_ZIP")));
+                user.setUser_country(rs.getString("USER_COUNTRY"));
+                user.setUser_first_name(rs.getString("USER_FIRST_NAME"));
+                user.setUser_last_name(rs.getString("USER_LAST_NAME"));
+                
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closeResultSet(rs);
+        }
+        return users;
     }
     
 }
