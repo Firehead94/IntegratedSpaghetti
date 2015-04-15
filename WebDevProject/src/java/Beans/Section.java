@@ -14,34 +14,67 @@ import java.io.Serializable;
  */
 public class Section implements Serializable {
     
-    private int stu_ID;
-    private int section_day_code;
-    private String section_times;
+    private int faculty_ID;
+    private int section_day;
+    private String section_time;
+    private String section_location;
     private int course_ID;
-    private String dept_abr;
-    private int course_credits;
-    private int course_cost;
-    private String reg_code;
+    private String section_num;
 
     /**
-     * @return the stu_ID
+     * @return the faculty_ID
      */
-    public int getStu_ID() {
-        return stu_ID;
+    public int getFaculty_ID() {
+        return faculty_ID;
     }
 
     /**
-     * @return the section_day_code
+     * @param faculty_ID the faculty_ID to set
      */
-    public int getSection_day_code() {
-        return section_day_code;
+    public void setFaculty_ID(int faculty_ID) {
+        this.faculty_ID = faculty_ID;
     }
 
     /**
-     * @return the section_times
+     * @return the section_day
      */
-    public String getSection_times() {
-        return section_times;
+    public int getSection_day() {
+        return section_day;
+    }
+
+    /**
+     * @param section_day the section_day to set
+     */
+    public void setSection_day(int section_day) {
+        this.section_day = section_day;
+    }
+
+    /**
+     * @return the section_time
+     */
+    public String getSection_time() {
+        return section_time;
+    }
+
+    /**
+     * @param section_time the section_time to set
+     */
+    public void setSection_time(String section_time) {
+        this.section_time = section_time;
+    }
+
+    /**
+     * @return the section_location
+     */
+    public String getSection_location() {
+        return section_location;
+    }
+
+    /**
+     * @param section_location the section_location to set
+     */
+    public void setSection_location(String section_location) {
+        this.section_location = section_location;
     }
 
     /**
@@ -52,55 +85,6 @@ public class Section implements Serializable {
     }
 
     /**
-     * @return the dept_abr
-     */
-    public String getDept_abr() {
-        return dept_abr;
-    }
-
-    /**
-     * @return the course_credits
-     */
-    public int getCourse_credits() {
-        return course_credits;
-    }
-
-    /**
-     * @return the course_cost
-     */
-    public int getCourse_cost() {
-        return course_cost;
-    }
-
-    /**
-     * @return the reg_code
-     */
-    public String getReg_code() {
-        return reg_code;
-    }
-
-    /**
-     * @param stu_ID the stu_ID to set
-     */
-    public void setStu_ID(int stu_ID) {
-        this.stu_ID = stu_ID;
-    }
-
-    /**
-     * @param section_day_code the section_day_code to set
-     */
-    public void setSection_day_code(int section_day_code) {
-        this.section_day_code = section_day_code;
-    }
-
-    /**
-     * @param section_times the section_times to set
-     */
-    public void setSection_times(String section_times) {
-        this.section_times = section_times;
-    }
-
-    /**
      * @param course_ID the course_ID to set
      */
     public void setCourse_ID(int course_ID) {
@@ -108,32 +92,17 @@ public class Section implements Serializable {
     }
 
     /**
-     * @param dept_abr the dept_abr to set
+     * @return the section_num
      */
-    public void setDept_abr(String dept_abr) {
-        this.dept_abr = dept_abr;
+    public String getSection_num() {
+        return section_num;
     }
 
     /**
-     * @param course_credits the course_credits to set
+     * @param section_num the section_num to set
      */
-    public void setCourse_credits(int course_credits) {
-        this.course_credits = course_credits;
+    public void setSection_num(String section_num) {
+        this.section_num = section_num;
     }
-
-    /**
-     * @param course_cost the course_cost to set
-     */
-    public void setCourse_cost(int course_cost) {
-        this.course_cost = course_cost;
-    }
-
-    /**
-     * @param reg_code the reg_code to set
-     */
-    public void setReg_code(String reg_code) {
-        this.reg_code = reg_code;
-    }
-    
-    
+   
 }

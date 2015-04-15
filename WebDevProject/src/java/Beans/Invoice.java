@@ -18,6 +18,7 @@ public class Invoice implements Serializable {
     private int stu_ID;
     private int invoice_payment;
     private Date invoice_date;
+    private int creditCard_num;
 
     /**
      * @return the invoice_ID
@@ -73,6 +74,20 @@ public class Invoice implements Serializable {
      */
     public void setInvoice_date(Date invoice_date) {
         this.invoice_date = invoice_date;
+    }
+
+    /**
+     * @return the creditCard_num
+     */
+    public int getCreditCard_num() {
+        return creditCard_num;
+    }
+
+    /**
+     * @param creditCard_num the creditCard_num to set
+     */
+    public void setCreditCard_num(int creditCard_num) {
+        this.creditCard_num = creditCard_num;
     }
     
 }

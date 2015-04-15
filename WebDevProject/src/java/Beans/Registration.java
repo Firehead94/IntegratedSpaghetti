@@ -13,22 +13,23 @@ import java.io.Serializable;
  */
 public class Registration implements Serializable {
     
-    private String reg_code;
-    private int course_ID;
+    private int section_num;
     private int stu_ID;
+    private int gpa;
+    private String grade;
 
     /**
-     * @return the reg_code
+     * @return the section_num
      */
-    public String getReg_code() {
-        return reg_code;
+    public int getSection_num() {
+        return section_num;
     }
 
     /**
-     * @return the course_ID
+     * @param section_num the section_num to set
      */
-    public int getCourse_ID() {
-        return course_ID;
+    public void setSection_num(int section_num) {
+        this.section_num = section_num;
     }
 
     /**
@@ -39,24 +40,38 @@ public class Registration implements Serializable {
     }
 
     /**
-     * @param reg_code the reg_code to set
-     */
-    public void setReg_code(String reg_code) {
-        this.reg_code = reg_code;
-    }
-
-    /**
-     * @param course_ID the course_ID to set
-     */
-    public void setCourse_ID(int course_ID) {
-        this.course_ID = course_ID;
-    }
-
-    /**
      * @param stu_ID the stu_ID to set
      */
     public void setStu_ID(int stu_ID) {
         this.stu_ID = stu_ID;
     }
-    
+
+    /**
+     * @return the gpa
+     */
+    public int getGpa() {
+        return gpa;
+    }
+
+    /**
+     * @param gpa the gpa to set
+     */
+    public void setGpa(int gpa) {
+        this.gpa = gpa;
+    }
+
+    /**
+     * @return the grade
+     */
+    public String getGrade() {
+        return grade;
+    }
+
+    /**
+     * @param grade the grade to set
+     */
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
 }
