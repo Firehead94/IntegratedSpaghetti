@@ -91,6 +91,7 @@ public class InvoiceDB {
                 invoice.setInvoice_ID(rs.getInt("INVOICE_ID"));
                 invoice.setInvoice_date(rs.getDate("INVOICE_DATE"));
                 invoice.setInvoice_payment(rs.getInt("INVOICE_PAYMENT"));
+                invoice.setCreditCard_num(rs.getInt("CREDITCARD_NUM"));
                 invoice.setStu_ID(rs.getInt("STU_ID"));
             }
         } catch (SQLException e) {
