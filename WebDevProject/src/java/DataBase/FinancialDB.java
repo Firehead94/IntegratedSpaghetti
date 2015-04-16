@@ -27,7 +27,7 @@ public class FinancialDB {
         PreparedStatement ps = null;
         
         String query = "SELECT * FROM FINANCIAL " +
-                "WHERE STU_ID = ? && CREDITCARD_NUM = ?";
+                "WHERE STU_ID = ? AND CREDITCARD_NUM = ?";
         try {
         ps = connection.prepareStatement(query);
         ps.setString(1, Integer.toString(student_ID));

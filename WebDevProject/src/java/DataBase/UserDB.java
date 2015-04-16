@@ -144,16 +144,16 @@ public class UserDB {
      * @param reg_code
      * @return 
      */
-    public static ArrayList<User> getUsersByRegistrationCode(String reg_code) {
+    public static ArrayList<User> getUsersBySectionNum(String section_num) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         
-        String query = "SELECT * FROM USERS u, REGISTRATION r " +
-                "WHERE r.REG_CODE = ? && r.STU_ID = u.STU_ID";
+        String query = "SELECT * FROM USERS u, REGISTRATION r, STUDENT s " +
+                "WHERE r.SECTION_NUM = ? AND (r.STU_ID = s.STU_ID AND s.STU_ID = u.STU_ID)";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, reg_code);
+        ps.setString(1, section_num);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -165,7 +165,7 @@ public class UserDB {
     
     /**
      * Gets a list of users in a specific course (ex. all users in a CIS 2353
-     * class).
+     * class). Might not work? Please TEST
      * 
      * @param course_ID
      * @return 
@@ -175,8 +175,8 @@ public class UserDB {
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         
-        String query = "SELECT * FROM USERS u, REGISTRATION r " +
-                "WHERE u.STU_ID = r.STU_ID && r.COURSE_ID = ?";
+        String query = "SELECT * FROM USERS u, STUDENT s, REGISTRATION r, SECTION s " +
+                "WHERE (u.STU_ID = s.STU_ID AND s.STU_ID = r.STU_ID) AND (r.SECTION_NUM = s.SECTION_NUM) AND s.COURSE_ID = ?";
         try {
         ps = connection.prepareStatement(query);
         ps.setString(1, Integer.toString(course_ID));
