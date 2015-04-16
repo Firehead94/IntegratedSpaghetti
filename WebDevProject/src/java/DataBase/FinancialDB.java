@@ -7,6 +7,7 @@ package DataBase;
 
 import Beans.Financial;
 import Beans.Invoice;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,12 +21,63 @@ import java.util.logging.Logger;
  */
 public class FinancialDB {
     
-    public static Financial getFinancialByStudentID(int student_ID) {
-        throw new UnsupportedOperationException("Unimplemented yet");
+    public static Financial getFinancialByIDAndCCNum (int student_ID, int ccn) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "SELECT * FROM FINANCIAL " +
+                "WHERE STU_ID = ? && CREDITCARD_NUM = ?";
+        try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, Integer.toString(student_ID));
+        ps.setString(2, Integer.toString(ccn));
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return getFromDB(ps);
+    }
+    
+    public static ArrayList<Financial> getFinancialByStudentID(int student_ID) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "SELECT * FROM FINANCIAL " +
+                "WHERE STU_ID = ?";
+        try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, Integer.toString(student_ID));
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return getListFromDB(ps);
     }
     
     public static ArrayList<Financial> getFinancialByBalanceRange(double min, double max) {
-        throw new UnsupportedOperationException("Unimplemented yet");
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "SELECT * FROM FINANCIAL " +
+                "WHERE BALANCE BETWEEN ? AND ?";
+        try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, Double.toString(min));
+        ps.setString(1, Double.toString(max));
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return getListFromDB(ps);
     }
     
     private static Financial getFromDB(PreparedStatement ps) {
