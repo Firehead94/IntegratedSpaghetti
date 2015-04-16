@@ -79,6 +79,25 @@ public class InvoiceDB {
         return getListFromDB(ps);
     }
     
+    public static ArrayList<Invoice> getInvoiceByCCN(int creditcard_num) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "SELECT * FROM INVOICE " +
+                "WHERE CREDITCARD_NUM = ?";
+        try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, Integer.toString(creditcard_num));
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return getListFromDB(ps);        
+    }
+    
     private static Invoice getFromDB(PreparedStatement ps) {
         
         ResultSet rs = null;
