@@ -6,6 +6,7 @@
 package Beans;
 
 import java.io.Serializable;
+import java.sql.Time;
 
 /**
  * This is what we would place in the Cart when user selects it. Will definitely be editted down the line.
@@ -16,10 +17,10 @@ public class Section implements Serializable {
     
     private int faculty_ID;
     private int section_day;
-    private String section_time;
+    private Time section_time;
     private String section_location;
     private int course_ID;
-    private String section_num;
+    private int section_num;
 
     /**
      * @return the faculty_ID
@@ -52,14 +53,14 @@ public class Section implements Serializable {
     /**
      * @return the section_time
      */
-    public String getSection_time() {
+    public Time getSection_time() {
         return section_time;
     }
 
     /**
      * @param section_time the section_time to set
      */
-    public void setSection_time(String section_time) {
+    public void setSection_time(Time section_time) {
         this.section_time = section_time;
     }
 
@@ -94,14 +95,14 @@ public class Section implements Serializable {
     /**
      * @return the section_num
      */
-    public String getSection_num() {
+    public int getSection_num() {
         return section_num;
     }
 
     /**
      * @param section_num the section_num to set
      */
-    public void setSection_num(String section_num) {
+    public void setSection_num(int section_num) {
         this.section_num = section_num;
     }
    
