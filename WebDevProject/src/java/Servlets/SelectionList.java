@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Servlets;
 
 import Beans.Course;
@@ -61,9 +57,9 @@ public class SelectionList extends HttpServlet {
 //      {
         if (/*list of vals*/ != null) {
             selectedList = new HashMap<Section, Course>();
-            for (int tmp : /* list of vals*/) {
+            for (int tmp : /*list of vals*/) {
                 Section section = SectionDB.getSectionBySectionNum(tmp);
-                selectedList.put(section, CourseDB.getCourseByCourseID(section.getCourse_ID()));
+                selectedList.put(section, CourseDB.getCourseByCourseIDAndDeptID(section.getCourse_ID(), section.getDept_ID()));
             }
         }else {
             error_msg = "No courses were selected.";
@@ -73,7 +69,7 @@ public class SelectionList extends HttpServlet {
         request.setAttribute("errormsg", error_msg);
         request.getSession().setAttribute("selectedlist", selectedList);
         getServletContext()
-            .getRequestDispatcher(url) //.getRequestRedirect for php
+            .getRequestDispatcher(url)
             .forward(request, response);
     }
 

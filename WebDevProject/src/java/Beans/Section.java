@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Beans;
 
 import java.io.Serializable;
@@ -20,6 +16,7 @@ public class Section implements Serializable {
     private Time section_time;
     private String section_location;
     private int course_ID;
+    private int dept_ID;
     private int section_num;
 
     /**
@@ -115,6 +112,20 @@ public class Section implements Serializable {
     
     public int hashCode() {
         return section_num;
+    }
+
+    /**
+     * @return the dept_ID
+     */
+    public int getDept_ID() {
+        return dept_ID;
+    }
+
+    /**
+     * @param dept_ID the dept_ID to set
+     */
+    public void setDept_ID(int dept_ID) {
+        this.dept_ID = dept_ID;
     }
    
 }

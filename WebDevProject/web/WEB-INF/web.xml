@@ -18,16 +18,12 @@
         <jsp-file>courseSelect.jsp</jsp-file>       
     </servlet>
     <servlet>
-        <servlet-name>AcademicRecords</servlet-name>
-        <jsp-file>academicRecords.jsp</jsp-file>      
-    </servlet>
-    <servlet>
         <servlet-name>FinancialRecords</servlet-name>
         <jsp-file>financialRecords.jsp</jsp-file>      
     </servlet>
     <servlet>
-        <servlet-name>GradeEntry</servlet-name>
-        <jsp-file>gradeEntry.jsp</jsp-file>     
+        <servlet-name>Grades</servlet-name>
+        <jsp-file>grades.jsp</jsp-file>     
     </servlet> 
     <servlet>
         <servlet-name>Home</servlet-name>
@@ -49,16 +45,12 @@
         <url-pattern>/payment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AcademicRecords</servlet-name>
-        <url-pattern>/academicRecords</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>FinancialRecords</servlet-name>
         <url-pattern>/financialRecords</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GradeEntry</servlet-name>
-        <url-pattern>/gradeEntry</url-pattern>
+        <servlet-name>Grades</servlet-name>
+        <url-pattern>/grades</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>

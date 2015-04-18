@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DataBase;
 
 import Beans.Course;
@@ -63,16 +59,17 @@ public class SectionDB {
         return getMapFromDB(ps);
     }
     
-    public static Map<Section, Course> getSectionsByCourseID(int course_ID) {
+    public static Map<Section, Course> getSectionsByCourseIDAndDeptID(int course_ID, int dept_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         
         String query = "SELECT * FROM SECTION " +
-                "WHERE COURSE_ID = ?";
+                "WHERE COURSE_ID = ? AND DEPT_ID = ?";
         try {
         ps = connection.prepareStatement(query);
         ps.setString(1, Integer.toString(course_ID));
+        ps.setString(2, Integer.toString(dept_ID));
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -169,6 +166,7 @@ public class SectionDB {
                 section = new Section();
                 
                 section.setCourse_ID(rs.getInt("COURSE_ID"));
+                section.setDept_ID(rs.getInt("DEPT_ID"));
                 section.setFaculty_ID(rs.getInt("FACULTY_ID"));
                 section.setSection_day(rs.getInt("SECTION_DAY"));
                 section.setSection_location(rs.getString("SECTION_LOCATION"));
@@ -197,7 +195,7 @@ public class SectionDB {
                 course = new Course();
                 
                 section = SectionDB.getSectionBySectionNum(rs.getInt("SECTION_NUM"));
-                course = CourseDB.getCourseByCourseID(rs.getInt("COURSE_ID"));
+                course = CourseDB.getCourseByCourseIDAndDeptID(rs.getInt("COURSE_ID"), rs.getInt("DEPT_ID"));
                 
                 sectionList.put(section, course);
 
@@ -223,6 +221,7 @@ public class SectionDB {
                 Section section = new Section();
                 
                 section.setCourse_ID(rs.getInt("COURSE_ID"));
+                section.setDept_ID(rs.getInt("DEPT_ID"));                
                 section.setFaculty_ID(rs.getInt("FACULTY_ID"));
                 section.setSection_day(rs.getInt("SECTION_DAY"));
                 section.setSection_location(rs.getString("SECTION_LOCATION"));
