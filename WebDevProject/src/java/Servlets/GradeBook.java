@@ -1,9 +1,12 @@
 
 package Servlets;
 
+import Beans.Course;
 import Beans.Registration;
 import Beans.User;
+import DataBase.CourseDB;
 import DataBase.RegistrationDB;
+import DataBase.SectionDB;
 import DataBase.UserDB;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,19 +54,24 @@ public class GradeBook extends HttpServlet {
         String url = "/gradeBook.jsp";
         
         User user = /*GET USER FROM SESSION*/;
-        Map<Registration, User> grades = null;
-        
-        if (user.getFaculty_ID() != 0) { //Is Teacher
-            grades = new HashMap<Registration, User>();
+        Map<Registration, HashMap<Course, User>> grades = null;
+        grades = new HashMap<Registration, HashMap<Course, User>>();
+        if (user.getFaculty_ID() != 0) { //Is Teacher           
             for (Registration tmp : RegistrationDB.getRegistrationByFacultyint(user.getFaculty_ID())) {
-                grades.put(tmp, UserDB.getUserByStudentID(tmp.getStu_ID()));
+                HashMap<Course, User> map = new HashMap<Course, User>();
+                map.put(CourseDB.getCourseByCourseID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID()), user);
+                grades.put(tmp, map);
             }
             
         }else { //Is Student
-            
+            for (Registration tmp : RegistrationDB.getRegistrationByStudent(user.getStu_ID())) {
+                HashMap<Course, User> map = new HashMap<Course, User>();
+                map.put(CourseDB.getCourseByCourseID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID()), user);
+                grades.put(tmp, map);
+            }
         }
         
-        
+        request.setAttribute("grades", grades);
         getServletContext()
             .getRequestDispatcher(url) //.getRequestRedirect for php
             .forward(request, response);
