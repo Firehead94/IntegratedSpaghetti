@@ -57,7 +57,7 @@ public class SelectionList extends HttpServlet {
 //      {
         if (/*list of vals*/ != null) {
             selectedList = new HashMap<Section, Course>();
-            for (int tmp : /* list of vals*/) {
+            for (int tmp : /*list of vals*/) {
                 Section section = SectionDB.getSectionBySectionNum(tmp);
                 selectedList.put(section, CourseDB.getCourseByCourseIDAndDeptID(section.getCourse_ID(), section.getDept_ID()));
             }
@@ -69,7 +69,7 @@ public class SelectionList extends HttpServlet {
         request.setAttribute("errormsg", error_msg);
         request.getSession().setAttribute("selectedlist", selectedList);
         getServletContext()
-            .getRequestDispatcher(url) //.getRequestRedirect for php
+            .getRequestDispatcher(url)
             .forward(request, response);
     }
 
