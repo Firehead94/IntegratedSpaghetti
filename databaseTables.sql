@@ -65,7 +65,7 @@ CREATE TABLE COURSE (
 	COURSE_CREDITS INT NOT NULL,
 	COURSE_COST INT NOT NULL,
 	DEPT_ID INT NOT NULL,
-	PRIMARY KEY (COURSE_ID),
+	PRIMARY KEY (COURSE_ID, DEPT_ID),
 	FOREIGN KEY (DEPT_ID) REFERENCES DEPARTMENT(DEPT_ID)
 );
 
@@ -116,7 +116,20 @@ CREATE TABLE FINANCIAL (
 	FOREIGN KEY (STU_ID) REFERENCES STUDENT(STU_ID)
 );
 
+INSERT INTO DEPARTMENT ( DEPT_TITLE, DEPT_ABR )
+VALUES 
+	( 'ACC', 'Accounting' ),
+	( 'BIO', 'Biology' ),
+	( 'CIS', 'Computer Information Systems'),
+	( 'ENG', 'English'),
+	( 'GEO', 'Geography'),
+	( 'GSC', 'General Science'),
+	( 'MAT', 'Mathematics' ),
+	( 'PHY', 'Physics' ),
+	( 'POL', 'Political Science');
+
 INSERT INTO COURSE (COURSE_TITLE, COURSE_DESCRIPT, COURSE_CREDITS, COURSE_CREDITS, DEPT_ID)
-VALUES (,,,,),
-		(,,,,),
-		(,,,,);
+VALUES 
+	(,,,,),
+	(,,,,),
+	(,,,,);
