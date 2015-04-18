@@ -57,7 +57,7 @@ public class CourseList extends HttpServlet {
         
 //GET INFO FROM JSP HERE
 //      {
-
+        
 //      }
 
         if (dept_abr != null) {

@@ -15,6 +15,7 @@ public class Course implements Serializable {
     
     private int course_ID;
     private String course_title;
+    private String course_descript;
     private int course_credits;
     private int course_cost;
     private int dept_ID;
@@ -99,5 +100,19 @@ public class Course implements Serializable {
     
     public int hashCode() {
         return course_ID;
+    }
+
+    /**
+     * @return the course_descript
+     */
+    public String getCourse_descript() {
+        return course_descript;
+    }
+
+    /**
+     * @param course_descript the course_descript to set
+     */
+    public void setCourse_descript(String course_descript) {
+        this.course_descript = course_descript;
     }
 }
