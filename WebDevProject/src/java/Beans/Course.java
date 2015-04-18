@@ -89,4 +89,15 @@ public class Course implements Serializable {
         this.dept_ID = dept_ID;
     }
     
+    
+    public boolean equals(Object other) {
+        if (((Course)other).course_ID == course_ID) {
+            return true;
+        }
+        return false;
+    }
+    
+    public int hashCode() {
+        return course_ID;
+    }
 }

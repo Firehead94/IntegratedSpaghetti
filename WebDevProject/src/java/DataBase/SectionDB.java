@@ -5,6 +5,7 @@
  */
 package DataBase;
 
+import Beans.Course;
 import Beans.Financial;
 import Beans.Section;
 import java.sql.Connection;
@@ -13,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,7 +44,26 @@ public class SectionDB {
         return getFromDB(ps);
     }
     
-    public static ArrayList<Section> getSectionsByCourseID(int course_ID) {
+    public static Map<Section, Course> getSectionsByDeptAbr(String dept_abr) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "SELECT * FROM SECTION s, COURSE c, DEPTARMENT d " +
+                "WHERE s.COURSE_ID = c.COURSE_ID AND s.DEPT_ID = d.DEPT_ID AND d.DEPT_ABR = ?";
+        try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, dept_abr);
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return getMapFromDB(ps);
+    }
+    
+    public static Map<Section, Course> getSectionsByCourseID(int course_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -57,10 +79,10 @@ public class SectionDB {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);
+        return getMapFromDB(ps);
     }
     
-    public static ArrayList<Section> getSectionsByDay(int dayCode) {
+    public static Map<Section, Course> getSectionsByDay(int dayCode) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -76,10 +98,10 @@ public class SectionDB {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);       
+        return getMapFromDB(ps);       
     }
     
-    public static ArrayList<Section> getSectionsByTime(Time min, Time max) {
+    public static Map<Section, Course> getSectionsByTime(Time min, Time max) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -96,10 +118,10 @@ public class SectionDB {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);         
+        return getMapFromDB(ps);         
     }
     
-    public static ArrayList<Section> getSectionByFacultyID(int faculty_ID) {
+    public static Map<Section, Course> getSectionByFacultyID(int faculty_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -115,10 +137,10 @@ public class SectionDB {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);          
+        return getMapFromDB(ps);          
     }
     
-    public static ArrayList<Section> getSectionsByLocation(String location) {
+    public static Map<Section, Course> getSectionsByLocation(String location) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -134,7 +156,7 @@ public class SectionDB {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);          
+        return getMapFromDB(ps);          
     }
     
     private static Section getFromDB(PreparedStatement ps) {
@@ -162,6 +184,34 @@ public class SectionDB {
         return section;
     }
     
+    private static Map<Section, Course> getMapFromDB(PreparedStatement ps) {
+        
+        ResultSet rs = null;
+        Map<Section, Course> sectionList = new HashMap<Section, Course>() {};
+        Section section = null;
+        Course course = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                section = new Section();
+                course = new Course();
+                
+                section = SectionDB.getSectionBySectionNum(rs.getInt("SECTION_NUM"));
+                course = CourseDB.getCourseByCourseID(rs.getInt("COURSE_ID"));
+                
+                sectionList.put(section, course);
+
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(CourseDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closeResultSet(rs);
+        }
+        return sectionList;
+    }
+    
+    
+    @Deprecated
     private static ArrayList<Section> getListFromDB(PreparedStatement ps) {
         
         ResultSet rs = null;

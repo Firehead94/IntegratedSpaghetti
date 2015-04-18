@@ -73,5 +73,15 @@ public class Registration implements Serializable {
     public void setGrade(String grade) {
         this.grade = grade;
     }
+    
+    public boolean equals(Object other) {
+        if (((Registration)other).getSection_num() != section_num && ((Registration)other).getStu_ID() != stu_ID)
+            return true;
+        return false;
+    }
+    
+    public int hashCode() {
+        return section_num * stu_ID;
+    }
 
 }

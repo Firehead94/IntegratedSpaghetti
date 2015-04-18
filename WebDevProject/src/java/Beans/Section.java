@@ -105,5 +105,16 @@ public class Section implements Serializable {
     public void setSection_num(int section_num) {
         this.section_num = section_num;
     }
+    
+    public boolean equals(Object other) {
+        if (((Section)other).section_num == section_num) {
+            return true;
+        }
+        return false;
+    }
+    
+    public int hashCode() {
+        return section_num;
+    }
    
 }

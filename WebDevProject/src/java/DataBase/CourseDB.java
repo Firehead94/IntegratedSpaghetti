@@ -73,6 +73,31 @@ public class CourseDB {
     }
     
     /**
+     * Gets a list of courses in a certain department.
+     * 
+     * @param dept_ID
+     * @return 
+     */
+    public static ArrayList<Course> getCoursesByDepartment (String dept_abr) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "SELECT * FROM COURSE c, DEPARTMENT d " +
+                "WHERE c.DEPT_ID = d.DEPT_ID AND d.DEPT_ABR = ?";
+        try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, dept_abr);
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return getListFromDB(ps);
+    }
+    
+    /**
      * Gets a course list for a certain user.
      * 
      * @param user

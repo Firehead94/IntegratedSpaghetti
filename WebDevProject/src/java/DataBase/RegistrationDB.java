@@ -78,6 +78,25 @@ public class RegistrationDB {
         return getListFromDB(ps);         
     }
     
+    public static ArrayList<Registration> getRegistrationByFacultyint(int faculty_ID) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "SELECT * FROM REGISTRATION r, SECTION s " +
+                "WHERE r.SECTION_NUM = s.SECTION_NUM AND s.FACULTY_ID = ?";
+        try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, Integer.toString(faculty_ID));
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return getListFromDB(ps);         
+    }
+    
     private static Registration getFromDB (PreparedStatement ps) {
         
         ResultSet rs = null;
