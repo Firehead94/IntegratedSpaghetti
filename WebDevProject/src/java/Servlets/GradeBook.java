@@ -59,14 +59,14 @@ public class GradeBook extends HttpServlet {
         if (user.getFaculty_ID() != 0) { //Is Teacher           
             for (Registration tmp : RegistrationDB.getRegistrationByFacultyint(user.getFaculty_ID())) {
                 HashMap<Course, User> map = new HashMap<Course, User>();
-                map.put(CourseDB.getCourseByCourseID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID()), user);
+                map.put(CourseDB.getCourseByCourseIDAndDeptID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID(), (SectionDB.getSectionBySectionNum(tmp.getSection_num())).getDept_ID()), user);
                 grades.put(tmp, map);
             }
             
         }else { //Is Student
             for (Registration tmp : RegistrationDB.getRegistrationByStudent(user.getStu_ID())) {
                 HashMap<Course, User> map = new HashMap<Course, User>();
-                map.put(CourseDB.getCourseByCourseID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID()), user);
+                map.put(CourseDB.getCourseByCourseIDAndDeptID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID(), (SectionDB.getSectionBySectionNum(tmp.getSection_num())).getDept_ID()), user);
                 grades.put(tmp, map);
             }
         }

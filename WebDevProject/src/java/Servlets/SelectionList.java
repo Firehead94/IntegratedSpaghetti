@@ -63,7 +63,7 @@ public class SelectionList extends HttpServlet {
             selectedList = new HashMap<Section, Course>();
             for (int tmp : /* list of vals*/) {
                 Section section = SectionDB.getSectionBySectionNum(tmp);
-                selectedList.put(section, CourseDB.getCourseByCourseID(section.getCourse_ID()));
+                selectedList.put(section, CourseDB.getCourseByCourseIDAndDeptID(section.getCourse_ID(), section.getDept_ID()));
             }
         }else {
             error_msg = "No courses were selected.";

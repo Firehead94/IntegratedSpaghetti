@@ -3,6 +3,7 @@ package Servlets;
 import Beans.Course;
 import Beans.Section;
 import DataBase.CourseDB;
+import DataBase.DepartmentDB;
 import DataBase.SectionDB;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,6 +52,8 @@ public class CourseList extends HttpServlet {
         
         Map<Section, Course> sectionList = null;
         String error_msg = null;
+        
+        //Must fill dept_abr AND course_ID or section_num
         String dept_abr = null;
         int course_id = 0;
         int section_num = 0;
@@ -60,14 +63,14 @@ public class CourseList extends HttpServlet {
         
 //      }
 
-        if (dept_abr != null) {
+        if (dept_abr != null && course_id == 0) {
             sectionList = new HashMap<Section, Course>(SectionDB.getSectionsByDeptAbr(dept_abr));
-        }else if (course_id != 0) {
-            sectionList = new HashMap<Section, Course>(SectionDB.getSectionsByCourseID(course_id));
+        }else if (course_id != 0 && dept_abr != null) {
+            sectionList = new HashMap<Section, Course>(SectionDB.getSectionsByCourseIDAndDeptID(course_id, DepartmentDB.getDeptIDFromAbr(dept_abr)));
         }else if (section_num != 0) {
             sectionList = new HashMap<Section, Course>();
             Section section = SectionDB.getSectionBySectionNum(section_num);
-            sectionList.put(section, CourseDB.getCourseByCourseID(section.getCourse_ID()));
+            sectionList.put(section, CourseDB.getCourseByCourseIDAndDeptID(section.getCourse_ID(), section.getDept_ID()));
         }
         if (sectionList == null){
             error_msg = "No Section Avaialable.";            
