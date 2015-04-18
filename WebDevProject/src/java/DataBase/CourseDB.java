@@ -28,16 +28,17 @@ public class CourseDB {
      * @param course_ID
      * @return 
      */
-    public static Course getCourseByCourseID (int course_ID) {
+    public static Course getCourseByCourseIDAndDeptID (int course_ID, int dept_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         
         String query = "SELECT * FROM COURSE " +
-                "WHERE COURSE_ID = ?";
+                "WHERE COURSE_ID = ? AND DEPT_ID = ?";
         try {
         ps = connection.prepareStatement(query);
         ps.setString(1, Integer.toString(course_ID));
+        ps.setString(2, Integer.toString(dept_ID));
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
