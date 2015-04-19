@@ -172,7 +172,6 @@ VALUES
 	(8,1620,'College Physics II','The student will study electricity, magnetism, optics, and selected topics in atomic physics. The student will perform measurements and experiments in electricity, magnetism, and optics. Course/lab fees.',4),
 	(8,2400,'Engineering Physics I','Prior physics in high school or college, or consent of instructor, is recommended. The student will define basic terms, explain theories, and apply them to the solution of problems in mechanics and thermodynamics using calculus where required. The student will obtain various types of data, reduce this data, express the reliability of the results, and write technical reports. Course/lab fees.',4),
 	(8,2500,'Engineering Physics II','The student will define basic terms, explain theories, and apply them to the solution of problems in electricity and magnetism using calculus and elementary differential equations where required. The student will obtain various types of data, reduce this data, express the reliability of the results, and write technical reports. Course/lab fees.',4),
-	(9,1510,'American Government','This course focuses on the structure and functioning of American government; introductory analysis of the process of decision-making, the relationship of the state and the individual, and the degree and nature of popular control.',3);
 
 INSERT INTO USERS (USER_LAST_NAME, USER_FIRST_NAME, USER_ADDRESS, USER_CITY, USER_STATE, USER_ZIP, USER_COUNTRY, USERNAME, USER_EMAIL, USER_DOB)
 	VALUES
@@ -181,7 +180,10 @@ INSERT INTO USERS (USER_LAST_NAME, USER_FIRST_NAME, USER_ADDRESS, USER_CITY, USE
 	('Vallejos','Donnie','1390 Twin Oaks Ave','Grand Rapids','MI',49503,'USA','vallejos.donnie','vallejos.donnie@fsu.edu','1963-08-25'),
 	('Emmons','Lee','21 Robinson Ct','Saginaw','MI',48607,'USA','emmons.lee','emmons.lee@fsu.edu','1981-07-17'),
 	('Taliaferro','Jessica','844 Rubaiyat Rd','Muskegon','MI',49440,'USA','taliaferro.jessica','taliaferro.jessica@fsu.edu','1980-01-21'),
-	('Turner','Henry','4998 Cottonwood Ln','Grand Rapids','MI',49505,'USA','turner.henry','turner.henry@fsu.edu'),
+	('Turner','Henry','4998 Cottonwood Ln','Grand Rapids','MI',49505,'USA','turner.henry','turner.henry@fsu.edu','1961-04-24'),
+	('Zwilling','Ema','1622 Bombardier Way','Romulus','MI',48174,'USA','zwilling.ema','zwilling.ema@fsu.edu','1982-06-27'),
+	('Sawyer','Travis','3671 John Ave','Jonesville','MI',49250,'USA','sawyer.travis','sawyer.travis@fsu.edu','1982-08-30'),
+
 	('Booth', 'Jesse', '947 Bartlett Ave', 'Southfield', 'MI', 48075, 'USA','booth.jesse', 'booth.jesse@fsu.edu', '1992-02-29'),
 	('Avila', 'Patricia', '1049 D St', 'Roseville', 'MI', 48066, 'USA', 'avila.patricia', 'avila.patricia@fsu.edu', '1992-02-29'),
 	('Sanner','Joseph','348 Nash St','Detroit','MI',48227,'USA','sanner.joseph','sanner.jospeh@fsu.edu', '1992-02-29'),
@@ -209,6 +211,8 @@ INSERT INTO USERS (USER_LAST_NAME, USER_FIRST_NAME, USER_ADDRESS, USER_CITY, USE
 	('Gill','Kathleen','1338 Tully St','Detroit','MI',48219,'USA','gill.kathleen','gill.kathleen@fsu.edu', '1992-02-29'),
 	('Mercuri','Jessica','209 Hayhurst Ln','Detroit','MI',48219,'USA','mercuri.jessica','mercuri.jessica@fsu.edu', '1992-02-29'),
 	('Raphael','Walter','1909 Front St','Southfield','MI',48075,'USA','raphael.walter','raphael.walter@fsu.edu', '1992-02-29'),
-	('Stecker','Iva','1619 Pinewood Ave','Crystal Falls','MI',49920,'USA','stecker.iva','stecker.iva@fsu.edu', '1992-02-29');
+	('Stecker','Iva','1619 Pinewood Ave','Crystal Falls','MI',49920,'USA','stecker.iva','stecker.iva@fsu.edu', '1992-02-29'),
+	('Mallory','Elizabeth','4464 State St','Detroit','MI',48219,'USA','mallory.elizabeth','mallory.elizabeth@fsu.edu','1992-02-29'),
+	('Case','Leslie','1674 Summit Park Ave','Plymouth','MI',48170,'USA','case.leslie','case.leslie@fsu.edu','1992-02-29');
 
-INSERT 
+INSERT INTO FACULTY ()
