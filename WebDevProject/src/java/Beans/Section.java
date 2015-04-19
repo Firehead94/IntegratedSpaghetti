@@ -13,7 +13,8 @@ public class Section implements Serializable {
     
     private int faculty_ID;
     private int section_day;
-    private Time section_time;
+    private Time section_time_start;
+    private Time section_time_end;
     private String section_location;
     private int course_ID;
     private int dept_ID;
@@ -45,20 +46,6 @@ public class Section implements Serializable {
      */
     public void setSection_day(int section_day) {
         this.section_day = section_day;
-    }
-
-    /**
-     * @return the section_time
-     */
-    public Time getSection_time() {
-        return section_time;
-    }
-
-    /**
-     * @param section_time the section_time to set
-     */
-    public void setSection_time(Time section_time) {
-        this.section_time = section_time;
     }
 
     /**
@@ -126,6 +113,34 @@ public class Section implements Serializable {
      */
     public void setDept_ID(int dept_ID) {
         this.dept_ID = dept_ID;
+    }
+
+    /**
+     * @return the section_time_start
+     */
+    public Time getSection_time_start() {
+        return section_time_start;
+    }
+
+    /**
+     * @param section_time_start the section_time_start to set
+     */
+    public void setSection_time_start(Time section_time_start) {
+        this.section_time_start = section_time_start;
+    }
+
+    /**
+     * @return the section_time_end
+     */
+    public Time getSection_time_end() {
+        return section_time_end;
+    }
+
+    /**
+     * @param section_time_end the section_time_end to set
+     */
+    public void setSection_time_end(Time section_time_end) {
+        this.section_time_end = section_time_end;
     }
    
 }

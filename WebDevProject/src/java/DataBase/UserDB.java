@@ -58,6 +58,44 @@ public class UserDB {
         
     }
     
+    public static boolean userExists(String email) {
+         
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String query = "SELECT * FROM USERS " +
+                       "WHERE USER_EMAIL = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }       
+    }
+    
+    public static boolean insertUser(String first, String last, String address, String city, String state, int zip, String country, String password, String email) {
+         
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "INSERT INTO USERS (USER_FIRST_NAME, USER_LAST_NAME, USER_ADDRESS, USER_CITY, USER_STATE, USER_ZIP, USER_COUNTRY, USER_PASSWORD, " +
+                       "WHERE USER_EMAIL = ?";        
+        
+    }
+    
     /**
      * Gets a user by their student id.
      * 
@@ -252,8 +290,6 @@ public class UserDB {
                 user.setUser_creation_date(rs.getDate("USER_CREATION_DATE"));
                 user.setUsername(rs.getString("USERNAME"));
                 user.setUser_ID(rs.getInt("USER_ID"));
-                user.setStu_ID(rs.getInt("STU_ID"));
-                user.setFaculty_ID(rs.getInt("FACULTY_ID"));
                 user.setUser_address(rs.getString("USER_ADDRESS"));
                 user.setUser_city(rs.getString("USER_CITY"));
                 user.setUser_state(rs.getString("USER_STATE"));
@@ -290,8 +326,6 @@ public class UserDB {
                 user.setUser_creation_date(rs.getDate("USER_CREATION_DATE"));
                 user.setUsername(rs.getString("USERNAME"));
                 user.setUser_ID(rs.getInt("USER_ID"));
-                user.setStu_ID(rs.getInt("STU_ID"));
-                user.setFaculty_ID(rs.getInt("FACULTY_ID"));
                 user.setUser_address(rs.getString("USER_ADDRESS"));
                 user.setUser_city(rs.getString("USER_CITY"));
                 user.setUser_state(rs.getString("USER_STATE"));
