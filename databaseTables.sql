@@ -43,6 +43,7 @@ CREATE TABLE STUDENT (
 	FOREIGN KEY (PROGRAM_ID) REFERENCES PROGRAM(PROGRAM_ID)
 );
 
+--default password 5ece6873250c932328313d034f2517a9 which is 'abc123'
 CREATE TABLE USERS (
 	USER_ID INT NOT NULL AUTO_INCREMENT,
 	USER_FIRST_NAME VARCHAR(255) NOT NULL,
@@ -52,7 +53,7 @@ CREATE TABLE USERS (
 	USER_STATE VARCHAR(255) NOT NULL,
 	USER_ZIP INT NOT NULL,
 	USER_COUNTRY VARCHAR(255) NOT NULL,
-	USER_PASSWORD VARCHAR(255) NOT NULL,
+	USER_PASSWORD VARCHAR(255) NOT NULL DEFAULT '5ece6873250c932328313d034f2517a9',
 	USER_CREATION_DATE DATETIME DEFAULT CURRENT_TIMESTAMP,
 	USERNAME VARCHAR(255) NOT NULL,
 	USER_EMAIL VARCHAR(255) NOT NULL,
@@ -206,3 +207,13 @@ VALUES
 
 	(9,1510,'American Government','This course focuses on the structure and functioning of American government; introductory analysis of the process of decision-making, the relationship of the state and the individual, and the degree and nature of popular control.',3);
 
+INSERT INTO USERS (USER_LAST_NAME, USER_FIRST_NAME, USER_ADDRESS, USER_CITY, 
+	USER_STATE,	USER_ZIP, USER_COUNTRY, USERNAME, USER_EMAIL)
+	VALUES
+	('Booth', 'Jesse', '947 Bartlett Ave', 'Southfield', 'MI', 48075, 'USA','booth.jesse', 'booth.jesse@fsu.edu'),
+	('Avila', 'Patricia', '1049 D St', 'Roseville', 'MI', 48066, 'USA', 'avila.patricia', 'avila.patricia@fsu.edu'),
+	('Sanner','Joseph','348 Nash St','Detroit','MI',48227,'USA','sanner.joseph','sanner.jospeh@fsu.edu'),
+	('Timmons','Julia','1945 Eagle Dr','Southfield','MI',48235,'USA','timmons.julia','timmons.julia@fsu.edu'),
+	('Kestner','Ralph','4185 Robinson Ct','Saginaw','MI',48607,'USA','kestner.ralph','kestner.ralph@fsu.edu'),
+	('Fredericks','Joan','1476 Wetzel Ln','Grand Rapids',49503,'USA','fredericks.joan','fredericks.joan@fsu.edu'),
+	
