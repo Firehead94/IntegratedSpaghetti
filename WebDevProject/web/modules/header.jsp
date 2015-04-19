@@ -19,6 +19,7 @@
     </c:if>
     <c:if test="${sessionScope.user != null}">
         Welcome, <a href="profile?id=${sessionScope.user.getUser_ID()}">${sessionScope.user.getUser_first_name()} ${sessionScope.user.getUser_last_name()}</a>
+        <button type="button" onclick="${session.invalidate} alert('Signed Out')" value="Sign Out" >Sign Out</button>
     </c:if>
 </header>
 <section class="banner">
