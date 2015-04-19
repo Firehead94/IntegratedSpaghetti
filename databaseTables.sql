@@ -66,6 +66,7 @@ CREATE TABLE STUDENT (
 	STU_ID INT NOT NULL AUTO_INCREMENT,
 	USER_ID INT NOT NULL,
 	PROGRAM_ID INT NOT NULL,
+	BALANCE DOUBLE NOT NULL DEFAULT 0.0,
 	PRIMARY KEY (STU_ID),
 	FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
 	FOREIGN KEY (PROGRAM_ID) REFERENCES PROGRAM(PROGRAM_ID)
@@ -116,7 +117,6 @@ CREATE TABLE FINANCIAL (
 	BILLING_STATE VARCHAR(255) NOT NULL,
 	BILLING_ZIP INT NOT NULL,
 	BILLING_NAME VARCHAR(255) NOT NULL,
-	BALANCE INT,
 	PRIMARY KEY (STU_ID, CREDITCARD_NUM),
 	FOREIGN KEY (STU_ID) REFERENCES STUDENT(STU_ID)
 );
@@ -210,7 +210,7 @@ VALUES
 	(7,7),
 	(8,8);
 
-INSERT INTO STUDENT (USER_ID, PROGRAM_ID)
+INSERT INTO STUDENT (USER_ID, PROGRAM_ID, BALANCE)
 VALUES
 	(9,3),
 	(10,8),
@@ -243,7 +243,7 @@ VALUES
 	(37,6),
 	(38,11);
 
-INSERT INTO COURSE (DEPT_ID, COURSE_ID, COURSE_TITLE, COURSE_DESCRIPT, COURSE_CREDITS, COURSE_CREDITS, DEPT_ID)
+INSERT INTO COURSE (DEPT_ID, COURSE_ID, COURSE_TITLE, COURSE_DESCRIPT, COURSE_CREDITS, COURSE_CREDITS)
 VALUES 
 	(1,1500,'Accounting for the Small Business Owner','This course is designed for the non-accountant business owner. The student will study accounting procedures and applications for small businesses. Topics include bookkeeping for the small business, accounting systems for the small business, understanding of financial statements, overview of inventory management, survey of small business owner tax concerns and accounting concepts relating to financing the small business.',3),
 	(1,1800,'Accounting Procedures','This course presents general accounting procedures. Students will study the accounting equation, emphasizing the process of analyzing and recording financial information using the double-entry accounting system. Coverage includes the recording of basic transactions and adjustments for both service and merchandising concerns.',2),
@@ -437,4 +437,6 @@ VALUES
 	(38,4,'B-',2.7),
 	(38,13,'C-',1.7);
 
-INSERT INTO FINANCIAL (BILLING_NAME, BILLING_ADDRESS, BILLING_CITY, BILLING_STATE, BILLING_ZIP, )
+INSERT INTO FINANCIAL (BILLING_NAME, BILLING_ADDRESS, BILLING_CITY, BILLING_STATE, BILLING_ZIP, STU_ID, CREDITCARD_NUM, EXP_DATE )
+VALUES
+	

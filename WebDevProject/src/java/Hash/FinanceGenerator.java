@@ -47,6 +47,13 @@ public class FinanceGenerator {
         ArrayList<String> list = new ArrayList<>(Arrays.asList(arr));
         
         for(String start : list) {
+            String cardNum = "";
+            for(int i=0; i<16;i++) {
+                cardNum+=String.valueOf((int)(Math.random() * 10));
+            }
+            String month = String.valueOf((int)(Math.random() *12 ) + 1);
+            String year = String.valueOf((int)(Math.random() * 6) + 15);
+            
             
         }
         
