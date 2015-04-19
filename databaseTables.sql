@@ -27,22 +27,24 @@ CREATE TABLE PROGRAM (
 
 CREATE TABLE FACULTY (
 	FACULTY_ID INT NOT NULL AUTO_INCREMENT,
+	USER_ID INT NOT NULL,
 	DEPT_ID INT,
 	PRIMARY KEY (FACULTY_ID),
+	FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
 	FOREIGN KEY (DEPT_ID) REFERENCES DEPARTMENT(DEPT_ID)
 );
 
 CREATE TABLE STUDENT (
 	STU_ID INT NOT NULL AUTO_INCREMENT,
+	USER_ID INT NOT NULL,
 	PROGRAM_ID INT NOT NULL,
 	PRIMARY KEY (STU_ID),
+	FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
 	FOREIGN KEY (PROGRAM_ID) REFERENCES PROGRAM(PROGRAM_ID)
 );
 
 CREATE TABLE USERS (
 	USER_ID INT NOT NULL AUTO_INCREMENT,
-	STU_ID INT,
-	FACULTY_ID INT,
 	USER_FIRST_NAME VARCHAR(255) NOT NULL,
 	USER_LAST_NAME VARCHAR(255) NOT NULL,
 	USER_ADDRESS VARCHAR(255) NOT NULL,
@@ -203,3 +205,4 @@ VALUES
 	(8,2500,'Engineering Physics II','The student will define basic terms, explain theories, and apply them to the solution of problems in electricity and magnetism using calculus and elementary differential equations where required. The student will obtain various types of data, reduce this data, express the reliability of the results, and write technical reports. Course/lab fees.',4),
 
 	(9,1510,'American Government','This course focuses on the structure and functioning of American government; introductory analysis of the process of decision-making, the relationship of the state and the individual, and the degree and nature of popular control.',3);
+
