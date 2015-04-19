@@ -170,7 +170,8 @@ public class SectionDB {
                 section.setFaculty_ID(rs.getInt("FACULTY_ID"));
                 section.setSection_day(rs.getInt("SECTION_DAY"));
                 section.setSection_location(rs.getString("SECTION_LOCATION"));
-                section.setSection_time(rs.getTime("SECTION_TIME"));
+                section.setSection_location(rs.getString("SECTION_LOCATION"));
+                section.setSection_time_start(rs.getTime("SECTION_TIME_START"));
                 section.setSection_num(rs.getInt("SECTION_NUM"));
 
             }
@@ -225,7 +226,8 @@ public class SectionDB {
                 section.setFaculty_ID(rs.getInt("FACULTY_ID"));
                 section.setSection_day(rs.getInt("SECTION_DAY"));
                 section.setSection_location(rs.getString("SECTION_LOCATION"));
-                section.setSection_time(rs.getTime("SECTION_TIME"));
+                section.setSection_time_start(rs.getTime("SECTION_TIME_START"));
+                section.setSection_time_end(rs.getTime("SECTION_TIME_END"));
                 section.setSection_num(rs.getInt("SECTION_NUM"));
                 
                 sections.add(section);
