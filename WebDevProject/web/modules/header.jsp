@@ -18,7 +18,7 @@
         <a href="accountCreation">Create Account</a>
     </c:if>
     <c:if test="${sessionScope.user != null}">
-        Welcome, <a href="profile?id=${sessionScope.user.getUser_ID()}">${sessionScope.user.getFirstName()} ${sessionScope.user.getLastName()}</a>
+        Welcome, <a href="profile?id=${sessionScope.user.getUser_ID()}">${sessionScope.user.getUser_first_name()} ${sessionScope.user.getUser_last_name()}</a>
     </c:if>
 </header>
 <section class="banner">
