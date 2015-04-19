@@ -166,13 +166,15 @@ public class SectionDB {
                 section = new Section();
                 
                 section.setCourse_ID(rs.getInt("COURSE_ID"));
-                section.setDept_ID(rs.getInt("DEPT_ID"));
+                section.setDept_ID(rs.getInt("DEPT_ID"));                
                 section.setFaculty_ID(rs.getInt("FACULTY_ID"));
                 section.setSection_day(rs.getInt("SECTION_DAY"));
                 section.setSection_location(rs.getString("SECTION_LOCATION"));
-                section.setSection_location(rs.getString("SECTION_LOCATION"));
                 section.setSection_time_start(rs.getTime("SECTION_TIME_START"));
+                section.setSection_time_end(rs.getTime("SECTION_TIME_END"));
                 section.setSection_num(rs.getInt("SECTION_NUM"));
+                section.setSection_year(rs.getInt("SECTION_YEAR"));
+                section.setSection_semester(rs.getInt("SECTION_SEMESTER"));
 
             }
         } catch (SQLException e) {
@@ -229,6 +231,8 @@ public class SectionDB {
                 section.setSection_time_start(rs.getTime("SECTION_TIME_START"));
                 section.setSection_time_end(rs.getTime("SECTION_TIME_END"));
                 section.setSection_num(rs.getInt("SECTION_NUM"));
+                section.setSection_year(rs.getInt("SECTION_YEAR"));
+                section.setSection_semester(rs.getInt("SECTION_SEMESTER"));
                 
                 sections.add(section);
 
