@@ -26,7 +26,7 @@ public class InvoiceDB {
                 "WHERE INVOICE_ID = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(invoice_ID));
+        ps.setInt(1, invoice_ID);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -45,7 +45,7 @@ public class InvoiceDB {
                 "WHERE STU_ID = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(student_ID));
+        ps.setInt(1, student_ID);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -64,8 +64,8 @@ public class InvoiceDB {
                 "WHERE INVOICE_DATE BETWEEN ? AND ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, dateMin.toString());
-        ps.setString(2, dateMax.toString());
+        ps.setDate(1, new java.sql.Date(dateMin.getTime()));
+        ps.setDate(2, new java.sql.Date(dateMax.getTime()));
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -75,7 +75,7 @@ public class InvoiceDB {
         return getListFromDB(ps);
     }
     
-    public static ArrayList<Invoice> getInvoiceByCCN(int creditcard_num) {
+    public static ArrayList<Invoice> getInvoiceByCCN(long creditcard_num) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -84,7 +84,7 @@ public class InvoiceDB {
                 "WHERE CREDITCARD_NUM = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(creditcard_num));
+        ps.setLong(1, creditcard_num);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -106,7 +106,7 @@ public class InvoiceDB {
                 invoice.setInvoice_ID(rs.getInt("INVOICE_ID"));
                 invoice.setInvoice_date(rs.getDate("INVOICE_DATE"));
                 invoice.setInvoice_payment(rs.getInt("INVOICE_PAYMENT"));
-                invoice.setCreditCard_num(rs.getInt("CREDITCARD_NUM"));
+                invoice.setCreditCard_num(rs.getLong("CREDITCARD_NUM"));
                 invoice.setStu_ID(rs.getInt("STU_ID"));
             }
         } catch (SQLException e) {

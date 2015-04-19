@@ -26,8 +26,8 @@ public class FinancialDB {
                 "WHERE STU_ID = ? AND CREDITCARD_NUM = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(student_ID));
-        ps.setString(2, Integer.toString(ccn));
+        ps.setInt(1, student_ID);
+        ps.setInt(2, ccn);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -46,7 +46,7 @@ public class FinancialDB {
                 "WHERE STU_ID = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(student_ID));
+        ps.setInt(1, student_ID);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -65,8 +65,8 @@ public class FinancialDB {
                 "WHERE BALANCE BETWEEN ? AND ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Double.toString(min));
-        ps.setString(1, Double.toString(max));
+        ps.setDouble(1, min);
+        ps.setDouble(1, max);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {

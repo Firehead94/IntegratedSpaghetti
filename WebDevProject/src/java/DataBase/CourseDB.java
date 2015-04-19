@@ -33,8 +33,8 @@ public class CourseDB {
                 "WHERE COURSE_ID = ? AND DEPT_ID = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(course_ID));
-        ps.setString(2, Integer.toString(dept_ID));
+        ps.setInt(1, course_ID);
+        ps.setInt(2, dept_ID);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -59,7 +59,7 @@ public class CourseDB {
                 "WHERE DEPT_ID = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(dept_ID));
+        ps.setInt(1, dept_ID);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -109,7 +109,7 @@ public class CourseDB {
                 "WHERE c.COURSE_ID = r.COURSE_ID && r.STU_ID = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(user.getStu_ID()));
+        ps.setInt(1, user.getStu_ID());
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {

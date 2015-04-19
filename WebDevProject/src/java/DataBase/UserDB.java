@@ -85,58 +85,48 @@ public class UserDB {
         }       
     }
     
-    public static boolean insertUser(String first, String last, String address, String city, String state, int zip, String country, String password, String email) {
+    public static int insertUser(User user, String hash) {
          
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         
-        String query = "INSERT INTO USERS (USER_FIRST_NAME, USER_LAST_NAME, USER_ADDRESS, USER_CITY, USER_STATE, USER_ZIP, USER_COUNTRY, USER_PASSWORD, " +
-                       "WHERE USER_EMAIL = ?";        
-        
-    }
-    
-    /**
-     * Gets a user by their student id.
-     * 
-     * @param student_ID
-     * @return 
-     */
-    public static User getUserByStudentID(int student_ID) {
-        ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
-        PreparedStatement ps = null;
-        
-        String query = "SELECT * FROM USERS " +
-                "WHERE STU_ID = ?";
+        String query = "INSERT INTO USERS (USER_FIRST_NAME, USER_LAST_NAME, USER_ADDRESS, USER_CITY, USER_STATE, USER_ZIP, USER_COUNTRY, USER_PASSWORD, USERNAME, USER_EMAIL, USER_DOB) " +
+                       "VALUES (?,?,?,?,?,?,?,?,?,?);";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(student_ID));
+            ps = connection.prepareStatement(query);
+            ps.setString(1, user.getUser_first_name());
+            ps.setString(2, user.getUser_last_name());
+            ps.setString(3, user.getUser_address());
+            ps.setString(4, user.getUser_city());
+            ps.setString(5, user.getUser_state());
+            ps.setInt(6, user.getUser_zip());
+            ps.setString(7, user.getUser_country());
+            ps.setString(8, hash);
+            ps.setString(9, user.getUsername());
+            ps.setString(10, user.getUser_email());
+            ps.setDate(11, new java.sql.Date(user.getUser_dob().getTime()));
+            return ps.executeUpdate();
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println(e);
+            return 0;
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getFromDB(ps);
-    }
+        
+    }   
     
-    /**
-     * Gets a user by their faculty id.
-     * 
-     * @param faculty_ID
-     * @return 
-     */
-    public static User getUserByFacultyID(int faculty_ID) {
+    public static User getUserByEmail(String email) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         
         String query = "SELECT * FROM USERS " +
-                "WHERE FACULTY_ID = ?";
+                "WHERE USER_EMAIL = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(faculty_ID));
+        ps.setString(1, email);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -333,6 +323,7 @@ public class UserDB {
                 user.setUser_country(rs.getString("USER_COUNTRY"));
                 user.setUser_first_name(rs.getString("USER_FIRST_NAME"));
                 user.setUser_last_name(rs.getString("USER_LAST_NAME"));
+                user.setUser_dob(rs.getDate("USER_DOB"));
                 
                 users.add(user);
             }

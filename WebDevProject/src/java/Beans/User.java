@@ -23,6 +23,8 @@ public class User implements Serializable {
     private String user_password;
     private Date user_creation_date;
     private String username;
+    private String user_email;
+    private Date user_dob;
 
     /**
      * @return the user_ID
@@ -205,7 +207,33 @@ public class User implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-    
-    
+
+    /**
+     * @return the user_email
+     */
+    public String getUser_email() {
+        return user_email;
+    }
+
+    /**
+     * @param user_email the user_email to set
+     */
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
+    }    
+
+    /**
+     * @return the user_dob
+     */
+    public Date getUser_dob() {
+        return user_dob;
+    }
+
+    /**
+     * @param user_dob the user_dob to set
+     */
+    public void setUser_dob(Date user_dob) {
+        this.user_dob = user_dob;
+    }
     
 }

@@ -26,7 +26,8 @@ public class RegistrationDB {
                 "WHERE STU_ID = ? AND SECTION_NUM = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(section_num));
+        ps.setInt(1, student_ID);
+        ps.setInt(2, section_num);        
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -45,7 +46,7 @@ public class RegistrationDB {
                 "WHERE STU_ID = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(student_ID));
+        ps.setInt(1, student_ID);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -64,7 +65,7 @@ public class RegistrationDB {
                 "WHERE SECTION_NUM = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(section_num));
+        ps.setInt(1, section_num);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -83,7 +84,7 @@ public class RegistrationDB {
                 "WHERE r.SECTION_NUM = s.SECTION_NUM AND s.FACULTY_ID = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(faculty_ID));
+        ps.setInt(1, faculty_ID);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {

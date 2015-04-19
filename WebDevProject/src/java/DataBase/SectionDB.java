@@ -30,7 +30,7 @@ public class SectionDB {
                 "WHERE SECTION_NUM = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(section_num));
+        ps.setInt(1, section_num);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -68,8 +68,8 @@ public class SectionDB {
                 "WHERE COURSE_ID = ? AND DEPT_ID = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(course_ID));
-        ps.setString(2, Integer.toString(dept_ID));
+        ps.setInt(1, course_ID);
+        ps.setInt(2, dept_ID);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -88,7 +88,7 @@ public class SectionDB {
                 "WHERE SECTION_DAY = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(dayCode));
+        ps.setInt(1, dayCode);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -107,8 +107,8 @@ public class SectionDB {
                 "WHERE SECTION_TIME BETWEEN ? AND ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Long.toString(min.getTime()));
-        ps.setString(1, Long.toString(max.getTime()));
+        ps.setTime(1, min);
+        ps.setTime(2, max);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -127,7 +127,7 @@ public class SectionDB {
                 "WHERE FACULTY_ID = ?";
         try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, Integer.toString(faculty_ID));
+        ps.setInt(1, faculty_ID);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {

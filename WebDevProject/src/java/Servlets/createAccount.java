@@ -5,8 +5,18 @@
  */
 package Servlets;
 
+import Beans.User;
+import DataBase.UserDB;
+import Hash.MD5;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,9 +57,39 @@ public class createAccount extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        Map<String, String[]> map = request.getParameterMap();
+        boolean exists = false;
         
+        if (map.get("action").equals("create")) {
         
+            User user = new User(); 
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-mm-dd");
         
+            user.setUser_first_name(map.get("FirstName")[0]);
+            user.setUser_last_name(map.get("LastName")[0]);
+            user.setUser_address(map.get("Address")[0]);
+            user.setUser_city(map.get("City")[0]);
+            user.setUser_state(map.get("State")[0]);
+            user.setUser_zip(Integer.parseInt(map.get("Zip")[0]));
+            user.setUser_country(map.get("Country")[0]);
+            try {
+                user.setUser_dob(sf.parse(map.get("DOB")[0]));
+            } catch (ParseException ex) {
+                Logger.getLogger(createAccount.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            user.setUsername(user.getUser_last_name() + "." + user.getUser_first_name());
+            user.setUser_email(user.getUsername() + "@fsu.edu");
+            
+            if (UserDB.userExists(user.getUser_email()))
+                UserDB.insertUser(user, new MD5((String)request.getAttribute("password")).getHash());
+            else
+                exists = true;
+            
+            request.getSession().setAttribute("user", UserDB.getUserByEmail(user.getUser_email()));
+        }
+        
+        request.setAttribute("exists", exists);
         
         getServletContext()
             .getRequestDispatcher(url)

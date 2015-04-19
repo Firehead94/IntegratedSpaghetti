@@ -50,7 +50,7 @@ public class DepartmentDB {
                 "WHERE DEPT_ID = ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, Integer.toString(dept_ID));
+            ps.setInt(1, dept_ID);
             
             rs = ps.executeQuery();
             
@@ -76,7 +76,7 @@ public class DepartmentDB {
                 "WHERE DEPT_ID = ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, Integer.toString(dept_ID));
+            ps.setInt(1, dept_ID);
             
             rs = ps.executeQuery();
             
