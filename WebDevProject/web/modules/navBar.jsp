@@ -14,7 +14,6 @@
         <li><a href="courseSelect">SELECT COURSES</a></li>
         <li><a href="payment">PAYMENT</a></li>
         <li><a href="financialRecords">FINANCIAL RECORDS</a></li>
-        <li><a href="academicRecords">ACADEMIC RECORDS</a></li>
-        <li><a href="gradeEntry">GRADE ENTRY</a></li>
+        <li><a href="grades">GRADES</a></li>
     </ul>
 </nav>
