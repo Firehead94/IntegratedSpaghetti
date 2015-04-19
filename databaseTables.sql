@@ -25,24 +25,6 @@ CREATE TABLE PROGRAM (
 	FOREIGN KEY (DEPT_ID) REFERENCES DEPARTMENT(DEPT_ID)
 );
 
-CREATE TABLE FACULTY (
-	FACULTY_ID INT NOT NULL AUTO_INCREMENT,
-	USER_ID INT NOT NULL,
-	DEPT_ID INT,
-	PRIMARY KEY (FACULTY_ID),
-	FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
-	FOREIGN KEY (DEPT_ID) REFERENCES DEPARTMENT(DEPT_ID)
-);
-
-CREATE TABLE STUDENT (
-	STU_ID INT NOT NULL AUTO_INCREMENT,
-	USER_ID INT NOT NULL,
-	PROGRAM_ID INT NOT NULL,
-	PRIMARY KEY (STU_ID),
-	FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
-	FOREIGN KEY (PROGRAM_ID) REFERENCES PROGRAM(PROGRAM_ID)
-);
-
 --default password 5ece6873250c932328313d034f2517a9 which is 'abc123'
 CREATE TABLE USERS (
 	USER_ID INT NOT NULL AUTO_INCREMENT,
@@ -61,6 +43,24 @@ CREATE TABLE USERS (
 	PRIMARY KEY (USER_ID),
 	FOREIGN KEY (STU_ID) REFERENCES STUDENT(STU_ID),
 	FOREIGN KEY (FACULTY_ID) REFERENCES FACULTY(STU_ID)
+);
+
+CREATE TABLE FACULTY (
+	FACULTY_ID INT NOT NULL AUTO_INCREMENT,
+	USER_ID INT NOT NULL,
+	DEPT_ID INT,
+	PRIMARY KEY (FACULTY_ID),
+	FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
+	FOREIGN KEY (DEPT_ID) REFERENCES DEPARTMENT(DEPT_ID)
+);
+
+CREATE TABLE STUDENT (
+	STU_ID INT NOT NULL AUTO_INCREMENT,
+	USER_ID INT NOT NULL,
+	PROGRAM_ID INT NOT NULL,
+	PRIMARY KEY (STU_ID),
+	FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
+	FOREIGN KEY (PROGRAM_ID) REFERENCES PROGRAM(PROGRAM_ID)
 );
 
 CREATE TABLE COURSE (
@@ -133,8 +133,107 @@ VALUES
 	( 'GEO', 'Geography'),
 	( 'GSC', 'General Science'),
 	( 'MAT', 'Mathematics' ),
-	( 'PHY', 'Physics' ),
-	( 'POL', 'Political Science');
+	( 'PHY', 'Physics' );
+
+INSERT INTO PROGRAM ( PROGRAM_TITLE, DEPT_ID )
+VALUES
+	( 'Accounting', 1),
+	( 'Biology', 2),
+	( 'Software Engineering', 3),
+	( 'Information Technologies', 3),
+	( 'Computer Support', 3),
+	( 'Systems Analysis', 3),
+	( 'English', 4),
+	( 'Geography', 5),
+	( 'General Sciences', 6),
+	( 'Mathematics', 7),
+	( 'Physics', 8);
+
+INSERT INTO USERS (USER_LAST_NAME, USER_FIRST_NAME, USER_ADDRESS, USER_CITY, USER_STATE, USER_ZIP, USER_COUNTRY, USERNAME, USER_EMAIL, USER_DOB)
+VALUES
+	('Ingram','Laura','3043 Perry St','Westland','MI',48185,'USA','ingram.laura','ingram.laura@fsu.edu','1970-11-19'),
+	('Vallejos','Donnie','1390 Twin Oaks Ave','Grand Rapids','MI',49503,'USA','vallejos.donnie','vallejos.donnie@fsu.edu','1963-08-25'),
+	('Schanerberger','William','10101 Binary Blvd','Blob','MI',10101,'USA','schanerberger.william','schanerberger.william@fsu.edu','1975-10-10'),
+	('Emmons','Lee','21 Robinson Ct','Saginaw','MI',48607,'USA','emmons.lee','emmons.lee@fsu.edu','1981-07-17'),
+	('Taliaferro','Jessica','844 Rubaiyat Rd','Muskegon','MI',49440,'USA','taliaferro.jessica','taliaferro.jessica@fsu.edu','1980-01-21'),
+	('Turner','Henry','4998 Cottonwood Ln','Grand Rapids','MI',49505,'USA','turner.henry','turner.henry@fsu.edu','1961-04-24'),
+	('Zwilling','Ema','1622 Bombardier Way','Romulus','MI',48174,'USA','zwilling.ema','zwilling.ema@fsu.edu','1982-06-27'),
+	('Sawyer','Travis','3671 John Ave','Jonesville','MI',49250,'USA','sawyer.travis','sawyer.travis@fsu.edu','1982-08-30'),
+
+	('Booth', 'Jesse', '947 Bartlett Ave', 'Southfield', 'MI', 48075, 'USA','booth.jesse', 'booth.jesse@fsu.edu', '1992-02-29'),
+	('Avila', 'Patricia', '1049 D St', 'Roseville', 'MI', 48066, 'USA', 'avila.patricia', 'avila.patricia@fsu.edu', '1992-02-29'),
+	('Sanner','Joseph','348 Nash St','Detroit','MI',48227,'USA','sanner.joseph','sanner.jospeh@fsu.edu', '1992-02-29'),
+	('Timmons','Julia','1945 Eagle Dr','Southfield','MI',48235,'USA','timmons.julia','timmons.julia@fsu.edu', '1992-02-29'),
+	('Kestner','Ralph','4185 Robinson Ct','Saginaw','MI',48607,'USA','kestner.ralph','kestner.ralph@fsu.edu', '1992-02-29'),
+	('Fredericks','Joan','1476 Wetzel Ln','Grand Rapids','MI',49503,'USA','fredericks.joan','fredericks.joan@fsu.edu', '1992-02-29'),
+	('Tyson','Sheila','3327 Cherry Ridge Dr','Bloomfield Township','MI',48302,'USA','tyson.sheila','tyson.sheila@fsu.edu', '1992-02-29'),
+	('Bramblett','Albert','1758 Goff Ave','Three Rivers','MI',49093,'USA','bramblett.albert','bramblett.albert@fsu.edu', '1992-02-29'),
+	('Gill','Elizabeth','2621 Haven Ln','Grand Rapids','MI',49508,'USA','gill.elizabeth','gill.elizabeth@fsu.edu', '1992-02-29'),
+	('Thomas','Jose','4638 Prudence St','Southfield','MI',48075,'USA','thomas.jose','thomas.jose@fsu.edu', '1992-02-29'),
+	('Jones','Justin','3734 Hart Ridge Rd','Saginaw','MI',48607,'USA','jones.justin','justin.jones@fsu.edu', '1992-02-29'),
+	('Swanson','Frances','324 Wetzel Ln','Grand Rapids','MI',49503,'USA','swanson.frances','swanson.frances@fsu.edu', '1992-02-29'),
+	('Flower','Barbara','4643 Bobcat Dr','Bloomfield Township','MI',48302,'USA','flower.barbara','flower.barbara@fsu.edu', '1992-02-29'),
+	('Richardson','Robert','1778 Veltri Dr','Marquette','MI',49855,'USA','richardson.robert','richardson.robert@fsu.edu', '1992-02-29'),
+	('Watts','Joseph','2854 Prudence St','Farmington Hills','MI',48335,'USA','watts.joseph','watts.joseph@fsu.edu', '1992-02-29'),
+	('Aguilar','Kathryn','4658 Ben St','East Lansing','MI',48823,'USA','aguilar.kathryn','aguilar.kathryn@fsu.edu', '1992-02-29'),
+	('Tate','Michelle','209 D Street','Southfield','MI',48075,'USA','tate.michelle','tate.michelle@fsu.edu', '1992-02-29'),
+	('Watson','Janice','3650 Eagle Dr','Monroe','MI',48162,'USA','watson.janice','watson.janice@fsu.edu', '1992-02-29'),
+	('Long','Edward','2689 Lakeland Terrace','Detroit','MI',48226,'USA','long.edward','long.edward@fsu.edu', '1992-02-29'),
+	('Stocks','Vernon','598 Mount St','Alma','MI',48801,'USA','stocks.vernon','stocks.vernon@fsu.edu', '1992-02-29'),
+	('Cordova','Raymonds','182 Echo Ln','Grands Rapids','MI',49508,'cordova.raymonds','cordova.raymonds@fsu.edu', '1992-02-29'),
+	('Robertson','Russell','2573 Ripple St','Kingston','MI',48741,'robertson.russell','robertson.russell@fsu.edu', '1992-02-29'),
+	('Moreno','Brandon','2855 John Ave','Lansing','MI',48912,'USA','moreno.brandon','moreno.brandon@fsu.edu', '1992-02-29'),
+	('Slaughter','Michele','2697 Ritter Ave','Southfield','MI',48034,'slaughter.michele','slaughter.michele@fsu.edu', '1992-02-29'),
+	('Gill','Kathleen','1338 Tully St','Detroit','MI',48219,'USA','gill.kathleen','gill.kathleen@fsu.edu', '1992-02-29'),
+	('Mercuri','Jessica','209 Hayhurst Ln','Detroit','MI',48219,'USA','mercuri.jessica','mercuri.jessica@fsu.edu', '1992-02-29'),
+	('Raphael','Walter','1909 Front St','Southfield','MI',48075,'USA','raphael.walter','raphael.walter@fsu.edu', '1992-02-29'),
+	('Stecker','Iva','1619 Pinewood Ave','Crystal Falls','MI',49920,'USA','stecker.iva','stecker.iva@fsu.edu', '1992-02-29'),
+	('Mallory','Elizabeth','4464 State St','Detroit','MI',48219,'USA','mallory.elizabeth','mallory.elizabeth@fsu.edu','1992-02-29'),
+	('Case','Leslie','1674 Summit Park Ave','Plymouth','MI',48170,'USA','case.leslie','case.leslie@fsu.edu','1992-02-29');
+
+INSERT INTO FACULTY (USER_ID, DEPT_ID)
+VALUES
+	(1,1),
+	(2,2),
+	(3,3),
+	(4,4),
+	(5,5),
+	(6,6),
+	(7,7),
+	(8,8);
+
+INSERT INTO STUDENT (USER_ID, PROGRAM_ID)
+VALUES
+	(9,3),
+	(10,8),
+	(11,5),
+	(12,5),
+	(13,2),
+	(14,9),
+	(15,4),
+	(16,2),
+	(17,3),
+	(18,7),
+	(19,4),
+	(20,10),
+	(21,6),
+	(22,10),
+	(23,8),
+	(24,9),
+	(25,10),
+	(26,1),
+	(27,3),
+	(28,10),
+	(29,4),
+	(30,7),
+	(31,4),
+	(32,3),
+	(33,1),
+	(34,7),
+	(35,10),
+	(36,10),
+	(37,6),
+	(38,11);
 
 INSERT INTO COURSE (DEPT_ID, COURSE_ID, COURSE_TITLE, COURSE_DESCRIPT, COURSE_CREDITS, COURSE_CREDITS, DEPT_ID)
 VALUES 
@@ -173,46 +272,37 @@ VALUES
 	(8,2400,'Engineering Physics I','Prior physics in high school or college, or consent of instructor, is recommended. The student will define basic terms, explain theories, and apply them to the solution of problems in mechanics and thermodynamics using calculus where required. The student will obtain various types of data, reduce this data, express the reliability of the results, and write technical reports. Course/lab fees.',4),
 	(8,2500,'Engineering Physics II','The student will define basic terms, explain theories, and apply them to the solution of problems in electricity and magnetism using calculus and elementary differential equations where required. The student will obtain various types of data, reduce this data, express the reliability of the results, and write technical reports. Course/lab fees.',4),
 
-INSERT INTO USERS (USER_LAST_NAME, USER_FIRST_NAME, USER_ADDRESS, USER_CITY, USER_STATE, USER_ZIP, USER_COUNTRY, USERNAME, USER_EMAIL, USER_DOB)
-	VALUES
-	('Ingram','Laura','3043 Perry St','Westland','MI',48185,'USA','ingram.laura','ingram.laura@fsu.edu','1970-11-19'),
-	('Schanerberger','William','10101 Binary Blvd','Blob','MI',10101,'USA','schanerberger.william','schanerberger.william@fsu.edu','1975-10-10'),
-	('Vallejos','Donnie','1390 Twin Oaks Ave','Grand Rapids','MI',49503,'USA','vallejos.donnie','vallejos.donnie@fsu.edu','1963-08-25'),
-	('Emmons','Lee','21 Robinson Ct','Saginaw','MI',48607,'USA','emmons.lee','emmons.lee@fsu.edu','1981-07-17'),
-	('Taliaferro','Jessica','844 Rubaiyat Rd','Muskegon','MI',49440,'USA','taliaferro.jessica','taliaferro.jessica@fsu.edu','1980-01-21'),
-	('Turner','Henry','4998 Cottonwood Ln','Grand Rapids','MI',49505,'USA','turner.henry','turner.henry@fsu.edu','1961-04-24'),
-	('Zwilling','Ema','1622 Bombardier Way','Romulus','MI',48174,'USA','zwilling.ema','zwilling.ema@fsu.edu','1982-06-27'),
-	('Sawyer','Travis','3671 John Ave','Jonesville','MI',49250,'USA','sawyer.travis','sawyer.travis@fsu.edu','1982-08-30'),
-
-	('Booth', 'Jesse', '947 Bartlett Ave', 'Southfield', 'MI', 48075, 'USA','booth.jesse', 'booth.jesse@fsu.edu', '1992-02-29'),
-	('Avila', 'Patricia', '1049 D St', 'Roseville', 'MI', 48066, 'USA', 'avila.patricia', 'avila.patricia@fsu.edu', '1992-02-29'),
-	('Sanner','Joseph','348 Nash St','Detroit','MI',48227,'USA','sanner.joseph','sanner.jospeh@fsu.edu', '1992-02-29'),
-	('Timmons','Julia','1945 Eagle Dr','Southfield','MI',48235,'USA','timmons.julia','timmons.julia@fsu.edu', '1992-02-29'),
-	('Kestner','Ralph','4185 Robinson Ct','Saginaw','MI',48607,'USA','kestner.ralph','kestner.ralph@fsu.edu', '1992-02-29'),
-	('Fredericks','Joan','1476 Wetzel Ln','Grand Rapids','MI',49503,'USA','fredericks.joan','fredericks.joan@fsu.edu', '1992-02-29'),
-	('Tyson','Sheila','3327 Cherry Ridge Dr','Bloomfield Township','MI',48302,'USA','tyson.sheila','tyson.sheila@fsu.edu', '1992-02-29'),
-	('Bramblett','Albert','1758 Goff Ave','Three Rivers','MI',49093,'USA','bramblett.albert','bramblett.albert@fsu.edu', '1992-02-29'),
-	('Gill','Elizabeth','2621 Haven Ln','Grand Rapids','MI',49508,'USA','gill.elizabeth','gill.elizabeth@fsu.edu', '1992-02-29'),
-	('Thomas','Jose','4638 Prudence St','Southfield','MI',48075,'USA','thomas.jose','thomas.jose@fsu.edu', '1992-02-29'),
-	('Jones','Justin','3734 Hart Ridge Rd','Saginaw','MI',48607,'USA','jones.justin','justin.jones@fsu.edu', '1992-02-29'),
-	('Swanson','Frances','324 Wetzel Ln','Grand Rapids','MI',49503,'USA','swanson.frances','swanson.frances@fsu.edu', '1992-02-29'),
-	('Flower','Barbara','4643 Bobcat Dr','Bloomfield Township','MI',48302,'USA','flower.barbara','flower.barbara@fsu.edu', '1992-02-29'),
-	('Richardson','Robert','1778 Veltri Dr','Marquette','MI',49855,'USA','richardson.robert','richardson.robert@fsu.edu', '1992-02-29'),
-	('Watts','Joseph','2854 Prudence St','Farmington Hills','MI',48335,'USA','watts.joseph','watts.joseph@fsu.edu', '1992-02-29'),
-	('Aguilar','Kathryn','4658 Ben St','East Lansing','MI',48823,'USA','aguilar.kathryn','aguilar.kathryn@fsu.edu', '1992-02-29'),
-	('Tate','Michelle','209 D Street','Southfield','MI',48075,'USA','tate.michelle','tate.michelle@fsu.edu', '1992-02-29'),
-	('Watson','Janice','3650 Eagle Dr','Monroe','MI',48162,'USA','watson.janice','watson.janice@fsu.edu', '1992-02-29'),
-	('Long','Edward','2689 Lakeland Terrace','Detroit','MI',48226,'USA','long.edward','long.edward@fsu.edu', '1992-02-29'),
-	('Stocks','Vernon','598 Mount St','Alma','MI',48801,'USA','stocks.vernon','stocks.vernon@fsu.edu', '1992-02-29'),
-	('Cordova','Raymonds','182 Echo Ln','Grands Rapids','MI',49508,'cordova.raymonds','cordova.raymonds@fsu.edu', '1992-02-29'),
-	('Robertson','Russell','2573 Ripple St','Kingston','MI',48741,'robertson.russell','robertson.russell@fsu.edu', '1992-02-29'),
-	('Moreno','Brandon','2855 John Ave','Lansing','MI',48912,'USA','moreno.brandon','moreno.brandon@fsu.edu', '1992-02-29'),
-	('Slaughter','Michele','2697 Ritter Ave','Southfield','MI',48034,'slaughter.michele','slaughter.michele@fsu.edu', '1992-02-29'),
-	('Gill','Kathleen','1338 Tully St','Detroit','MI',48219,'USA','gill.kathleen','gill.kathleen@fsu.edu', '1992-02-29'),
-	('Mercuri','Jessica','209 Hayhurst Ln','Detroit','MI',48219,'USA','mercuri.jessica','mercuri.jessica@fsu.edu', '1992-02-29'),
-	('Raphael','Walter','1909 Front St','Southfield','MI',48075,'USA','raphael.walter','raphael.walter@fsu.edu', '1992-02-29'),
-	('Stecker','Iva','1619 Pinewood Ave','Crystal Falls','MI',49920,'USA','stecker.iva','stecker.iva@fsu.edu', '1992-02-29'),
-	('Mallory','Elizabeth','4464 State St','Detroit','MI',48219,'USA','mallory.elizabeth','mallory.elizabeth@fsu.edu','1992-02-29'),
-	('Case','Leslie','1674 Summit Park Ave','Plymouth','MI',48170,'USA','case.leslie','case.leslie@fsu.edu','1992-02-29');
-
-INSERT INTO FACULTY ()
+INSERT INTO SECTION (DEPT_ID, COURSE_ID, SECTION_DAY, SECTION_TIME_START, SECTION_TIME_END, SECTION_LOCATION, FACULTY_ID)
+VALUES
+	(1, 1500, 20,'16:00:00','18:00:00','B108',1),
+	(1, 1800, 32,'9:00:00','11:00:00','A316',1),
+	(1, 1800, 10,'8:00:00','10:00:00','A306',1),
+	(2, 1500, 4,'19:00:00','21:00:00','A119',2),
+	(2, 1500, 16,'10:00:00','12:00:00','G101',2),
+	(2, 1510, 40,'9:00:00','11:00:00','C224',2),
+	(2, 1510, 10,'16:00:00','18:00:00','B304',2),
+	(2, 2540, 16,'12:00:00','14:00:00','G111',2),
+	(2, 2540, 16,'9:00:00','11:00:00','A306',2),
+	(3, 1050, 40,'13:00:00','15:00:00','A110',3),
+	(3, 1050, 4,'12:00:00','14:00:00','E225',3),
+	(3, 1200, 20,'10:00:00','12:00:00','B118',3),
+	(3, 1400, 32,'19:00:00','21:00:00','C210',3),
+	(3, 1500, 16,'13:00:00','15:00:00','D114',3),
+	(4, 1510, 32,'17:00:00','19:00:00','D224',4),
+	(4, 1510, 40,'18:00:00','20:00:00','G204',4),
+	(4, 1520, 8,'14:00:00','16:00:00','F119',4),
+	(4, 1520, 8,'16:00:00','18:00:00','D125',4),
+	(4, 2300, 10,'17:00:00','19:00:00','F314',4),
+	(5, 1520, 10,'19:00:00','21:00:00','B308',5),
+	(5, 1520, 40,'18:00:00','20:00:00','A309',5),
+	(6, 1530, 32,'9:00:00','11:00:00','A107',6),
+	(6, 1590, 20,'14:00:00','16:00:00','G221',6),
+	(7, 1100, 16,'9:00:00','11:00:00','B323',7),
+	(7, 1100, 40,'15:00:00','17:00:00','G321',7),
+	(7, 1560, 40,'13:00:00','15:00:00','B324',7),
+	(7, 1740, 32,'17:00:00','19:00:00','A124',7),
+	(7, 1740, 40,'16:00:00','18:00:00','A120',7),
+	(8, 1610, 20,'13:00:00','15:00:00','D103',8),
+	(8, 1610, 10,'12:00:00','14:00:00','F322',8),
+	(8, 2400, 40,'11:00:00','13:00:00','G302',8),
+	(8, 2400, 2,'8:00:00','10:00:00','F312',8);
