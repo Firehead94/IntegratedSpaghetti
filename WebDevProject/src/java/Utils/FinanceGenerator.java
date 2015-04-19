@@ -107,7 +107,7 @@ public class FinanceGenerator {
                     if(invMo.length()<2)
                         invMo = "0" + invMo;
                     
-                    String invDate = invMo + "-" + invDa + "-" + invYe;
+                    String invDate = invYe + "-" + invMo + "-" + invDa;
                     
                     int payment = (int)(Math.random()*1000);
                     
