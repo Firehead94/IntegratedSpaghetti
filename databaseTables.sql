@@ -210,7 +210,7 @@ VALUES
 	(7,7),
 	(8,8);
 
-INSERT INTO STUDENT (USER_ID, PROGRAM_ID, BALANCE)
+INSERT INTO STUDENT (USER_ID, PROGRAM_ID)
 VALUES
 	(9,3),
 	(10,8),
@@ -243,7 +243,7 @@ VALUES
 	(37,6),
 	(38,11);
 
-INSERT INTO COURSE (DEPT_ID, COURSE_ID, COURSE_TITLE, COURSE_DESCRIPT, COURSE_CREDITS, COURSE_CREDITS)
+INSERT INTO COURSE (DEPT_ID, COURSE_ID, COURSE_TITLE, COURSE_DESCRIPT, COURSE_CREDITS)
 VALUES 
 	(1,1500,'Accounting for the Small Business Owner','This course is designed for the non-accountant business owner. The student will study accounting procedures and applications for small businesses. Topics include bookkeeping for the small business, accounting systems for the small business, understanding of financial statements, overview of inventory management, survey of small business owner tax concerns and accounting concepts relating to financing the small business.',3),
 	(1,1800,'Accounting Procedures','This course presents general accounting procedures. Students will study the accounting equation, emphasizing the process of analyzing and recording financial information using the double-entry accounting system. Coverage includes the recording of basic transactions and adjustments for both service and merchandising concerns.',2),
@@ -278,7 +278,7 @@ VALUES
 	(8,1610,'College Physics I','The student will investigate the physical aspects of mechanics, sound, and heat. The student will perform measurements and experiments in mechanics and thermodynamics. Course/lab fees.',4),
 	(8,1620,'College Physics II','The student will study electricity, magnetism, optics, and selected topics in atomic physics. The student will perform measurements and experiments in electricity, magnetism, and optics. Course/lab fees.',4),
 	(8,2400,'Engineering Physics I','Prior physics in high school or college, or consent of instructor, is recommended. The student will define basic terms, explain theories, and apply them to the solution of problems in mechanics and thermodynamics using calculus where required. The student will obtain various types of data, reduce this data, express the reliability of the results, and write technical reports. Course/lab fees.',4),
-	(8,2500,'Engineering Physics II','The student will define basic terms, explain theories, and apply them to the solution of problems in electricity and magnetism using calculus and elementary differential equations where required. The student will obtain various types of data, reduce this data, express the reliability of the results, and write technical reports. Course/lab fees.',4),
+	(8,2500,'Engineering Physics II','The student will define basic terms, explain theories, and apply them to the solution of problems in electricity and magnetism using calculus and elementary differential equations where required. The student will obtain various types of data, reduce this data, express the reliability of the results, and write technical reports. Course/lab fees.',4);
 
 INSERT INTO SECTION (DEPT_ID, COURSE_ID, SECTION_DAY, SECTION_TIME_START, SECTION_TIME_END, SECTION_LOCATION, FACULTY_ID)
 VALUES
@@ -315,7 +315,7 @@ VALUES
 	(8, 2400, 40,'11:00:00','13:00:00','G302',8),
 	(8, 2400, 2,'8:00:00','10:00:00','F312',8);
 
-INSERT INTO REGISTRATION (STU_ID, SECTION_NUM, GPA, GRADE)
+INSERT INTO REGISTRATION (STU_ID, SECTION_NUM, GRADE, GPA)
 VALUES
 	(9,10,'D',1.0),
 	(9,3,'B',3.0),

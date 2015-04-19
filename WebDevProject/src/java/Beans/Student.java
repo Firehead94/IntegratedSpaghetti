@@ -11,6 +11,7 @@ public class Student implements Serializable {
     
     private int stu_ID;
     private int program_ID;
+    private double balance;
 
     /**
      * @return the stu_ID
@@ -38,6 +39,20 @@ public class Student implements Serializable {
      */
     public void setProgram_ID(int program_ID) {
         this.program_ID = program_ID;
+    }
+
+    /**
+     * @return the balance
+     */
+    public double getBalance() {
+        return balance;
+    }
+
+    /**
+     * @param balance the balance to set
+     */
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
     
 }
