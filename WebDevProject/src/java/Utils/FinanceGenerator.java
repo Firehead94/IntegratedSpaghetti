@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Hash;
+package Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +14,10 @@ import java.util.Arrays;
  */
 public class FinanceGenerator {
     public static void main(String[] args) {
+        
+        ArrayList<String> finance = new ArrayList<>();
+        ArrayList<String> invoice = new ArrayList<>();
+        
         String[] arr = {"('Jesse Booth', '947 Bartlett Ave', 'Southfield', 'MI', 48075,",
             "('Patricia Avila', '1049 D St', 'Roseville', 'MI', 48066,",
             "('Joseph Sanner','348 Nash St','Detroit','MI',48227,",
@@ -47,13 +51,19 @@ public class FinanceGenerator {
         ArrayList<String> list = new ArrayList<>(Arrays.asList(arr));
         
         for(String start : list) {
-            String cardNum = "";
-            for(int i=0; i<16;i++) {
-                cardNum+=String.valueOf((int)(Math.random() * 10));
-            }
-            String month = String.valueOf((int)(Math.random() *12 ) + 1);
-            String year = String.valueOf((int)(Math.random() * 6) + 15);
             
+            int numCards = (int)(Math.random()*2) + 1;
+            for(int n=0; n<numCards; n++) {
+                
+                String cardNum = "";
+                for(int i=0; i<16;i++) {
+                    cardNum+=String.valueOf((int)(Math.random() * 10));
+                }
+                String month = String.valueOf((int)(Math.random() *12 ) + 1);
+                String year = String.valueOf((int)(Math.random() * 6) + 15);
+
+                String expDate = month + "/" + year;
+            }
             
         }
         

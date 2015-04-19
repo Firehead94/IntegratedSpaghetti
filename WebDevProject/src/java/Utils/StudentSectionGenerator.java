@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Hash;
+package Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +40,10 @@ public class StudentSectionGenerator {
             gpas.put("A-","3.7");
             gpas.put("A","4.0");
         
-        for(int i=9; i<39;i++) {
+            ArrayList<String> withGpas = new ArrayList<>();
+            ArrayList<String> noGpas = new ArrayList<>();
+            
+        for(int i=1; i<31;i++) {
             
             String student = String.valueOf(i);
             int numClasses = (int)(Math.random()*3) + 3;
@@ -54,17 +57,32 @@ public class StudentSectionGenerator {
                 }
                 sections.add(section);
                 
-                System.out.print("("+student+","+section);
+                String sectionInfo = ("("+student+","+section);
                 if(grades.containsKey(gradeInt)) {
                     String grade = grades.get(gradeInt);
                     String gpa = gpas.get(grade);
-                    System.out.print(",\'"+grade+"\',"+gpa);
+                    sectionInfo += ",\'"+grade+"\',"+gpa+"),";
+                    withGpas.add(sectionInfo);
                 }
-                System.out.println("),");
+                else {
+                    sectionInfo += "),";
+                    noGpas.add(sectionInfo);
+                }
+                
+                
             
             }             
             
             
         }
-    }
+        
+        System.out.println("With GPAs");
+        for(String sct : withGpas) {
+            System.out.println(sct);
+        }
+        System.out.println("Without GPAs");
+        for(String sct : noGpas) {
+            System.out.println(sct);
+        }
+}
 }
