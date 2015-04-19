@@ -15,8 +15,8 @@ import java.util.Arrays;
 public class FinanceGenerator {
     public static void main(String[] args) {
         
-        ArrayList<String> finance = new ArrayList<>();
-        ArrayList<String> invoice = new ArrayList<>();
+        ArrayList<String> finances = new ArrayList<>();
+        ArrayList<String> invoices = new ArrayList<>();
         
         String[] arr = {"('Jesse Booth', '947 Bartlett Ave', 'Southfield', 'MI', 48075,",
             "('Patricia Avila', '1049 D St', 'Roseville', 'MI', 48066,",
@@ -49,7 +49,33 @@ public class FinanceGenerator {
             "('Elizabeth Mallory','4464 State St','Detroit','MI',48219,",
             "('Leslie Case','1674 Summit Park Ave','Plymouth','MI',48170,"};
         ArrayList<String> list = new ArrayList<>(Arrays.asList(arr));
+        int s = 1;
         
+        
+        /*
+        CREATE TABLE FINANCIAL (
+	STU_ID INT NOT NULL,
+	CREDITCARD_NUM BIGINT NOT NULL,
+	EXP_DATE CHAR(5) NOT NULL,
+	BILLING_ADDRESS VARCHAR(255) NOT NULL,
+	BILLING_CITY VARCHAR(255) NOT NULL,
+	BILLING_STATE VARCHAR(255) NOT NULL,
+	BILLING_ZIP INT NOT NULL,
+	BILLING_NAME VARCHAR(255) NOT NULL,
+	PRIMARY KEY (STU_ID, CREDITCARD_NUM),
+	FOREIGN KEY (STU_ID) REFERENCES STUDENT(STU_ID)
+        );
+
+        CREATE TABLE INVOICE (
+                INVOICE_ID INT NOT NULL AUTO_INCREMENT,
+                CREDITCARD_NUM BIGINT,
+                STU_ID INT NOT NULL,
+                INVOICE_PAYMENT INT NOT NULL,
+                INVOICE_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                PRIMARY KEY (INVOICE_ID),
+                FOREIGN KEY (STU_ID, CREDITCARD_NUM) REFERENCES FINANCIAL(STU_ID, CREDITCARD_NUM)
+        );
+        */
         for(String start : list) {
             
             int numCards = (int)(Math.random()*2) + 1;
@@ -59,14 +85,56 @@ public class FinanceGenerator {
                 for(int i=0; i<16;i++) {
                     cardNum+=String.valueOf((int)(Math.random() * 10));
                 }
+                
                 String month = String.valueOf((int)(Math.random() *12 ) + 1);
                 String year = String.valueOf((int)(Math.random() * 6) + 15);
 
+                if(Integer.valueOf(month)<10)
+                    month = "0"+month;
+                
                 String expDate = month + "/" + year;
+                
+                int invoiceNum = (int)(Math.random()*5) +1;
+                for(int v=0; v<invoiceNum;v++) {
+
+                    String invDa = String.valueOf((int)(Math.random()*29)+1);
+                    String invMo = String.valueOf((int)(Math.random()*12)+1);
+                    String invYe = String.valueOf((int)(Math.random()*10) + 2005);
+                    
+                    if(invDa.length()<2)
+                        invDa = "0"+invDa;
+                    
+                    if(invMo.length()<2)
+                        invMo = "0" + invMo;
+                    
+                    String invDate = invMo + "-" + invDa + "-" + invYe;
+                    
+                    int payment = (int)(Math.random()*1000);
+                    
+                    String invStr = "("+cardNum+","+s+","+payment+",'"+invDate+"')";
+                    invoices.add(invStr);
+                    
+                }
+                
+                String finStr=start+s+","+cardNum+",'"+expDate + "')";
+                finances.add(finStr);
             }
             
+             s++;
         }
         
+        System.out.println("finances:");
+        for(String finance : finances ) {
+            System.out.print(finance);
+            System.out.println(",");
+        }
         
+        System.out.println("invoices:");
+        for(String invoice : invoices) {
+            System.out.print(invoice);
+            System.out.println(",");
+        }
+        
+       
     }
 }

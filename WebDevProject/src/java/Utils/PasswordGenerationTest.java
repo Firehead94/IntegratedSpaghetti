@@ -14,7 +14,7 @@ import Hash.MD5;
 public class PasswordGenerationTest {
     
     public static void main(String[] args) {
-        String pass = "abc123'";
+        String pass = "abc123";
         
         MD5 hasher = new MD5(pass);
         
