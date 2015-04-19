@@ -27,8 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Justin
  */
-@WebServlet(name = "createAccount", urlPatterns = {"/createAccount"})
-public class createAccount extends HttpServlet {
+public class CreateAccount extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -59,40 +58,44 @@ public class createAccount extends HttpServlet {
         
         Map<String, String[]> map = request.getParameterMap();
         boolean exists = false;
-        
-        if (map.get("action").equals("create")) {
-        
-            User user = new User(); 
-            SimpleDateFormat sf = new SimpleDateFormat("yyyy-mm-dd");
-        
-            user.setUser_first_name(map.get("FirstName")[0]);
-            user.setUser_last_name(map.get("LastName")[0]);
-            user.setUser_address(map.get("Address")[0]);
-            user.setUser_city(map.get("City")[0]);
-            user.setUser_state(map.get("State")[0]);
-            user.setUser_zip(Integer.parseInt(map.get("Zip")[0]));
-            user.setUser_country(map.get("Country")[0]);
-            try {
-                user.setUser_dob(sf.parse(map.get("DOB")[0]));
-            } catch (ParseException ex) {
-                Logger.getLogger(createAccount.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        System.out.print("creating sumthing maybe");
+        System.out.println(map.keySet());
 
-            user.setUsername(user.getUser_last_name() + "." + user.getUser_first_name());
-            user.setUser_email(user.getUsername() + "@fsu.edu");
-            
-            if (UserDB.userExists(user.getUser_email()))
-                UserDB.insertUser(user, new MD5((String)request.getAttribute("password")).getHash());
-            else
-                exists = true;
-            
-            request.getSession().setAttribute("user", UserDB.getUserByEmail(user.getUser_email()));
+        System.out.print("creating");
+        User user = new User(); 
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-mm-dd");
+
+        user.setUser_first_name(map.get("FirstName")[0]);
+        user.setUser_last_name(map.get("LastName")[0]);
+        user.setUser_address(map.get("Address")[0]);
+        user.setUser_city(map.get("City")[0]);
+        user.setUser_state(map.get("State")[0]);
+        user.setUser_zip(Integer.parseInt(map.get("Zip")[0]));
+        user.setUser_country(map.get("Country")[0]);
+        try {
+            user.setUser_dob(sf.parse(map.get("DOB")[0]));
+        } catch (ParseException ex) {
+            Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        user.setUsername(user.getUser_last_name() + "." + user.getUser_first_name());
+        user.setUser_email(user.getUsername() + "@fsu.edu");
+
+        if (!UserDB.userExists(user.getUser_email())) {
+            System.out.println(map.get("Password")[0]);
+            MD5 hash = new MD5(map.get("Password")[0]);
+            UserDB.insertUser(user, hash.getHash());
+        } else {
+            exists = true;
+        }
+        System.out.println("Created!!!");
+        request.getSession().setAttribute("user", UserDB.getUserByEmail(user.getUser_email()));
+        
         
         request.setAttribute("exists", exists);
         
         getServletContext()
-            .getRequestDispatcher(url)
+            .getRequestDispatcher("/index.jsp")
             .forward(request, response);
     }
 
