@@ -51,9 +51,9 @@ public class StudentSectionGenerator {
             
             for(int s=0;s<numClasses;s++) {
                 int gradeInt = (int)(Math.random()*13);
-                int section = (int)(Math.random()*20);
+                int section = (int)(Math.random()*32 + 1);
                 while(sections.contains(section)){
-                    section = (int)(Math.random()*20);
+                    section = (int)(Math.random()*32 + 1);
                 }
                 sections.add(section);
                 
