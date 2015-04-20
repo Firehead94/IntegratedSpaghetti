@@ -90,6 +90,7 @@ public class UserDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        int retVal;
         
         String query = "INSERT INTO USERS (USER_FIRST_NAME, USER_LAST_NAME, USER_ADDRESS, USER_CITY, USER_STATE, USER_ZIP, USER_COUNTRY, USER_PASSWORD, USERNAME, USER_EMAIL, USER_DOB) " +
                        "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
@@ -106,7 +107,7 @@ public class UserDB {
             ps.setString(9, user.getUsername());
             ps.setString(10, user.getUser_email());
             ps.setDate(11, new java.sql.Date(user.getUser_dob().getTime()));
-            return ps.executeUpdate();
+            retVal = ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
             return 0;
@@ -114,6 +115,7 @@ public class UserDB {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
+        return retVal;
         
     }   
     
@@ -121,20 +123,21 @@ public class UserDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        User user = null;
         
         String query = "SELECT * FROM USERS " +
                 "WHERE USER_EMAIL = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, email);
-            return getFromDB(ps);
+            user = getFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return null;
+        return user;
     }
     
     /**
@@ -147,20 +150,21 @@ public class UserDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        User user = null;
         
         String query = "SELECT * FROM USERS " +
                 "WHERE USERNAME = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, username);
-            return getFromDB(ps);
+            user = getFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }        
-        return null;
+        return user;
     }
     
     /**
@@ -174,20 +178,21 @@ public class UserDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<User> users = null;
         
         String query = "SELECT * FROM USERS u, REGISTRATION r, STUDENT s " +
                 "WHERE r.SECTION_NUM = ? AND (r.STU_ID = s.STU_ID AND s.STU_ID = u.STU_ID)";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, section_num);
-            return getListFromDB(ps);
+            users = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }        
-        return null;
+        return users;
     }
     
     /**
@@ -201,20 +206,21 @@ public class UserDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<User> users = null;
         
         String query = "SELECT * FROM USERS u, STUDENT s, REGISTRATION r, SECTION s " +
                 "WHERE (u.STU_ID = s.STU_ID AND s.STU_ID = r.STU_ID) AND (r.SECTION_NUM = s.SECTION_NUM) AND s.COURSE_ID = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, Integer.toString(course_ID));
-            return getListFromDB(ps);
+            users = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }        
-        return null;
+        return users;
     }
     
     /**
@@ -227,20 +233,21 @@ public class UserDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<User> users = null;
         
         String query = "SELECT * FROM USERS " +
                 "WHERE USER_FIRST_NAME = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, name);
-            return getListFromDB(ps);
+            users = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }        
-        return null;
+        return users;
     }
     
     /**
@@ -253,6 +260,7 @@ public class UserDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<User> users = null;
         
         String query = "SELECT * FROM USERS " +
                 "WHERE USER_LAST_NAME = ?";
@@ -260,14 +268,14 @@ public class UserDB {
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, name);
-            return getListFromDB(ps);
+            users = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }        
-        return null;
+        return users;
     }
      
     /**
