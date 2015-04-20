@@ -21,77 +21,85 @@ public class RegistrationDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        Registration registration = null;
         
         String query = "SELECT * FROM REGISTRATION " +
                 "WHERE STU_ID = ? AND SECTION_NUM = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, student_ID);
-        ps.setInt(2, section_num);        
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, student_ID);
+            ps.setInt(2, section_num);
+            registration = getFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getFromDB(ps);        
+        return registration;        
     }
     
     public static ArrayList<Registration> getRegistrationByStudent(int student_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<Registration> registrations = null;
         
         String query = "SELECT * FROM REGISTRATION " +
                 "WHERE STU_ID = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, student_ID);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, student_ID);
+            registrations = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);           
+        return registrations;           
     }
     
     public static ArrayList<Registration> getRegistrationBySection(int section_num) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<Registration> registrations = null;
         
         String query = "SELECT * FROM REGISTRATION " +
                 "WHERE SECTION_NUM = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, section_num);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, section_num);
+            registrations = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);         
+        return registrations;         
     }
     
     public static ArrayList<Registration> getRegistrationByFacultyint(int faculty_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<Registration> registrations = null;
         
         String query = "SELECT * FROM REGISTRATION r, SECTION s " +
                 "WHERE r.SECTION_NUM = s.SECTION_NUM AND s.FACULTY_ID = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, faculty_ID);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, faculty_ID);
+            registrations = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);         
+        return registrations;         
     }
     
     private static Registration getFromDB (PreparedStatement ps) {

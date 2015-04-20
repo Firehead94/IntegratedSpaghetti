@@ -25,51 +25,58 @@ public class SectionDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        Section section = null;
         
         String query = "SELECT * FROM SECTION " +
                 "WHERE SECTION_NUM = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, section_num);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, section_num);
+            section = getFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getFromDB(ps);
+        return section;
     }
     
     public static Map<Section, Course> getSectionsByDeptAbr(String dept_abr) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        Map<Section, Course> section = null;
         
         String query = "SELECT * FROM SECTION s, COURSE c, DEPTARMENT d " +
                 "WHERE s.COURSE_ID = c.COURSE_ID AND s.DEPT_ID = d.DEPT_ID AND d.DEPT_ABR = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setString(1, dept_abr);
+            ps = connection.prepareStatement(query);
+            ps.setString(1, dept_abr);
+            section = getMapFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getMapFromDB(ps);
+        return section;
     }
     
     public static Map<Section, Course> getSectionsByCourseIDAndDeptID(int course_ID, int dept_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        Map<Section, Course> section = null;
+        
         
         String query = "SELECT * FROM SECTION " +
                 "WHERE COURSE_ID = ? AND DEPT_ID = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, course_ID);
-        ps.setInt(2, dept_ID);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, course_ID);
+            ps.setInt(2, dept_ID);
+            section = getMapFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -83,77 +90,85 @@ public class SectionDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        Map<Section, Course> section = null;
         
         String query = "SELECT * FROM SECTION " +
                 "WHERE SECTION_DAY = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, dayCode);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, dayCode);
+            section = getMapFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getMapFromDB(ps);       
+        return section;       
     }
     
     public static Map<Section, Course> getSectionsByTime(Time min, Time max) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        Map<Section, Course> section = null;
         
         String query = "SELECT * FROM SECTION " +
                 "WHERE SECTION_TIME BETWEEN ? AND ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setTime(1, min);
-        ps.setTime(2, max);
+            ps = connection.prepareStatement(query);
+            ps.setTime(1, min);
+            ps.setTime(2, max);
+            section = getMapFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getMapFromDB(ps);         
+        return section;         
     }
     
     public static Map<Section, Course> getSectionByFacultyID(int faculty_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        Map<Section, Course> section = null;
         
         String query = "SELECT * FROM SECTION " +
                 "WHERE FACULTY_ID = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, faculty_ID);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, faculty_ID);
+            section = getMapFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getMapFromDB(ps);          
+        return section;          
     }
     
     public static Map<Section, Course> getSectionsByLocation(String location) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        Map<Section, Course> section = null;
         
         String query = "SELECT * FROM SECTION " +
                 "WHERE SECTION_LOCATION = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setString(1, location);
+            ps = connection.prepareStatement(query);
+            ps.setString(1, location);
+            section = getMapFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getMapFromDB(ps);          
+        return section;          
     }
     
     private static Section getFromDB(PreparedStatement ps) {

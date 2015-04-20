@@ -28,20 +28,22 @@ public class CourseDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        Course course = null;
         
         String query = "SELECT * FROM COURSE " +
                 "WHERE COURSE_ID = ? AND DEPT_ID = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, course_ID);
-        ps.setInt(2, dept_ID);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, course_ID);
+            ps.setInt(2, dept_ID);
+            course = getFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getFromDB(ps);
+        return course;
     }
     
     /**
@@ -54,19 +56,21 @@ public class CourseDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<Course> courses = null;
         
         String query = "SELECT * FROM COURSE " +
                 "WHERE DEPT_ID = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, dept_ID);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, dept_ID);
+            courses = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);
+        return courses;
     }
     
     /**
@@ -79,19 +83,21 @@ public class CourseDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<Course> courses = null;
         
         String query = "SELECT * FROM COURSE c, DEPARTMENT d " +
                 "WHERE c.DEPT_ID = d.DEPT_ID AND d.DEPT_ABR = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setString(1, dept_abr);
+            ps = connection.prepareStatement(query);
+            ps.setString(1, dept_abr);
+            courses = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);
+        return courses;
     }
     
     /**
@@ -104,19 +110,21 @@ public class CourseDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<Course> courses = null;
         
         String query = "SELECT * FROM COURSE c, REGISTRATION r " +
                 "WHERE c.COURSE_ID = r.COURSE_ID && r.STU_ID = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, user.getStu_ID());
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, user.getStu_ID());
+            courses = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);
+        return courses;
     }
 
     /**

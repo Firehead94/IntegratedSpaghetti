@@ -21,77 +21,85 @@ public class InvoiceDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        Invoice invoice = null;
         
         String query = "SELECT * FROM INVOICE " +
                 "WHERE INVOICE_ID = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, invoice_ID);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, invoice_ID);
+            invoice = getFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getFromDB(ps);
+        return invoice;
     }
     
     public static ArrayList<Invoice> getInvoiceByStudentID(int student_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<Invoice> invoices = null;
         
         String query = "SELECT * FROM INVOICE " +
                 "WHERE STU_ID = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, student_ID);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, student_ID);
+            invoices = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);
+        return invoices;
     }
     
     public static ArrayList<Invoice> getInvoiceByDate(Date dateMin, Date dateMax) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<Invoice> invoices = null;
         
         String query = "SELECT * FROM INVOICE " +
                 "WHERE INVOICE_DATE BETWEEN ? AND ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setDate(1, new java.sql.Date(dateMin.getTime()));
-        ps.setDate(2, new java.sql.Date(dateMax.getTime()));
+            ps = connection.prepareStatement(query);
+            ps.setDate(1, new java.sql.Date(dateMin.getTime()));
+            ps.setDate(2, new java.sql.Date(dateMax.getTime()));
+            invoices = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);
+        return invoices;
     }
     
     public static ArrayList<Invoice> getInvoiceByCCN(long creditcard_num) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<Invoice> invoices = null;
         
         String query = "SELECT * FROM INVOICE " +
                 "WHERE CREDITCARD_NUM = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setLong(1, creditcard_num);
+            ps = connection.prepareStatement(query);
+            ps.setLong(1, creditcard_num);
+            invoices = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);        
+        return invoices;       
     }
     
     private static Invoice getFromDB(PreparedStatement ps) {

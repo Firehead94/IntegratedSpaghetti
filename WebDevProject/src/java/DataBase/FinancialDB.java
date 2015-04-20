@@ -21,59 +21,65 @@ public class FinancialDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        Financial financial = null;
         
         String query = "SELECT * FROM FINANCIAL " +
                 "WHERE STU_ID = ? AND CREDITCARD_NUM = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, student_ID);
-        ps.setInt(2, ccn);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, student_ID);
+            ps.setInt(2, ccn);
+            financial = getFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getFromDB(ps);
+        return financial;
     }
     
     public static ArrayList<Financial> getFinancialByStudentID(int student_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<Financial> financials = null;
         
         String query = "SELECT * FROM FINANCIAL " +
                 "WHERE STU_ID = ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, student_ID);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, student_ID);
+            financials = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);
+        return financials;
     }
     
     public static ArrayList<Financial> getFinancialByBalanceRange(double min, double max) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ArrayList<Financial> financials = null;
         
         String query = "SELECT * FROM FINANCIAL " +
                 "WHERE BALANCE BETWEEN ? AND ?";
         try {
-        ps = connection.prepareStatement(query);
-        ps.setDouble(1, min);
-        ps.setDouble(1, max);
+            ps = connection.prepareStatement(query);
+            ps.setDouble(1, min);
+            ps.setDouble(1, max);
+            financials = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getListFromDB(ps);
+        return financials;
     }
     
     private static Financial getFromDB(PreparedStatement ps) {
