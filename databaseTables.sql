@@ -1,4 +1,3 @@
--- Hi if you're looking bebee I love you :D 
 DELETE FROM REGISTRATION;
 DELETE FROM SECTION;
 DELETE FROM FACULTY;

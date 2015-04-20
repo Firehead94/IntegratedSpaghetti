@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -48,7 +49,7 @@ public class Login extends HttpServlet {
         
         //String action = request.getParameterValues("action")[0];
         Map<String,String[]> map = request.getParameterMap();
-        
+        HttpSession session = request.getSession();
         
         if (map.containsKey("loginInfo")) {
             
@@ -64,8 +65,8 @@ public class Login extends HttpServlet {
                 System.err.println("Hash was not null");
                 // placeholder for DB initialization and query
                 url = "/test.jsp";
-                request.setAttribute("username",username);
-                request.setAttribute("hash",hash);
+                session.setAttribute("user",username);
+                session.setAttribute("hash",hash);
                 // tested this, and it works
                 
             }
