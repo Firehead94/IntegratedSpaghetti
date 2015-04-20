@@ -1,6 +1,7 @@
 
 package Servlets;
 
+import DataBase.UserDB;
 import Hash.MD5;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -60,15 +61,9 @@ public class Login extends HttpServlet {
             
             hash = new MD5(password).getHash();            
             
-            if(hash != null) {
-                
-                System.err.println("Hash was not null");
-                // placeholder for DB initialization and query
-                url = "/test.jsp";
-                session.setAttribute("user",username);
-                session.setAttribute("hash",hash);
-                // tested this, and it works
-                
+            if(hash != null && UserDB.validateUser(username, hash)) {               
+                url = "/index.jsp";
+                session.setAttribute("user",UserDB.getUserByUsername(username));                
             }
 
             

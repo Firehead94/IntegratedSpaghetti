@@ -37,7 +37,7 @@ public class UserDB {
         ResultSet rs = null;
         
         String query = "SELECT COUNT(*) FROM USERS " +
-                       "WHERE USERNAME = ? AND PASSWORD = ?";
+                       "WHERE USERNAME = ? AND USER_PASSWORD = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, username);
@@ -181,7 +181,7 @@ public class UserDB {
         ArrayList<User> users = null;
         
         String query = "SELECT * FROM USERS u, REGISTRATION r, STUDENT s " +
-                "WHERE r.SECTION_NUM = ? AND (r.STU_ID = s.STU_ID AND s.STU_ID = u.STU_ID)";
+                "WHERE r.SECTION_NUM = ? AND (r.STU_ID = s.STU_ID AND s.USER_ID = u.USER_ID)";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, section_num);
@@ -209,7 +209,7 @@ public class UserDB {
         ArrayList<User> users = null;
         
         String query = "SELECT * FROM USERS u, STUDENT s, REGISTRATION r, SECTION s " +
-                "WHERE (u.STU_ID = s.STU_ID AND s.STU_ID = r.STU_ID) AND (r.SECTION_NUM = s.SECTION_NUM) AND s.COURSE_ID = ?";
+                "WHERE (u.USER_ID = s.USER_ID AND s.STU_ID = r.STU_ID) AND (r.SECTION_NUM = s.SECTION_NUM) AND s.COURSE_ID = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, Integer.toString(course_ID));
