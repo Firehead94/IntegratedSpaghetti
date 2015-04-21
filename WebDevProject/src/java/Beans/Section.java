@@ -102,6 +102,8 @@ public class Section implements Serializable {
     public int hashCode() {
         return section_num;
     }
+    
+    include equals 
 
     /**
      * @return the dept_ID
