@@ -76,11 +76,7 @@ public class CreateAccount extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int usernameExist = UserDB.getUserByUsername(user.getUser_last_name() + "." + user.getUser_first_name()).size();
-        if (usernameExist > 0)
-            user.setUsername(user.getUser_last_name() + "." + user.getUser_first_name() + usernameExist);
-        else
-            user.setUsername(user.getUser_last_name() + "." + user.getUser_first_name());
+        user.setUsername(getUserName(user.getUser_last_name() + "." + user.getUser_first_name()));
         user.setUser_email(user.getUsername() + "@fsu.edu");
 
         if (!UserDB.userExists(user.getUser_email())) {
@@ -98,6 +94,25 @@ public class CreateAccount extends HttpServlet {
         getServletContext()
             .getRequestDispatcher("/index.jsp")
             .forward(request, response);
+    }
+    
+    private String getUserName(String name) {
+        int i = 0;
+        i++;
+        if (UserDB.getUserByUsername(name).isEmpty()) {
+            return name;
+        }else {
+            System.out.println(name);
+            return getUserName_i(name, i);
+        }
+    }
+    
+    private String getUserName_i(String name, int count) {
+        if (UserDB.getUserByUsername(name + count).isEmpty()) {
+            return name + count;
+        }else {
+            return getUserName_i(name, ++count);
+        }
     }
 
 
