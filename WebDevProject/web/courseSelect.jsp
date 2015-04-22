@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home</title>
+        <title>Course Selection</title>
         
         <link rel="stylesheet" href="css/main.css" type="text/css" />
     </head>
@@ -20,10 +20,27 @@
             <nav>                
                 <jsp:include page="modules/navBar.jsp" />
             </nav>
-
-
             <section class="content">
                 <article class="info">
+                    <table>
+                        <tr>
+                            <td>Section Number:</td>
+                            <!--Textbox -->
+                        </tr>
+                        <tr>
+                            <td>Course Number:</td>
+                            <!--Textbox -->
+                        </tr>
+                        <tr>
+                            <td>Course Dept:</td>
+                            <!--Drop down -->
+                        </tr>
+                        <tr>
+                            <td>Semester:</td>
+                            <!--Drop down -->
+                        </tr>
+                    </table> 
+                    <!--Submit button -->
                 </article>
             </section>  
         </section>

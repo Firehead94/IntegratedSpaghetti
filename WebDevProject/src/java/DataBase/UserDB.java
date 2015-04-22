@@ -2,6 +2,7 @@
 package DataBase;
 
 import Beans.User;
+import com.sun.xml.rpc.processor.util.StringUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -96,17 +97,17 @@ public class UserDB {
                        "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, user.getUser_first_name());
-            ps.setString(2, user.getUser_last_name());
-            ps.setString(3, user.getUser_address());
-            ps.setString(4, user.getUser_city());
-            ps.setString(5, user.getUser_state());
+            ps.setString(1, StringUtils.capitalize(user.getUser_first_name()));
+            ps.setString(2, StringUtils.capitalize(user.getUser_last_name()));
+            ps.setString(3, StringUtils.capitalize(user.getUser_address()));
+            ps.setString(4, user.getUser_city().toUpperCase());
+            ps.setString(5, user.getUser_state().toUpperCase());
             ps.setInt(6, user.getUser_zip());
-            ps.setString(7, user.getUser_country());
+            ps.setString(7, user.getUser_country().toUpperCase());
             ps.setString(8, hash);
             ps.setString(9, user.getUsername());
             ps.setString(10, user.getUser_email());
-            ps.setDate(11, new java.sql.Date(user.getUser_dob().getTime()));
+            ps.setLong(11, user.getUser_dob());
             retVal = ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -117,7 +118,38 @@ public class UserDB {
         }
         return retVal;
         
-    }   
+    }
+    
+    public static int updateUser(User user) {
+         
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        int retVal;
+        
+        String query = "UPDATE USERS SET USER_FIRST_NAME = ?, USER_LAST_NAME = ?, USER_ADDRESS = ?, USER_CITY = ?, USER_STATE = ?, USER_ZIP = ?, USER_COUNTRY = ?, USER_DOB = ? " +
+                "WHERE USER_ID = ?;";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, StringUtils.capitalize(user.getUser_first_name()));
+            ps.setString(2, StringUtils.capitalize(user.getUser_last_name()));
+            ps.setString(3, StringUtils.capitalize(user.getUser_address()));
+            ps.setString(4, user.getUser_city().toUpperCase());
+            ps.setString(5, user.getUser_state().toUpperCase());
+            ps.setInt(6, user.getUser_zip());
+            ps.setString(7, user.getUser_country().toUpperCase());
+            ps.setLong(8, user.getUser_dob());
+            ps.setInt(9, user.getUser_ID());
+            retVal = ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+            return 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return retVal;        
+    }
     
     public static User getUserByEmail(String email) {
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -146,18 +178,18 @@ public class UserDB {
      * @param username
      * @return 
      */
-    public static User getUserByUsername(String username) {
+    public static ArrayList<User> getUserByUsername(String username) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
-        User user = null;
+        ArrayList<User> user = null;
         
         String query = "SELECT * FROM USERS " +
                 "WHERE USERNAME = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, username);
-            user = getFromDB(ps);
+            user = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -302,7 +334,8 @@ public class UserDB {
                 user.setUser_country(rs.getString("USER_COUNTRY"));
                 user.setUser_first_name(rs.getString("USER_FIRST_NAME"));
                 user.setUser_last_name(rs.getString("USER_LAST_NAME"));
-
+                user.setUser_dob(rs.getLong("USER_DOB"));
+                user.setUser_email(rs.getString("USER_EMAIL"));
             }
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
@@ -338,7 +371,8 @@ public class UserDB {
                 user.setUser_country(rs.getString("USER_COUNTRY"));
                 user.setUser_first_name(rs.getString("USER_FIRST_NAME"));
                 user.setUser_last_name(rs.getString("USER_LAST_NAME"));
-                user.setUser_dob(rs.getDate("USER_DOB"));
+                user.setUser_dob(rs.getLong("USER_DOB"));
+                user.setUser_email(rs.getString("USER_EMAIL"));
                 
                 users.add(user);
             }

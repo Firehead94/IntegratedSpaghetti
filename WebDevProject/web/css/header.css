@@ -24,4 +24,8 @@ and open the template in the editor.
     transition: all .2s ease;
 }
 
+a {
+    color: white;
+}
+
 

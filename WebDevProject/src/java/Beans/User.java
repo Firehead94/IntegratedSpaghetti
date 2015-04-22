@@ -2,6 +2,8 @@
 package Beans;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -24,7 +26,7 @@ public class User implements Serializable {
     private Date user_creation_date;
     private String username;
     private String user_email;
-    private Date user_dob;
+    private long user_dob;
 
     /**
      * @return the user_ID
@@ -225,14 +227,21 @@ public class User implements Serializable {
     /**
      * @return the user_dob
      */
-    public Date getUser_dob() {
+    public long getUser_dob() {
         return user_dob;
+    }
+    
+    public String getUser_dob_date() {
+        Date date = new Date(user_dob);
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        
+        return df.format(date);
     }
 
     /**
      * @param user_dob the user_dob to set
      */
-    public void setUser_dob(Date user_dob) {
+    public void setUser_dob(long user_dob) {
         this.user_dob = user_dob;
     }
     

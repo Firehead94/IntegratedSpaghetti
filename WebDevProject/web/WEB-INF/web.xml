@@ -40,7 +40,18 @@
         <servlet-name>Create</servlet-name>
         <servlet-class>Servlets.CreateAccount</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>Profile</servlet-name>
+        <jsp-file>accountPage.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>Edit</servlet-name>
+        <jsp-file>editProfile.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUser</servlet-name>
+        <servlet-class>Servlets.UpdateUser</servlet-class>
+    </servlet>    
     
     <!-- Start Mapping -->
     <!-- NavBar Elements -->
@@ -81,6 +92,18 @@
     <servlet-mapping>
         <servlet-name>Create</servlet-name>
         <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Edit</servlet-name>
+        <url-pattern>/editProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUser</servlet-name>
+        <url-pattern>/updateUser</url-pattern>
     </servlet-mapping>
     
     

@@ -63,7 +63,7 @@ public class Login extends HttpServlet {
             
             if(hash != null && UserDB.validateUser(username, hash)) {               
                 url = "/index.jsp";
-                session.setAttribute("user",UserDB.getUserByUsername(username));                
+                session.setAttribute("user",UserDB.getUserByUsername(username).get(0));                
             }
 
             
