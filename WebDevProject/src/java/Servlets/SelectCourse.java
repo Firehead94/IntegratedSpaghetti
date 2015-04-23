@@ -46,6 +46,8 @@ public class SelectCourse extends HttpServlet {
         
         Map<String, String[]> map = request.getParameterMap();
         
+        System.out.println(map.entrySet());
+        
         getServletContext()
             .getRequestDispatcher(url) 
             .forward(request, response);

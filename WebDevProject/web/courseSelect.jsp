@@ -23,7 +23,7 @@
             </nav>
             <section class="content">
                 <article class="info">
-                    <form action="find" method="post" >
+                    <form id="find" action="fine" method="post">
                         <table>
                             <tr>
                                 <td>Section Number:</td>
@@ -37,17 +37,17 @@
                                 <td>Course Dept:</td>
                                 <td><select>
                                     <c:forEach var="abr" items="${requestScope.departmentlist}" >
-                                        <option>${abr}</option>
+                                        <option value="${abr}" form="find">${abr}</option>
                                     </c:forEach>
                                 </select></td>
                             </tr>
                             <tr>
                                 <td>Semester:</td>
                                 <td><select>
-                                        <option>Summer I 2015</option>
-                                        <option>Summer II 2015</option>
-                                        <option>Fall 2015</option>
-                                        <option>Winter 2016</option>
+                                        <option value="Summer1" form="find">Summer I 2015</option>
+                                        <option value="Summer2" form="find">Summer II 2015</option>
+                                        <option value="Fall" form="find">Fall 2015</option>
+                                        <option value="Winter" form="find">Winter 2016</option>
                                     </select></td>
                             </tr>
                         </table> 
