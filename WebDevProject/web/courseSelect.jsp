@@ -23,7 +23,7 @@
             </nav>
             <section class="content">
                 <article class="info">
-                    <form id="find" action="fine" method="post">
+                    <form id="find" action="find" method="post">
                         <table>
                             <tr>
                                 <td>Section Number:</td>
@@ -35,20 +35,21 @@
                             </tr>
                             <tr>
                                 <td>Course Dept:</td>
-                                <td><select>
+                                <td><select name="deptlist" form="find">
                                     <c:forEach var="abr" items="${requestScope.departmentlist}" >
-                                        <option value="${abr}" form="find">${abr}</option>
+                                        <option value="${abr}">${abr}</option>
                                     </c:forEach>
-                                </select></td>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Semester:</td>
-                                <td><select>
-                                        <option value="Summer1" form="find">Summer I 2015</option>
-                                        <option value="Summer2" form="find">Summer II 2015</option>
-                                        <option value="Fall" form="find">Fall 2015</option>
-                                        <option value="Winter" form="find">Winter 2016</option>
-                                    </select></td>
+                                <td><select name="semesterlist" form="find">
+                                        <option value="2">Summer 2015</option>
+                                        <option value="3">Fall 2015</option>
+                                        <option value="1">Winter 2016</option>
+                                    </select>
+                                </td>
                             </tr>
                         </table> 
                         <input type="submit" value="Find Sections" name="find" />

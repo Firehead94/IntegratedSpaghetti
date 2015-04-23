@@ -6,6 +6,7 @@
 package Servlets;
 
 import Beans.User;
+import DataBase.PrivilegeDB;
 import DataBase.UserDB;
 import Hash.MD5;
 import com.sun.xml.internal.ws.util.StringUtils;
