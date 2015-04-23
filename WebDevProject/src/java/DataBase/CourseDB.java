@@ -46,6 +46,27 @@ public class CourseDB {
         return course;
     }
     
+    public static Course getCourseBySectionID (int section_num) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        Course course = null;
+        
+        String query = "SELECT * FROM COURSE c, SECTION s " +
+                "WHERE c.COURSE_ID = s.COURSE_ID AND s.SECTION_NUM = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, section_num);
+            course = getFromDB(ps);
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return course;
+    }
+    
     /**
      * Gets a list of courses in a certain department.
      * 

@@ -1,6 +1,7 @@
 
 package Beans;
 
+import DataBase.PrivilegeDB;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,8 +14,8 @@ import java.util.Date;
 public class User implements Serializable {
     
     private int user_ID;
-    private int stu_ID;
-    private int faculty_ID;
+    private boolean student;
+    private boolean faculty;
     private String user_first_name;
     private String user_last_name;
     private String user_address;
@@ -33,20 +34,6 @@ public class User implements Serializable {
      */
     public int getUser_ID() {
         return user_ID;
-    }
-
-    /**
-     * @return the stu_ID
-     */
-    public int getStu_ID() {
-        return stu_ID;
-    }
-
-    /**
-     * @return the faculty_ID
-     */
-    public int getFaculty_ID() {
-        return faculty_ID;
     }
 
     /**
@@ -117,20 +104,6 @@ public class User implements Serializable {
      */
     public void setUser_ID(int user_ID) {
         this.user_ID = user_ID;
-    }
-
-    /**
-     * @param stu_ID the stu_ID to set
-     */
-    public void setStu_ID(int stu_ID) {
-        this.stu_ID = stu_ID;
-    }
-
-    /**
-     * @param faculty_ID the faculty_ID to set
-     */
-    public void setFaculty_ID(int faculty_ID) {
-        this.faculty_ID = faculty_ID;
     }
 
     /**
@@ -243,6 +216,39 @@ public class User implements Serializable {
      */
     public void setUser_dob(long user_dob) {
         this.user_dob = user_dob;
+    }
+
+    /**
+     * @return the isStudent
+     */
+    public boolean isIsStudent() {
+        return student;
+    }
+
+    /**
+     * @param isStudent the isStudent to set
+     */
+    public void setIsStudent(boolean isStudent) {
+        this.student = isStudent;
+    }
+
+    /**
+     * @return the isFaculty
+     */
+    public boolean isIsFaculty() {
+        return faculty;
+    }
+
+    /**
+     * @param isFaculty the isFaculty to set
+     */
+    public void setIsFaculty(boolean isFaculty) {
+        this.faculty = isFaculty;
+    }
+    
+    public User() {
+        faculty = PrivilegeDB.isFacultyByUser(this);
+        student = PrivilegeDB.isStudentByUser(this);
     }
     
 }

@@ -86,6 +86,30 @@ public class SectionDB {
         return getMapFromDB(ps);
     }
     
+    public static Map<Section, Course> getSectionsByCourseIDAndDeptIDAndSemester(int course_ID, int dept_ID, int semester) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        Map<Section, Course> section = null;
+        
+        
+        String query = "SELECT * FROM SECTION " +
+                "WHERE COURSE_ID = ? AND DEPT_ID = ? AND SECTION_SEMESTER = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, course_ID);
+            ps.setInt(2, dept_ID);
+            ps.setInt(3, semester);
+            section = getMapFromDB(ps);
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return getMapFromDB(ps);
+    }
+    
     public static Map<Section, Course> getSectionsByDay(int dayCode) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
