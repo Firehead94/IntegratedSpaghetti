@@ -65,9 +65,7 @@ public class SelectCourse extends HttpServlet {
         } else {
             sectionList = SectionDB.getSectionsByCourseIDAndDeptID(Integer.parseInt(courseNum), DepartmentDB.getDeptIDFromAbr(dept));
         }
-        
-        
-        
+                
         request.getSession().setAttribute("sectionlist", sectionList);
         
         getServletContext()
