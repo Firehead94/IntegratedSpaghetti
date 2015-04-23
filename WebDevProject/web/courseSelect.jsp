@@ -3,6 +3,7 @@
     Created on : Mar 19, 2015, 4:50:21 PM
     Author     : Justin
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
@@ -22,25 +23,36 @@
             </nav>
             <section class="content">
                 <article class="info">
-                    <table>
-                        <tr>
-                            <td>Section Number:</td>
-                            <!--Textbox -->
-                        </tr>
-                        <tr>
-                            <td>Course Number:</td>
-                            <!--Textbox -->
-                        </tr>
-                        <tr>
-                            <td>Course Dept:</td>
-                            <!--Drop down -->
-                        </tr>
-                        <tr>
-                            <td>Semester:</td>
-                            <!--Drop down -->
-                        </tr>
-                    </table> 
-                    <!--Submit button -->
+                    <form action="find" method="post" >
+                        <table>
+                            <tr>
+                                <td>Section Number:</td>
+                                <td><input type="number" size="20" name="SectionNum" placeholder="Section Number" /></td>
+                            </tr>
+                            <tr>
+                                <td>Course Number:</td>
+                                <td><input type="number" size="20" name="CourseNum" placeholder="Course Number" /></td>
+                            </tr>
+                            <tr>
+                                <td>Course Dept:</td>
+                                <td><select>
+                                    <c:forEach var="abr" items="${requestScope.departmentlist}" >
+                                        <option>${abr}</option>
+                                    </c:forEach>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>Semester:</td>
+                                <td><select>
+                                        <option>Summer I 2015</option>
+                                        <option>Summer II 2015</option>
+                                        <option>Fall 2015</option>
+                                        <option>Winter 2016</option>
+                                    </select></td>
+                            </tr>
+                        </table> 
+                        <input type="submit" value="Find Sections" name="find" />
+                    </form>
                 </article>
             </section>  
         </section>

@@ -8,7 +8,7 @@
     </servlet>
     <servlet>
         <servlet-name>CourseSelect</servlet-name>
-        <jsp-file>courseSelect.jsp</jsp-file>
+        <servlet-class>Servlets.DepartmentList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FinancialRecords</servlet-name>
@@ -51,7 +51,11 @@
     <servlet>
         <servlet-name>UpdateUser</servlet-name>
         <servlet-class>Servlets.UpdateUser</servlet-class>
-    </servlet>    
+    </servlet>
+    <servlet>
+        <servlet-name>Find</servlet-name>
+        <servlet-class>Servlets.SelectCourse</servlet-class>
+    </servlet>  
     
     <!-- Start Mapping -->
     <!-- NavBar Elements -->
@@ -104,6 +108,10 @@
     <servlet-mapping>
         <servlet-name>UpdateUser</servlet-name>
         <url-pattern>/updateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Find</servlet-name>
+        <url-pattern>/find</url-pattern>
     </servlet-mapping>
     
     

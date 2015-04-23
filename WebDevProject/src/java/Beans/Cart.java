@@ -12,26 +12,26 @@ import java.util.TreeSet;
  * Needs to be redone once we settle on reg_code shit.
  * @author Justin
  */
-public class Cart_old implements Serializable {
-    /*
+public class Cart implements Serializable {
+    
     private TreeSet<Section> cart;
     
-    public Cart_old() {
+    public Cart() {
         cart = new TreeSet<>();
     }
     
-    public void addToCart(Course_old course) {
-        cart.add(course);
+    public void addToCart(Section section) {
+        cart.add(section);
     }
     
-    public void removeFromCart(Course_old course) {
-        cart.remove(course);
+    public void removeFromCart(Section section) {
+        cart.remove(section);
     }
     
     public int size() {
         return cart.size();
     }
     
-    */
+    
     
 }
