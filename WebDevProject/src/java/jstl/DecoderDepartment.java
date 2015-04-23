@@ -5,10 +5,33 @@
  */
 package jstl;
 
+import DataBase.DepartmentDB;
+import DataBase.UserDB;
+import java.io.IOException;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
+
 /**
  *
  * @author Justin
  */
-public class DecoderDepartment {
+public class DecoderDepartment extends SimpleTagSupport {
+    
+    int id;
+    
+    public DecoderDepartment() {
+        id = 0;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+        
+    @Override
+    public void doTag() throws JspException, IOException {
+        JspWriter out = getJspContext().getOut();
+        out.print(DepartmentDB.getDeptAbrFromID(id));
+    }
     
 }

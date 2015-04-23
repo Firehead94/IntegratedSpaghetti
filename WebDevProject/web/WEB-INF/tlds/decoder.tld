@@ -32,5 +32,25 @@
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
-    </tag>    
+    </tag>
+    <tag>
+        <name>department</name>
+        <tag-class>jstl.DecoderDepartment</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>id</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>  
+    <tag>
+        <name>program</name>
+        <tag-class>jstl.DecoderProgram</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>id</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>      
 </taglib>
