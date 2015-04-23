@@ -98,12 +98,11 @@ public class CreateAccount extends HttpServlet {
     
     private String getUserName(String name) {
         int i = 0;
-        i++;
         if (UserDB.getUserByUsername(name).isEmpty()) {
             return name;
         }else {
             System.out.println(name);
-            return getUserName_i(name, i);
+            return getUserName_i(name, ++i);
         }
     }
     
