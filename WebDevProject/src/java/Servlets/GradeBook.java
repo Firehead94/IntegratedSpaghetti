@@ -51,7 +51,7 @@ public class GradeBook extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "/gradeBook.jsp";
+        String url = "/error_404.jsp";
         
         User user = UserDB.getUserByUsername(((User)request.getSession().getAttribute("user")).getUsername()).get(0);
         Map<Registration, HashMap<Course, User>> grades = null;
@@ -61,6 +61,7 @@ public class GradeBook extends HttpServlet {
                 HashMap<Course, User> map = new HashMap<Course, User>();
                 map.put(CourseDB.getCourseByCourseIDAndDeptID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID(), (SectionDB.getSectionBySectionNum(tmp.getSection_num())).getDept_ID()), user);
                 grades.put(tmp, map);
+                url = "/gradeBook.jsp";
             }
             
         }else if(user.isStudent()) { //Is Student
@@ -68,6 +69,7 @@ public class GradeBook extends HttpServlet {
                 HashMap<Course, User> map = new HashMap<Course, User>();
                 map.put(CourseDB.getCourseByCourseIDAndDeptID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID(), (SectionDB.getSectionBySectionNum(tmp.getSection_num())).getDept_ID()), user);
                 grades.put(tmp, map);
+                url = "/grades.jsp";
             }
         }
         

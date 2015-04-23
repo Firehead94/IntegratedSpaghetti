@@ -221,29 +221,29 @@ public class User implements Serializable {
     /**
      * @return the isStudent
      */
-    public boolean isIsStudent() {
+    public boolean isStudent() {
         return student;
     }
 
     /**
      * @param isStudent the isStudent to set
      */
-    public void setIsStudent(boolean isStudent) {
-        this.student = isStudent;
+    public void setStudent(boolean student) {
+        this.student = student;
     }
 
     /**
      * @return the isFaculty
      */
-    public boolean isIsFaculty() {
+    public boolean isFaculty() {
         return faculty;
     }
 
     /**
      * @param isFaculty the isFaculty to set
      */
-    public void setIsFaculty(boolean isFaculty) {
-        this.faculty = isFaculty;
+    public void setFaculty(boolean faculty) {
+        this.faculty = faculty;
     }
     
     public User() {
