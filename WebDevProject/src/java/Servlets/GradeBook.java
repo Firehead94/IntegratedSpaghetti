@@ -55,15 +55,15 @@ public class GradeBook extends HttpServlet {
         
         User user = UserDB.getUserByUsername(((User)request.getSession().getAttribute("user")).getUsername()).get(0);
         Map<Registration, HashMap<Course, User>> grades = null;
-        //grades = new HashMap<Registration, HashMap<Course, User>>();
-        if (PrivilegeDB.isFacultyByUser(user)) { //Is Teacher           
+        grades = new HashMap<Registration, HashMap<Course, User>>();
+        if (user.isFaculty()) { //Is Teacher           
             for (Registration tmp : RegistrationDB.getRegistrationByFacultyint(user.getFaculty_ID())) {
                 HashMap<Course, User> map = new HashMap<Course, User>();
                 map.put(CourseDB.getCourseByCourseIDAndDeptID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID(), (SectionDB.getSectionBySectionNum(tmp.getSection_num())).getDept_ID()), user);
                 grades.put(tmp, map);
             }
             
-        }else if(PrivilegeDB.isStudentByUser(user)) { //Is Student
+        }else if(user.isStudent()) { //Is Student
             for (Registration tmp : RegistrationDB.getRegistrationByStudent(user.getStu_ID())) {
                 HashMap<Course, User> map = new HashMap<Course, User>();
                 map.put(CourseDB.getCourseByCourseIDAndDeptID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID(), (SectionDB.getSectionBySectionNum(tmp.getSection_num())).getDept_ID()), user);
