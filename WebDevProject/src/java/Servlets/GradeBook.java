@@ -5,6 +5,7 @@ import Beans.Course;
 import Beans.Registration;
 import Beans.User;
 import DataBase.CourseDB;
+import DataBase.PrivilegeDB;
 import DataBase.RegistrationDB;
 import DataBase.SectionDB;
 import DataBase.UserDB;
@@ -57,7 +58,7 @@ public class GradeBook extends HttpServlet {
         Map<Registration, HashMap<Course, User>> grades = null;
         grades = new HashMap<Registration, HashMap<Course, User>>();
         if (user.isFaculty()) { //Is Teacher           
-            for (Registration tmp : RegistrationDB.getRegistrationByFacultyint(user.getFaculty_ID())) {
+            for (Registration tmp : RegistrationDB.getRegistrationByFacultyint(PrivilegeDB.getFacultyByUserID(user.getUser_ID()))) {
                 HashMap<Course, User> map = new HashMap<Course, User>();
                 map.put(CourseDB.getCourseByCourseIDAndDeptID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID(), (SectionDB.getSectionBySectionNum(tmp.getSection_num())).getDept_ID()), user);
                 grades.put(tmp, map);
@@ -65,7 +66,7 @@ public class GradeBook extends HttpServlet {
             }
             
         }else if(user.isStudent()) { //Is Student
-            for (Registration tmp : RegistrationDB.getRegistrationByStudent(user.getStu_ID())) {
+            for (Registration tmp : RegistrationDB.getRegistrationByStudent(PrivilegeDB.getStudentIDByUserID(user.getUser_ID()))) {
                 HashMap<Course, User> map = new HashMap<Course, User>();
                 map.put(CourseDB.getCourseByCourseIDAndDeptID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID(), (SectionDB.getSectionBySectionNum(tmp.getSection_num())).getDept_ID()), user);
                 grades.put(tmp, map);

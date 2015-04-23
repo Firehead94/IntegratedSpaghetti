@@ -134,10 +134,10 @@ public class CourseDB {
         ArrayList<Course> courses = null;
         
         String query = "SELECT * FROM COURSE c, REGISTRATION r " +
-                "WHERE c.COURSE_ID = r.COURSE_ID && r.STU_ID = ?";
+                "WHERE c.COURSE_ID = r.COURSE_ID AND r.STU_ID = ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1, user.getStu_ID());
+            ps.setInt(1, PrivilegeDB.getStudentIDByUserID(user.getUser_ID()));
             courses = getListFromDB(ps);
         } catch (SQLException e) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
