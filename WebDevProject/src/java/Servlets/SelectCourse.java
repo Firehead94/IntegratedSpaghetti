@@ -8,6 +8,7 @@ import DataBase.DepartmentDB;
 import DataBase.SectionDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,9 +59,12 @@ public class SelectCourse extends HttpServlet {
         String dept = map.get("deptlist")[0];
         String semester = map.get("semesterlist")[0];
         
+        
         if (!sectionNum.equals("")) {
+            sectionList = new HashMap<Section, Course>();
             sectionList.put(SectionDB.getSectionBySectionNum(Integer.parseInt(sectionNum)),CourseDB.getCourseBySectionID(Integer.parseInt(sectionNum)));
         } else if (!courseNum.equals("")){
+            sectionList = new HashMap<Section, Course>();
             sectionList = SectionDB.getSectionsByCourseIDAndDeptIDAndSemester(Integer.parseInt(courseNum), DepartmentDB.getDeptIDFromAbr(dept), Integer.parseInt(semester));
         }
                 

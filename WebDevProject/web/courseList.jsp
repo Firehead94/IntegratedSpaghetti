@@ -33,14 +33,21 @@
                             <tr>Location</tr>
                             <tr>Credits</tr>
                         </thead>
-                    <c:forEach varStatus="index" var="course" items="${sessionScope.sectionlist}" >
-                        
-                    </c:forEach>
+                        <c:forEach varStatus="index" var="course" items="${sessionScope.sectionlist}" >
+                            <tr>
+                                <td><d:department id="${course.key.getDept_ID()}" />${course.key.getCourse_ID()}</td>
+                                <td>${course.value.getCourse_title()}</td>
+                                <td>${course.value.getCourse_descript()}</td>
+                                <td><d:faculty id="${course.key.getFaculty_ID()}" /></td>
+                                <td><d:day code="${course.key.getSection_day()}" />  ${course.key.getSection_time_start()} - ${course.key.getSection_time_end()}</td>
+                                <td>${course.key.getSection_location()}</td>
+                                <td>${course.value.getCourse_credits()}</td>
+                            </tr>
+                        </c:forEach>
                     </table>
                 </article>
             </section>  
-        </section>
-        
+        </section>       
         <footer>
             <jsp:include page="modules/footer.jsp" />
         </footer>

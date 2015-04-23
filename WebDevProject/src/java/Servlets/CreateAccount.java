@@ -102,7 +102,6 @@ public class CreateAccount extends HttpServlet {
         if (UserDB.getUserByUsername(name).isEmpty()) {
             return name;
         }else {
-            System.out.println(name);
             return getUserName_i(name, ++i);
         }
     }

@@ -107,7 +107,7 @@ public class SectionDB {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
-        return getMapFromDB(ps);
+        return section;
     }
     
     public static Map<Section, Course> getSectionsByDay(int dayCode) {

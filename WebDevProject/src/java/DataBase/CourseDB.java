@@ -53,7 +53,7 @@ public class CourseDB {
         Course course = null;
         
         String query = "SELECT * FROM COURSE c, SECTION s " +
-                "WHERE c.COURSE_ID = s.COURSE_ID AND s.SECTION_NUM = ?";
+                "WHERE (c.COURSE_ID = s.COURSE_ID AND c.DEPT_ID = s.DEPT_ID) AND s.SECTION_NUM = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, section_num);
