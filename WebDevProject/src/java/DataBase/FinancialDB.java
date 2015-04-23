@@ -31,7 +31,7 @@ public class FinancialDB {
             ps.setInt(2, ccn);
             financial = getFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(FinancialDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -52,7 +52,7 @@ public class FinancialDB {
             ps.setInt(1, student_ID);
             financials = getListFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(FinancialDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -74,7 +74,7 @@ public class FinancialDB {
             ps.setDouble(1, max);
             financials = getListFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(FinancialDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);

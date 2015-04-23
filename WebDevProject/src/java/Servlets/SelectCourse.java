@@ -47,7 +47,7 @@ public class SelectCourse extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "/index.jsp";
+        String url = "/courseList.jsp";
         
         Map<String, String[]> map = request.getParameterMap();
         
@@ -60,10 +60,8 @@ public class SelectCourse extends HttpServlet {
         
         if (!sectionNum.equals("")) {
             sectionList.put(SectionDB.getSectionBySectionNum(Integer.parseInt(sectionNum)),CourseDB.getCourseBySectionID(Integer.parseInt(sectionNum)));
-        } else if (!semester.equals("")){
+        } else if (!courseNum.equals("")){
             sectionList = SectionDB.getSectionsByCourseIDAndDeptIDAndSemester(Integer.parseInt(courseNum), DepartmentDB.getDeptIDFromAbr(dept), Integer.parseInt(semester));
-        } else {
-            sectionList = SectionDB.getSectionsByCourseIDAndDeptID(Integer.parseInt(courseNum), DepartmentDB.getDeptIDFromAbr(dept));
         }
                 
         request.getSession().setAttribute("sectionlist", sectionList);

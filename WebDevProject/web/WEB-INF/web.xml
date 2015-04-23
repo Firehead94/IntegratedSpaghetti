@@ -113,8 +113,7 @@
         <servlet-name>Find</servlet-name>
         <url-pattern>/find</url-pattern>
     </servlet-mapping>
-    
-    
+       
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.jsp</welcome-file>

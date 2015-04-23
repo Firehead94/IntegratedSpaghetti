@@ -171,7 +171,57 @@ public class UserDB {
         }
         return user;
     }
+
+    public static String getNameByFacultyID(int id) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String query = "SELECT * FROM USERS u, FACULTY f " +
+                "WHERE u.USER_ID = f.USER_ID AND f.FACULTY_ID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("USER_FIRST_NAME") + " " + rs.getString("USER_LAST_NAME");
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+            DBUtil.closeResultSet(rs);
+        }
+        return null;
+    }
     
+    public static String getNameByStudentID(int id) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String query = "SELECT * FROM USERS u, STUDENT s " +
+                "WHERE u.USER_ID = s.USER_ID AND s.STU_ID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("USER_FIRST_NAME") + " " + rs.getString("USER_LAST_NAME");
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+            DBUtil.closeResultSet(rs);
+        }
+        return null;
+    }
+        
     /**
      * Gets a user by their username.
      * 

@@ -30,7 +30,7 @@ public class InvoiceDB {
             ps.setInt(1, invoice_ID);
             invoice = getFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(InvoiceDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -51,7 +51,7 @@ public class InvoiceDB {
             ps.setInt(1, student_ID);
             invoices = getListFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(InvoiceDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -73,7 +73,7 @@ public class InvoiceDB {
             ps.setDate(2, new java.sql.Date(dateMax.getTime()));
             invoices = getListFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(InvoiceDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -94,7 +94,7 @@ public class InvoiceDB {
             ps.setLong(1, creditcard_num);
             invoices = getListFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(InvoiceDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);

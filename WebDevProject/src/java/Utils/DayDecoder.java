@@ -43,41 +43,42 @@ public class DayDecoder {
     
     private static String getString(int code) {
         Stack<String> days = new Stack<String>() {};
-        String str = null;
+        String str = "";
         
         
-        if (code > dayMap.get("saturday")) {
+        if (code >= dayMap.get("saturday")) {
             code -= dayMap.get("saturday");
             days.push("Saturday");
         }
-        if (code > dayMap.get("friday")) {
+        if (code >= dayMap.get("friday")) {
             code -= dayMap.get("friday");
             days.push("Friday");
         }
-        if (code > dayMap.get("thursday")) {
+        if (code >= dayMap.get("thursday")) {
             code -= dayMap.get("thursday");
             days.push("Thursday");
         }
-        if (code > dayMap.get("wednesday")) {
+        if (code >= dayMap.get("wednesday")) {
             code -= dayMap.get("wednesday");
             days.push("Wednesday");
         }
-        if (code > dayMap.get("tuesday")) {
+        if (code >= dayMap.get("tuesday")) {
             code -= dayMap.get("tuesday");
             days.push("Tuesday");
         }
-        if (code > dayMap.get("monday")) {
+        if (code >= dayMap.get("monday")) {
             code -= dayMap.get("monday");
             days.push("Monday");
         }
-        if (code > dayMap.get("sunday")) {
+        if (code >= dayMap.get("sunday")) {
             code -= dayMap.get("sunday");
             days.push("Sunday");
         }
-        for (String tmp : days)
-            str = str.concat(tmp + ", ");
-        
-        return str.substring(str.lastIndexOf(","));
+        while(!days.isEmpty()) {
+            str = str.concat(days.pop() + ", ");
+        }
+            
+        return str.substring(0,str.lastIndexOf(","));
         
     }
     

@@ -38,7 +38,7 @@ public class CourseDB {
             ps.setInt(2, dept_ID);
             course = getFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(CourseDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -59,7 +59,7 @@ public class CourseDB {
             ps.setInt(1, section_num);
             course = getFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(CourseDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -86,7 +86,7 @@ public class CourseDB {
             ps.setInt(1, dept_ID);
             courses = getListFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(CourseDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -113,7 +113,7 @@ public class CourseDB {
             ps.setString(1, dept_abr);
             courses = getListFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(CourseDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -140,7 +140,7 @@ public class CourseDB {
             ps.setInt(1, PrivilegeDB.getStudentIDByUserID(user.getUser_ID()));
             courses = getListFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(CourseDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -199,7 +199,7 @@ public class CourseDB {
                 courses.add(course);
             }
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(CourseDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closeResultSet(rs);
         }

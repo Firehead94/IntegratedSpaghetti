@@ -31,7 +31,7 @@ public class RegistrationDB {
             ps.setInt(2, section_num);
             registration = getFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(RegistrationDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -52,7 +52,7 @@ public class RegistrationDB {
             ps.setInt(1, student_ID);
             registrations = getListFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(RegistrationDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -73,7 +73,7 @@ public class RegistrationDB {
             ps.setInt(1, section_num);
             registrations = getListFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(RegistrationDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -94,7 +94,7 @@ public class RegistrationDB {
             ps.setInt(1, faculty_ID);
             registrations = getListFromDB(ps);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(RegistrationDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);

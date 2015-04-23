@@ -33,7 +33,7 @@ public class DepartmentDB {
                 return rs.getInt("DEPT_ID");
             }
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(DepartmentDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -59,7 +59,7 @@ public class DepartmentDB {
                 return rs.getString("DEPT_ABR");
             }
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(DepartmentDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -85,7 +85,7 @@ public class DepartmentDB {
                 return rs.getString("DEPT_TITLE");
             }
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(DepartmentDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -113,7 +113,7 @@ public class DepartmentDB {
             depts = new String[dept_abrs.size()];
             return dept_abrs.toArray(depts);
         } catch (SQLException e) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(DepartmentDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
