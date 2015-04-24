@@ -142,7 +142,7 @@ public class UserDB {
             ps.setInt(9, user.getUser_ID());
             retVal = ps.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, e);
             return 0;
         } finally {
             DBUtil.closePreparedStatement(ps);

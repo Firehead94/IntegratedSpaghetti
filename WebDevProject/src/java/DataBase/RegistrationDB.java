@@ -17,6 +17,33 @@ import java.util.logging.Logger;
  */
 public class RegistrationDB {
     
+    
+    public static int updateRegistrationByStudentIDAndSectionNum(int student_ID, int section_num, double gpa, String grade) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        int retVal = -1;
+        
+        String query = "UPDATE REGISTRATION SET GPA = ?, GRADE = ? " +
+                "WHERE STU_ID = ? AND SECTION_NUM = ?;";
+        
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setDouble(1, gpa);
+            ps.setString(2, grade);
+            ps.setInt(3, student_ID);
+            ps.setInt(4, section_num);
+            retVal = ps.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(RegistrationDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return retVal;
+    }
+    
+    
     public static Registration getRegistrationByStudentAndSection(int student_ID, int section_num) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();

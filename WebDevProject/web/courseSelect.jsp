@@ -52,7 +52,7 @@
                                 </td>
                             </tr>
                         </table> 
-                        <input type="submit" value="Find Sections" name="find" />
+                        <input type="submit" value="Find Sections" name="find" /><button type="button" onclick="location.href = 'viewSelection.jsp'" value="CurrentList" >View Current</button>
                     </form>
                 </article>
             </section>  

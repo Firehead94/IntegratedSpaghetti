@@ -24,10 +24,10 @@
             </nav>
             <section class="content">
                 <article class="info">
-                    <c:if test="${requestScope.errormsg != null}">
-                        ${requestScope.errormsg}
+                    <c:if test="${requestScope.errormsg != null || sessionScope.selectedlist == null}">
+                        Your cart is empty.
                     </c:if>
-                    <c:if test="${requestScope.errormsg == null}">
+                    <c:if test="${requestScope.errormsg == null && sessionScope.selectedlist != null}">
                         <table>
                             <thead>
                                 <tr>
