@@ -44,7 +44,7 @@
                                 </thead>
                                 <c:forEach varStatus="index" var="course" items="${sessionScope.selectedlist}" >
                                     <tr>
-                                        <td>${course.key.getSection_semester()}</td>
+                                        <td><d:semester semester="${course.key.getSection_semester()}" /></td>
                                         <td><d:department id="${course.key.getDept_ID()}" />${course.key.getCourse_ID()}</td>
                                         <td style="width: 150px">${course.value.getCourse_title()}</td>
                                         <td><d:faculty id="${course.key.getFaculty_ID()}" /></td>
