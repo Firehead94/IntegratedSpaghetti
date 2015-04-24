@@ -1,6 +1,7 @@
 
 package Servlets;
 
+import Beans.Cart;
 import Beans.Course;
 import Beans.Section;
 import DataBase.CourseDB;
@@ -48,23 +49,30 @@ public class SelectionList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "/selectionList.jsp";
+        String url = "/viewSelection.jsp";
         
+        Map<String, String[]> map = request.getParameterMap();
         Map<Section, Course> selectedList = null;
+        Cart cart = new Cart();
         String error_msg = null;
+        Section section = null;
         
-//GET A LIST OF CHECKBOXED VALUES FROM JSP
-//      {
-        if (/*list of vals*/ != null) {
+        if (request.getSession().getAttribute("selectedlist") != null) {
+            selectedList = (Map<Section, Course>)request.getSession().getAttribute("selectedlist");
+        }else {
             selectedList = new HashMap<Section, Course>();
-            for (int tmp : /*list of vals*/) {
-                Section section = SectionDB.getSectionBySectionNum(tmp);
-                selectedList.put(section, CourseDB.getCourseByCourseIDAndDeptID(section.getCourse_ID(), section.getDept_ID()));
+        }
+        
+        if (map.get("selectedCourses") != null) {
+            
+            for (String tmp : map.get("selectedCourses")) {
+                section = SectionDB.getSectionBySectionNum(Integer.parseInt(tmp));
+                selectedList.put(section, CourseDB.getCourseBySectionID(Integer.parseInt(tmp)));
+                System.out.println(section.getSection_num());
             }
         }else {
             error_msg = "No courses were selected.";
         }
-//      }       
             
         request.setAttribute("errormsg", error_msg);
         request.getSession().setAttribute("selectedlist", selectedList);

@@ -32,6 +32,4 @@ public class Cart implements Serializable {
         return cart.size();
     }
     
-    
-    
 }

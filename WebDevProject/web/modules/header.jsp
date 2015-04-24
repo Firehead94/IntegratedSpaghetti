@@ -13,9 +13,10 @@
         <form action="login" method="post">
             <input type="submit" value="Login:" />
             <input type="textbox" size="10" name="loginInfo" placeholder="username" />
-            <input type="password" size="5" name="loginInfo" placeholder="password" />
+            <input type="password" size="5" name="loginInfo" placeholder="password" />            
         </form>
-        <a href="accountCreation">Create Account</a>
+        <a href="accountCreation" class="create">Create Account</a>
+        
     </c:if>
     <c:if test="${sessionScope.user != null}">
         Welcome, <a href="profile?id=${sessionScope.user.getUser_ID()}">${sessionScope.user.getUser_first_name()} ${sessionScope.user.getUser_last_name()}</a>

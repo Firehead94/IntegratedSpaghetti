@@ -55,8 +55,16 @@
     <servlet>
         <servlet-name>Find</servlet-name>
         <servlet-class>Servlets.SelectCourse</servlet-class>
-    </servlet>  
-    
+    </servlet>
+    <servlet>
+        <servlet-name>Selected</servlet-name>
+        <servlet-class>Servlets.SelectionList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveAll</servlet-name>
+        <servlet-class>Servlets.ClearCart</servlet-class>
+    </servlet>
+        
     <!-- Start Mapping -->
     <!-- NavBar Elements -->
     <servlet-mapping>
@@ -113,7 +121,14 @@
         <servlet-name>Find</servlet-name>
         <url-pattern>/find</url-pattern>
     </servlet-mapping>
-       
+    <servlet-mapping>
+        <servlet-name>Selected</servlet-name>
+        <url-pattern>/selected</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveAll</servlet-name>
+        <url-pattern>/removeall</url-pattern>
+    </servlet-mapping>      
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.jsp</welcome-file>
