@@ -165,6 +165,7 @@ public class CourseDB {
                 course.setCourse_ID(rs.getInt("COURSE_ID"));
                 course.setCourse_cost(rs.getInt("COURSE_COST"));
                 course.setCourse_credits(rs.getInt("COURSE_CREDITS"));
+                course.setCourse_descript(rs.getString("COURSE_DESCRIPT"));
                 course.setCourse_title(rs.getString("COURSE_TITLE"));
                 course.setDept_ID(rs.getInt("DEPT_ID"));
             }
@@ -194,6 +195,7 @@ public class CourseDB {
                 course.setCourse_cost(rs.getInt("COURSE_COST"));
                 course.setCourse_credits(rs.getInt("COURSE_CREDITS"));
                 course.setCourse_title(rs.getString("COURSE_TITLE"));
+                course.setCourse_descript(rs.getString("COURSE_DESCRIPT"));
                 course.setDept_ID(rs.getInt("DEPT_ID"));
                 
                 courses.add(course);

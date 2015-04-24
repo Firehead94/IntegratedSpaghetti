@@ -52,5 +52,15 @@
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
-    </tag>      
+    </tag>
+    <tag>
+        <name>time</name>
+        <tag-class>jstl.DecoderTime</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>time</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>         
 </taglib>

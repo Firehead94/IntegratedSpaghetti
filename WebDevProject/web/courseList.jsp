@@ -25,23 +25,25 @@
                 <article class="info">
                     <table>
                         <thead>
-                            <tr>Number</tr>
-                            <tr>Title</tr>
-                            <tr>Description</tr>
-                            <tr>Staff</tr>
-                            <tr>Day/Time</tr>
-                            <tr>Location</tr>
-                            <tr>Credits</tr>
+                            <tr>
+                                <td>Number</td>
+                                <td>Title</td>
+                                <td>Staff</td>
+                                <td>Day/Time</td>
+                                <td>Location</td>
+                                <td>Credits</td>
+                                <td>Select</td>
+                            </tr>
                         </thead>
                         <c:forEach varStatus="index" var="course" items="${sessionScope.sectionlist}" >
                             <tr>
                                 <td><d:department id="${course.key.getDept_ID()}" />${course.key.getCourse_ID()}</td>
-                                <td>${course.value.getCourse_title()}</td>
-                                <td>${course.value.getCourse_descript()}</td>
+                                <td style="width: 150px">${course.value.getCourse_title()}</td>
                                 <td><d:faculty id="${course.key.getFaculty_ID()}" /></td>
-                                <td><d:day code="${course.key.getSection_day()}" />  ${course.key.getSection_time_start()} - ${course.key.getSection_time_end()}</td>
+                                <td><d:day code="${course.key.getSection_day()}" /> <br /> <d:time time="${course.key.getSection_time_start()}" /> - <d:time time="${course.key.getSection_time_end()}" /></td>
                                 <td>${course.key.getSection_location()}</td>
                                 <td>${course.value.getCourse_credits()}</td>
+                                <td><input type="checkbox" name="selectedCourses" value="${course}" /></td>
                             </tr>
                         </c:forEach>
                     </table>
