@@ -1,14 +1,15 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Servlets;
 
 import Beans.Course;
 import Beans.Section;
-import DataBase.CourseDB;
-import DataBase.DepartmentDB;
 import DataBase.SectionDB;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Justin
  */
-public class SelectCourse extends HttpServlet {
+public class RemoveCourse extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -48,35 +49,20 @@ public class SelectCourse extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "/courseList.jsp";
-        
+        String url = "/viewSelection.jsp";
         Map<String, String[]> map = request.getParameterMap();
         
-        Map<Section, Course> sectionList = null;
-        
-        String sectionNum = map.get("SectionNum")[0];
-        String courseNum = map.get("CourseNum")[0];
-        String dept = map.get("deptlist")[0];
-        String semester = map.get("semesterlist")[0];
-        
-        
-        if (!sectionNum.equals("")) {
-            sectionList = new HashMap<Section, Course>();
-            sectionList.put(SectionDB.getSectionBySectionNum(Integer.parseInt(sectionNum)),CourseDB.getCourseBySectionID(Integer.parseInt(sectionNum)));
-        } else if (!courseNum.equals("")){
-            sectionList = new HashMap<Section, Course>();
-            sectionList = SectionDB.getSectionsByCourseIDAndDeptIDAndSemester(Integer.parseInt(courseNum), DepartmentDB.getDeptIDFromAbr(dept), Integer.parseInt(semester));
-        }else if (!dept.equals("")){
-            sectionList = SectionDB.getSectionsByDeptAbr(dept);
-        } else {
-            request.setAttribute("errormsg", "Sorry, no courses available that meet your criteria.");
+        if (request.getSession().getAttribute("selectedlist") != null && map.get("removeCourses") != null) {
+            for (String str : map.get("removeCourses")) {
+                ((Map<Section, Course>)request.getSession().getAttribute("selectedlist")).remove(SectionDB.getSectionBySectionNum(Integer.parseInt(str)));              
+            }
+            
         }
-                
-        request.getSession().setAttribute("sectionlist", sectionList);
         
         getServletContext()
             .getRequestDispatcher(url) 
             .forward(request, response);
     }
+
 
 }

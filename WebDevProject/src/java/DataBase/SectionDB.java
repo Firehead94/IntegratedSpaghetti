@@ -48,7 +48,7 @@ public class SectionDB {
         PreparedStatement ps = null;
         Map<Section, Course> section = null;
         
-        String query = "SELECT * FROM SECTION s, COURSE c, DEPTARMENT d " +
+        String query = "SELECT * FROM SECTION s, COURSE c, DEPARTMENT d " +
                 "WHERE s.COURSE_ID = c.COURSE_ID AND s.DEPT_ID = d.DEPT_ID AND d.DEPT_ABR = ?";
         try {
             ps = connection.prepareStatement(query);

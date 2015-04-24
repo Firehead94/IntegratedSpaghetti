@@ -28,31 +28,35 @@
                         Your cart is empty.
                     </c:if>
                     <c:if test="${requestScope.errormsg == null && sessionScope.selectedlist != null}">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>Number</td>
-                                    <td>Title</td>
-                                    <td>Staff</td>
-                                    <td>Day/Time</td>
-                                    <td>Location</td>
-                                    <td>Credits</td>
-                                    <td>Select</td>
-                                </tr>
-                            </thead>
-                            <c:forEach varStatus="index" var="course" items="${sessionScope.selectedlist}" >
-                                <tr>
-                                    <td><d:department id="${course.key.getDept_ID()}" />${course.key.getCourse_ID()}</td>
-                                    <td style="width: 150px">${course.value.getCourse_title()}</td>
-                                    <td><d:faculty id="${course.key.getFaculty_ID()}" /></td>
-                                    <td><d:day code="${course.key.getSection_day()}" /> <br /> <d:time time="${course.key.getSection_time_start()}" /> - <d:time time="${course.key.getSection_time_end()}" /></td>
-                                    <td>${course.key.getSection_location()}</td>
-                                    <td>${course.value.getCourse_credits()}</td>
-                                    <td><input type="checkbox" name="selectedCourses" value="${course.key.getSection_num()}" /></td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                        <input type="submit" value="Remove Selected" /><button type="button" onclick="alert('Removed All Sections'); location.href = 'removeall'" value="Clear" >Clear</button>
+                        <form action="removeSelection" method="post">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td>Semester</td>
+                                        <td>Number</td>
+                                        <td>Title</td>
+                                        <td>Staff</td>
+                                        <td>Day/Time</td>
+                                        <td>Location</td>
+                                        <td>Credits</td>
+                                        <td>Select</td>
+                                    </tr>
+                                </thead>
+                                <c:forEach varStatus="index" var="course" items="${sessionScope.selectedlist}" >
+                                    <tr>
+                                        <td>${course.key.getSection_semester()}</td>
+                                        <td><d:department id="${course.key.getDept_ID()}" />${course.key.getCourse_ID()}</td>
+                                        <td style="width: 150px">${course.value.getCourse_title()}</td>
+                                        <td><d:faculty id="${course.key.getFaculty_ID()}" /></td>
+                                        <td><d:day code="${course.key.getSection_day()}" /> <br /> <d:time time="${course.key.getSection_time_start()}" /> - <d:time time="${course.key.getSection_time_end()}" /></td>
+                                        <td>${course.key.getSection_location()}</td>
+                                        <td>${course.value.getCourse_credits()}</td>
+                                        <td><input type="checkbox" name="removeCourses" value="${course.key.getSection_num()}" /></td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                            <input type="submit" value="Remove Selected" onclick="alert('Are you sure you want to remove these courses?')"/><button type="button" onclick="alert('Removed All Sections'); location.href = 'removeall'" value="Clear" >Clear</button>
+                        </form>
                     </c:if>
                 </article>
             </section>  
