@@ -65,15 +65,16 @@ public class FinalizeGrades extends HttpServlet {
         while(map.containsKey(String.valueOf(counter))) {
             Integer stu_ID = Integer.parseInt(map.get(String.valueOf(counter))[0]);
             String grade = map.get(String.valueOf(stu_ID))[0];
-            Integer section = Integer.parseInt(request.getParameter("selectedSection"));
-            if(GpaCalculator.validGrade(grade)) {
-                double gpa = GpaCalculator.calcGpa(grade);
-                RegistrationDB.updateRegistrationByStudentIDAndSectionNum(stu_ID, section, gpa, grade);
-                if(success)
-                    success = true;
-                else
-                    success = false;
-            }
+            System.err.println(request.getParameter("selectedSection"));
+//            Integer section = Integer.parseInt(request.getParameter("selectedSection"));
+//            if(GpaCalculator.validGrade(grade)) {
+//                double gpa = GpaCalculator.calcGpa(grade);
+//                RegistrationDB.updateRegistrationByStudentIDAndSectionNum(stu_ID, section, gpa, grade);
+//                if(success)
+//                    success = true;
+//                else
+//                    success = false;
+//            }
             counter++;
         }
         

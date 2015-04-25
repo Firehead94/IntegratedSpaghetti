@@ -68,6 +68,10 @@
         <servlet-name>RemoveSelection</servlet-name>
         <servlet-class>Servlets.RemoveCourse</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FinalizeGrades</servlet-name>
+        <servlet-class>Servlets.FinalizeGrades</servlet-class>
+    </servlet>
         
     <!-- Start Mapping -->
     <!-- NavBar Elements -->
@@ -116,6 +120,10 @@
     <servlet-mapping>
         <servlet-name>Edit</servlet-name>
         <url-pattern>/editProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FinalizeGrades</servlet-name>
+        <url-pattern>/finalizeGrades</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateUser</servlet-name>
