@@ -4,6 +4,7 @@
     Author     : Justin
 --%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
@@ -24,11 +25,11 @@
 
             <section class="content">
                 <article class="info">
+                
                     <c:if test="${requestScope.errormsg != null}">
                         ${requestScope.errormsg}
                     </c:if>
                     <c:if test="${requestScope.errormsg == null && requestScope.sections != null}">
-                        <c:out value="${requestScope.sections}">
                         <form action="grades" method="post" >
                             <table>
                                 <thead>
@@ -46,6 +47,7 @@
                                 </thead>
                                 <c:forEach varStatus="index" var="section" items="${sessionScope.sections}" >
                                     <tr>
+                                        ${section.key.toString()}, ${section.value.toString()}
                                         <d:semester semester="${section.key.getSection_semester()}" />
                                         <td>${section.key.getSection_num()}</td>
                                         <td><d:department id="${section.key.getDept_ID()}" />${section.key.getCourse_ID()}</td>
@@ -54,7 +56,7 @@
                                         <td><d:day code="${section.key.getSection_day()}" /> <br /> <d:time time="${section.key.getSection_time_start()}" /> - <d:time time="${course.key.getSection_time_end()}" /></td>
                                         <td>${section.key.getSection_location()}</td>
                                         <td>${section.value.getCourse_credits()}</td>
-                                        <td><input type="checkbox" name="selectedSection" value="${section.key.getSection_num()}" /></td>                                    
+                                        <td><input type="radio" name="selectedSection" value="${section.key.getSection_num()}" /></td>                                    
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -70,12 +72,11 @@
                                         <td>Grade</td>
                                     </tr>
                                 </thead>
-                                <jsp:useBean id="newGrades" class="java.util.HashMap" scope="request" />
-                                <form action="updateGrades" method="post" >
-                                    <c:foreach items="${requestScope.students}" var="grade" >
+                                    <c:forEach items="${requestScope.students}" var="student" varStatus="loop" >
                                         <tr>                                        
-                                            <tr><td><d:student id="${grade.getStu_ID()}" /></td><td><c:set target="${requestScope.newGrades}" property="${grade.getGrade()}" value="<input type="textbox" name="newGrades" value="${grade.getGrade()}" />" /></td></tr>
-                                            </form>                               
+                                            <td><input type="textbox" name="${student.stu_ID}" placeholder="${student.grade}" /></td>
+                                            <td><d:student id="${student.stu_ID}" /></td>
+                                            <input type="hidden" name="${loop.index}" value="${student.stu_ID}"/>
                                         </tr>
                                     </c:forEach>
                                 </form>
@@ -83,12 +84,14 @@
                             <input type="submit" value="submit" /><button type="button" onclick="location.href = 'courseSelect'" value="Cancel" >Cancel</button>
                         </form>
                     </c:if>
+                
                 </article>
-            </section>  
+            </section>
         </section>
         
         <footer>
             <jsp:include page="modules/footer.jsp" />
         </footer>
     </body>
+    
 </html>

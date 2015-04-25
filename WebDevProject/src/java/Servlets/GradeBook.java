@@ -62,11 +62,7 @@ public class GradeBook extends HttpServlet {
                 if(request.getParameterMap().containsKey("selectedSection")){
                     int sectionInt = Integer.parseInt(request.getParameter("selectedSection"));
                     ArrayList<Registration> regList = RegistrationDB.getRegistrationBySection(sectionInt);
-                    Map<Integer, String> students = new HashMap<>();
-                    for(Registration registrar : regList) {
-                        students.put(registrar.getStu_ID(), UserDB.getNameByStudentID(registrar.getStu_ID()));
-                    }
-                    request.setAttribute("students",students);
+                    request.setAttribute("students",regList);
                 }
                 else {
     //            for (Registration tmp : RegistrationDB.getRegistrationByFacultyint(PrivilegeDB.getFacultyByUserID(user.getUser_ID()))) {
