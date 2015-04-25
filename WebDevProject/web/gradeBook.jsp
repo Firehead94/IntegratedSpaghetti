@@ -27,7 +27,8 @@
                     <c:if test="${requestScope.errormsg != null}">
                         ${requestScope.errormsg}
                     </c:if>
-                    <c:if test="${requestScope.sections != null}">
+                    <c:if test="${requestScope.errormsg == null && requestScope.sections != null}">
+                        <c:out value="${requestScope.sections}">
                         <form action="grades" method="post" >
                             <table>
                                 <thead>
