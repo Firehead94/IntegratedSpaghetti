@@ -36,7 +36,6 @@
                                         <td>Section Number</td>
                                         <td>Course Number</td>
                                         <td>Title</td>
-                                        <td>Staff</td>
                                         <td>Day/Time</td>
                                         <td>Location</td>
                                         <td>Credits</td>
@@ -49,7 +48,6 @@
                                         <td>${course.key.getSection_num()}</td>
                                         <td><d:department id="${course.key.getDept_ID()}" />${course.key.getCourse_ID()}</td>
                                         <td style="width: 150px">${course.value.getCourse_title()}</td>
-                                        <td><d:faculty id="${course.key.getFaculty_ID()}" /></td>
                                         <td><d:day code="${course.key.getSection_day()}" /> <br /> <d:time time="${course.key.getSection_time_start()}" /> - <d:time time="${course.key.getSection_time_end()}" /></td>
                                         <td>${course.key.getSection_location()}</td>
                                         <td>${course.value.getCourse_credits()}</td>
