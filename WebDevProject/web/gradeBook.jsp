@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="d" uri="/WEB-INF/tlds/decoder" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -50,15 +51,14 @@
                                         <td>${section.key.getSection_num()}</td>
                                         <td><d:department id="${section.key.getDept_ID()}" />${section.key.getCourse_ID()}</td>
                                         <td style="width: 150px">${section.value.getCourse_title()}</td>
-                                        <td><d:faculty id="${section.key.getFaculty_ID()}" /></td>
-                                        <td><d:day code="${section.key.getSection_day()}" /> <br /> <d:time time="${section.key.getSection_time_start()}" /> - <d:time time="${course.key.getSection_time_end()}" /></td>
+                                        <td><d:day code="${section.key.getSection_day()}" /> <br /> <d:time time="${section.key.getSection_time_start()}" /> - <d:time time="${section.key.getSection_time_end()}" /></td>
                                         <td>${section.key.getSection_location()}</td>
                                         <td>${section.value.getCourse_credits()}</td>
                                         <td><input type="radio" name="selectedSection" value="${section.key.getSection_num()}" /></td>                                    
                                     </tr>
                                 </c:forEach>
                             </table>
-                            <input type="submit" value="submit" /><button type="button" onclick="location.href = 'courseSelect'" value="Cancel" >Cancel</button>
+                            <input type="submit" value="submit" /><button type="button" onclick="location.href = 'home'" value="Cancel" >Cancel</button>
                         </form>
                     </c:if>
                     <c:if test="${requestScope.students != null}">
@@ -66,8 +66,8 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <td>Name</td>
                                         <td>Grade</td>
+                                        <td>Name</td>
                                     </tr>
                                 </thead>
                                     <c:forEach items="${requestScope.students}" var="student" varStatus="loop" >
@@ -79,7 +79,7 @@
                                     </c:forEach>
                                 </form>
                             </table>
-                            <input type="submit" value="submit" /><button type="button" onclick="location.href = 'courseSelect'" value="Cancel" >Cancel</button>
+                            <input type="submit" value="submit" /><button type="button" onclick="location.href = 'grades'" value="Cancel" >Cancel</button>
                         </form>
                     </c:if>
                 
