@@ -62,7 +62,7 @@
                         </form>
                     </c:if>
                     <c:if test="${requestScope.students != null}">
-                        <form action="selected" method="post" >
+                        <form action="finalizeGrades" method="post" >
                             <table>
                                 <thead>
                                     <tr>
