@@ -89,7 +89,7 @@ public class GradeBook extends HttpServlet {
             }
         }
         
-        request.setAttribute("grades", grades);
+      //  request.setAttribute("grades", grades);
         getServletContext()
             .getRequestDispatcher(url) //.getRequestRedirect for php
             .forward(request, response);

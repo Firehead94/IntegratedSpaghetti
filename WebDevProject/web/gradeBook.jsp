@@ -65,16 +65,19 @@
                             <table>
                                 <thead>
                                     <tr>
+                                        <td>Name</td>
                                         <td>Grade</td>
-                                        <td>Student</td>
                                     </tr>
                                 </thead>
-                                <c:forEach varStatus="index" var="student" items="${sessionScope.students}" >
-                                    <tr>
-                                        <td><input type="textbox" placeholder="${sessionScope}"><input type="hidden" name="ignoreme"></td>
-                                        <td><d:student id="${student.getStu_ID}" /></td>                        
-                                    </tr>
-                                </c:forEach>
+                                <jsp:useBean id="newGrades" class="java.util.HashMap" scope="request" />
+                                <form action="updateGrades" method="post" >
+                                    <c:foreach items="${requestScope.students}" var="grade" >
+                                        <tr>                                        
+                                            <tr><td><d:student id="${grade.getStu_ID()}" /></td><td><c:set target="${requestScope.newGrades}" property="${grade.getGrade()}" value="<input type="textbox" name="newGrades" value="${grade.getGrade()}" />" /></td></tr>
+                                            </form>                               
+                                        </tr>
+                                    </c:forEach>
+                                </form>
                             </table>
                             <input type="submit" value="submit" /><button type="button" onclick="location.href = 'courseSelect'" value="Cancel" >Cancel</button>
                         </form>

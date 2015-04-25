@@ -16,7 +16,7 @@
     </servlet>
     <servlet>
         <servlet-name>Grades</servlet-name>
-        <jsp-file>grades.jsp</jsp-file>
+        <servlet-class>Servlets.GradeBook</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Home</servlet-name>

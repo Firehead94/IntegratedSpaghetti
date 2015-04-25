@@ -108,7 +108,7 @@ public class RegistrationDB {
         return registrations;         
     }
     
-    public static ArrayList<Registration> getRegistrationByFacultyint(int faculty_ID) {
+    public static ArrayList<Registration> getRegistrationByFacultyID(int faculty_ID) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
