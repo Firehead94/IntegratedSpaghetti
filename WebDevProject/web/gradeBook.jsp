@@ -28,7 +28,7 @@
                         ${requestScope.errormsg}
                     </c:if>
                     <c:if test="${requestScope.sections != null}">
-                        <form action="selected" method="post" >
+                        <form action="grades" method="post" >
                             <table>
                                 <thead>
                                     <tr>
@@ -43,7 +43,7 @@
                                         <td>Select</td>
                                     </tr>
                                 </thead>
-                                <c:forEach varStatus="index" var="section" items="${sessionScope.sectionlist}" >
+                                <c:forEach varStatus="index" var="section" items="${sessionScope.sections}" >
                                     <tr>
                                         <d:semester semester="${section.key.getSection_semester()}" />
                                         <td>${section.key.getSection_num()}</td>
