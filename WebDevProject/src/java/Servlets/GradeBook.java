@@ -83,12 +83,12 @@ public class GradeBook extends HttpServlet {
             for (Registration tmp : RegistrationDB.getRegistrationByStudent(PrivilegeDB.getStudentIDByUserID(user.getUser_ID()))) {
                 HashMap<Course, User> map = new HashMap<Course, User>();
                 map.put(CourseDB.getCourseByCourseIDAndDeptID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID(), (SectionDB.getSectionBySectionNum(tmp.getSection_num())).getDept_ID()), user);
-                grades.put(tmp, map);
+                //grades.put(tmp, map);
                 url = "/grades.jsp";
             }
         }
         
-        request.setAttribute("grades", grades);
+      //  request.setAttribute("grades", grades);
         getServletContext()
             .getRequestDispatcher(url) //.getRequestRedirect for php
             .forward(request, response);
