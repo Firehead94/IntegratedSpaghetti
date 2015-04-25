@@ -62,12 +62,13 @@ public class GradeBook extends HttpServlet {
         if (user.isFaculty()) { //Is Teacher   ]
             url = "/gradeBook.jsp";
             if(request.getParameterMap().containsKey("selectedSection")){
-                ArrayList<Registration> regList = RegistrationDB.getRegistrationBySection(Integer.parseInt(request.getParameter("selectedSection")));
+                int sectionInt = Integer.parseInt(request.getParameter("selectedSection"));
+                ArrayList<Registration> regList = RegistrationDB.getRegistrationBySection(sectionInt);
                 Map<Integer, String> students = new HashMap<>();
                 for(Registration registrar : regList) {
                     students.put(registrar.getStu_ID(), UserDB.getNameByStudentID(registrar.getStu_ID()));
                 }
-                request.setAttribute("students",RegistrationDB.getRegistrationBySection(Integer.parseInt(request.getParameter("selectedSection"))));
+                request.setAttribute("students",students);
             }
             else {
 //            for (Registration tmp : RegistrationDB.getRegistrationByFacultyint(PrivilegeDB.getFacultyByUserID(user.getUser_ID()))) {
@@ -83,7 +84,7 @@ public class GradeBook extends HttpServlet {
             for (Registration tmp : RegistrationDB.getRegistrationByStudent(PrivilegeDB.getStudentIDByUserID(user.getUser_ID()))) {
                 HashMap<Course, User> map = new HashMap<Course, User>();
                 map.put(CourseDB.getCourseByCourseIDAndDeptID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID(), (SectionDB.getSectionBySectionNum(tmp.getSection_num())).getDept_ID()), user);
-                grades.put(tmp, map);
+                //grades.put(tmp, map);
                 url = "/grades.jsp";
             }
         }
