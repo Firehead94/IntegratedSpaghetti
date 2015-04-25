@@ -1,0 +1,1 @@
+hey <?=$data['userinfo'][0]["USER_FIRST_NAME"]?> <?=$data['financialinfo'][0]["CREDITCARD_NUM"]?>

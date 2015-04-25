@@ -22,12 +22,11 @@ class finance extends Controller {
         $hash = md5($_POST['password']);
         $user = new UserDB();
         $userinfo = $user->validateUser($username, $hash);
-        var_dump($userinfo);
         if (isset($userinfo[0])) {
             $this->model('FinancialDB');
             $finance = new FinancialDB();
-            $financialInfo = $finance->getFinancialRecords($userinfo["USER_ID"]);
-            echo var_dump($financialInfo);
+            $financialInfo = $finance->getFinancialRecords($userinfo[0]["USER_ID"]);
+            $this->view('finance/viewRecords', ['userinfo' => $userinfo, 'financialinfo' => $financialInfo]);
         }else {           
             header("location:../finance?error=invalid");            
         }        
