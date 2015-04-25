@@ -67,7 +67,7 @@ public class GradeBook extends HttpServlet {
                 for(Registration registrar : regList) {
                     students.put(registrar.getStu_ID(), UserDB.getNameByStudentID(registrar.getStu_ID()));
                 }
-                request.setAttribute("students",students);
+                request.setAttribute("students",RegistrationDB.getRegistrationBySection(Integer.parseInt(request.getParameter("selectedSection"))));
             }
             else {
 //            for (Registration tmp : RegistrationDB.getRegistrationByFacultyint(PrivilegeDB.getFacultyByUserID(user.getUser_ID()))) {

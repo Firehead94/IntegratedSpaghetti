@@ -71,8 +71,7 @@
                                 </thead>
                                 <c:forEach varStatus="index" var="student" items="${sessionScope.students}" >
                                     <tr>
-                                        <d:semester semester="${student.key.getSection_semester()}" />
-                                        <td>Grade Input</td>
+                                        <td><input type="textbox" placeholder="${sessionScope}"><input type="hidden" name="ignoreme"></td>
                                         <td><d:student id="${student.getStu_ID}" /></td>                        
                                     </tr>
                                 </c:forEach>
