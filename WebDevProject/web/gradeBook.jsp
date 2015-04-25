@@ -38,17 +38,15 @@
                                         <td>Section Number</td>
                                         <td>Course Number</td>
                                         <td>Title</td>
-                                        <td>Staff</td>
                                         <td>Day/Time</td>
                                         <td>Location</td>
                                         <td>Credits</td>
                                         <td>Select</td>
                                     </tr>
                                 </thead>
-                                <c:forEach varStatus="index" var="section" items="${sessionScope.sections}" >
+                                <c:forEach varStatus="index" var="section" items="${requestScope.sections}" >
                                     <tr>
-                                        ${section.key.toString()}, ${section.value.toString()}
-                                        <d:semester semester="${section.key.getSection_semester()}" />
+                                        <td><d:semester semester="${section.key.getSection_semester()}" /></td>
                                         <td>${section.key.getSection_num()}</td>
                                         <td><d:department id="${section.key.getDept_ID()}" />${section.key.getCourse_ID()}</td>
                                         <td style="width: 150px">${section.value.getCourse_title()}</td>
