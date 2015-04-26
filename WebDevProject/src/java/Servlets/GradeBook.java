@@ -59,13 +59,10 @@ public class GradeBook extends HttpServlet {
         
         if(request.getSession().getAttribute("user")!=null) {
             user = (User)request.getSession().getAttribute("user");
-<<<<<<< HEAD
             if (user!= null && user.isFaculty()) { //Is Teacher   
                 System.err.println("User is not null");
-=======
             System.out.println(user.isFaculty() + "|" + user.isStudent());
             if (user!= null && user.isFaculty()) { //Is Teacher   ]
->>>>>>> 9e26fe3d72b1dff8ce856bb6e3fb4c35e311fc98
                 if(request.getParameterMap().containsKey("selectedSection")){
                     String selectedSection = request.getParameter("selectedSection");
                     int sectionInt = Integer.parseInt(request.getParameter("selectedSection"));
@@ -98,5 +95,5 @@ public class GradeBook extends HttpServlet {
             .getRequestDispatcher(url) //.getRequestRedirect for php
             .forward(request, response);
     }
-
+    }
 }
