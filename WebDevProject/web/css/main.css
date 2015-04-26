@@ -41,7 +41,12 @@ article.info {
     background-color: rgba(50,150,50,.4); 
     margin: 10px;
     height: 400px;
+    overflow:auto;
     box-shadow: 0 0 10px rgba(0,0,0,.15);
+}
+
+thead {
+    font-weight:bold;
 }
 
 article table {

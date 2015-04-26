@@ -32,7 +32,9 @@ public class GpaCalculator {
         
     }
     
-    public static boolean validGrade(String grade) {
+    public static boolean validGrade(String grade) throws Exception{
+        if(grade.equals(""))
+            throw new Exception();
         return gpas.containsKey(grade);
     }
     

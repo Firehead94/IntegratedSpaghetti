@@ -44,7 +44,7 @@ public class FinalizeGrades extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String url = "/home";
+        String url = "/grades";
         
         Map<String,String[]> map = request.getParameterMap();
         
@@ -54,12 +54,16 @@ public class FinalizeGrades extends HttpServlet {
             String grade = map.get(String.valueOf(stu_ID))[0];
             System.err.println(request.getParameter("selectedSection"));
             Integer section = Integer.parseInt(request.getParameter("selectedSection"));
-            if(GpaCalculator.validGrade(grade)) {
-                double gpa = GpaCalculator.calcGpa(grade);
-                RegistrationDB.updateRegistrationByStudentIDAndSectionNum(stu_ID, section, gpa, grade);
+            try{
+                if(GpaCalculator.validGrade(grade)) {
+                    double gpa = GpaCalculator.calcGpa(grade);
+                    RegistrationDB.updateRegistrationByStudentIDAndSectionNum(stu_ID, section, gpa, grade);
+                }
+                else
+                        success = false;
+            } catch(Exception e) {
+                //no value input, ignore error
             }
-            else
-                    success = false;
         }
         if(!success) {
             request.setAttribute("errormsg","Failed to set values. Incorrect Grade input.");
