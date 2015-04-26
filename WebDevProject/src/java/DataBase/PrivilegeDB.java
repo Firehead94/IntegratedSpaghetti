@@ -109,7 +109,7 @@ public class PrivilegeDB {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                return rs.getInt("STUDENT_ID");
+                return rs.getInt("STU_ID");
             }
             return 0;
         } catch (SQLException e) {
