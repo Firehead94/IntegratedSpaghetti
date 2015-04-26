@@ -55,7 +55,7 @@
                                     </tr>
                                 </c:forEach>
                             </table>
-                            <input type="submit" value="submit" /><button type="button" onclick="location.href = 'courseSelect'" value="Cancel" >Cancel</button>
+                            <input type="submit" value="submit" /><input type="button" onclick="location.href = 'courseSelect'" value="Cancel" >Cancel</button>
                         </form>
                     </c:if>
                 </article>

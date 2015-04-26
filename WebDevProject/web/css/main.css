@@ -44,6 +44,11 @@ article.info {
     box-shadow: 0 0 10px rgba(0,0,0,.15);
 }
 
+<<<<<<< HEAD
 table {
     margin:10px;
+=======
+article table {
+    margin: 10px;
+>>>>>>> 83236a85567028a5abff049f7aa2d7436fe05573
 }
