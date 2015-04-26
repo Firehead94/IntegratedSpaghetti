@@ -59,7 +59,6 @@ public class GradeBook extends HttpServlet {
         
         if(request.getSession().getAttribute("user")!=null) {
             user = (User)request.getSession().getAttribute("user");
-            System.out.println(user.isFaculty() + "|" + user.isStudent());
             if (user!= null && user.isFaculty()) { //Is Teacher   ]
                 if(request.getParameterMap().containsKey("selectedSection")){
                     String selectedSection = request.getParameter("selectedSection");
