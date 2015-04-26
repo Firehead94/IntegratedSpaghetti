@@ -55,9 +55,10 @@ public class PrivilegeDB {
             ps.setInt(1, user.getUser_ID());
             rs = ps.executeQuery();
             if (rs.next()) {
-                return true;
+                if (Integer.parseInt(rs.getString("COUNT(*)")) > 0) {
+                    return true;
+                }
             }
-            return false;
         } catch (SQLException e) {
             Logger.getLogger(PrivilegeDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -81,9 +82,10 @@ public class PrivilegeDB {
             ps.setInt(1, user.getUser_ID());
             rs = ps.executeQuery();
             if (rs.next()) {
-                return true;
+                if (Integer.parseInt(rs.getString("COUNT(*)")) > 0) {
+                    return true;
+                }
             }
-            return false;
         } catch (SQLException e) {
             Logger.getLogger(PrivilegeDB.class.getName()).log(Level.SEVERE, null, e);
         } finally {

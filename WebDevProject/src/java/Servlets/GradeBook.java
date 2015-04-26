@@ -56,8 +56,10 @@ public class GradeBook extends HttpServlet {
             throws ServletException, IOException {
         String url = "/gradeBook.jsp";
         User user = null;
+        
         if(request.getSession().getAttribute("user")!=null) {
-            user = UserDB.getUserByUsername(((User)request.getSession().getAttribute("user")).getUsername()).get(0);
+            user = (User)request.getSession().getAttribute("user");
+            System.out.println(user.isFaculty() + "|" + user.isStudent());
             if (user!= null && user.isFaculty()) { //Is Teacher   ]
                 if(request.getParameterMap().containsKey("selectedSection")){
                     String selectedSection = request.getParameter("selectedSection");
@@ -71,7 +73,7 @@ public class GradeBook extends HttpServlet {
                     request.setAttribute("sections",sectionMap);
                 }   
 
-            }else if(user!= null && user.isStudent()) { //Is Student
+            }else if(user != null && user.isStudent()) { //Is Student
                 Map<Course, Map<Section,Registration>> map = new HashMap<>();
                 Map<Section,Registration> map2 = new HashMap<>();
                 for (Registration tmp : RegistrationDB.getRegistrationByStudent(PrivilegeDB.getStudentIDByUserID(user.getUser_ID()))) {
