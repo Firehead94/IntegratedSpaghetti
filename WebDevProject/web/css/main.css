@@ -43,3 +43,7 @@ article.info {
     height: 400px;
     box-shadow: 0 0 10px rgba(0,0,0,.15);
 }
+
+article table {
+    margin: 10px;
+}
