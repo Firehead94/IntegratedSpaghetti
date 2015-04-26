@@ -28,38 +28,34 @@
                 <article class="info">
                     
                     <c:if test="${requestScope.grades != null}">
-                        <form action="grades" method="post" >
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <td>Semester</td>
-                                        <td>Section Number</td>
-                                        <td>Course Number</td>
-                                        <td>Title</td>
-                                        <td>Day/Time</td>
-                                        <td>Location</td>
-                                        <td>Credits</td>
-                                        <td>Grade</td> 
-                                    </tr>
-                                </thead>
-                                <!-- Map<Course, Map<Section,Registration>> -->
-                                <c:forEach varStatus="index" var="course" items="${requestScope.grades}" >
-                                    <tr>
-                                        <td><d:semester semester="${course.value.key.getSection_semester()}" /></td>
-                                        <td>${course.value.key.getSection_num()}</td>
-                                        <td><d:department id="${course.value.key.getDept_ID()}" />${course.key.getCourse_ID()}</td>
-                                        <td style="width: 150px">${course.key.getCourse_title()}</td>
-                                        <td><d:day code="${course.value.key.getSection_day()}" /> <br /> <d:time time="${course.value.key.getSection_time_start()}" /> - <d:time time="${course.value.key.getSection_time_end()}" /></td>
-                                        <td>${course.value.key.getSection_location()}</td>
-                                        <td>${course.key.getCourse_credits()}</td>
-                                        <td>${course.value.value.grade}</td>                              
-                                    </tr>
-                                </c:forEach>
-                            </table>
-                            <input type="submit" value="submit" /><button type="button" onclick="location.href = 'home'" value="Cancel" >Cancel</button>
-                        </form>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Semester</td>
+                                    <td>Section Number</td>
+                                    <td>Course Number</td>
+                                    <td>Title</td>
+                                    <td>Day/Time</td>
+                                    <td>Location</td>
+                                    <td>Credits</td>
+                                    <td>Grade</td> 
+                                </tr>
+                            </thead>
+                            <!-- Map<Course, Map<Section,Registration>> -->
+                            <c:forEach varStatus="index" var="map" items="${requestScope.grades}" >
+                                <tr>
+                                    <td><d:semester semester="${map.get(1).section_semester}" /></td>
+                                    <td>${map.get(1).section_num}</td>
+                                    <td><d:department id="${map.get(1).dept_ID}" />${map.get(0).course_ID}</td>
+                                    <td style="width: 150px">${map.get(0).course_title}</td>
+                                    <td><d:day code="${map.get(1).section_day}" /> <br /> <d:time time="${map.get(1).section_time_start}" /> - <d:time time="${map.get(1).section_time_end}" /></td>
+                                    <td>${map.get(1).section_location}</td>
+                                    <td>${map.get(0).course_credits}</td>
+                                    <td>${map.get(2).grade}</td>                              
+                                </tr>
+                            </c:forEach>
+                        </table>
                     </c:if>
-                    
                 </article>
             </section>  
         </section>

@@ -71,12 +71,14 @@ public class GradeBook extends HttpServlet {
 
         }
         else if(user != null && user.isStudent()) { //Is Student
-            Map<Course, Map<Section,Registration>> map = new HashMap<>();
-            Map<Section,Registration> map2 = new HashMap<>();
+            ArrayList<ArrayList<Object>> map = new ArrayList<>();
             for (Registration tmp : RegistrationDB.getRegistrationByStudent(PrivilegeDB.getStudentIDByUserID(user.getUser_ID()))) {
                 int sectionNum = tmp.getSection_num();
-                map2.put(SectionDB.getSectionBySectionNum(sectionNum),tmp);
-                map.put(CourseDB.getCourseBySectionID(sectionNum),map2);                    
+                ArrayList<Object> list = new ArrayList<>();
+                list.add(CourseDB.getCourseBySectionID(sectionNum));
+                list.add(SectionDB.getSectionBySectionNum(sectionNum));
+                list.add(tmp);
+                map.add(list);
             }
             request.setAttribute("grades",map);
             url = "/grades.jsp";

@@ -48,13 +48,13 @@
                                 <c:forEach varStatus="index" var="section" items="${requestScope.sections}" >
                                     <tr>
                                         <td><d:semester semester="${section.key.getSection_semester()}" /></td>
-                                        <td>${section.key.getSection_num()}</td>
-                                        <td><d:department id="${section.key.getDept_ID()}" />${section.key.getCourse_ID()}</td>
-                                        <td style="width: 150px">${section.value.getCourse_title()}</td>
-                                        <td><d:day code="${section.key.getSection_day()}" /> <br /> <d:time time="${section.key.getSection_time_start()}" /> - <d:time time="${section.key.getSection_time_end()}" /></td>
-                                        <td>${section.key.getSection_location()}</td>
-                                        <td>${section.value.getCourse_credits()}</td>
-                                        <td><input type="radio" name="selectedSection" value="${section.key.getSection_num()}" /></td>                                    
+                                        <td>${section.key.section_num}</td>
+                                        <td><d:department id="${section.key.dept_ID}" />${section.key.course_ID}</td>
+                                        <td style="width: 150px">${section.value.course_title}</td>
+                                        <td><d:day code="${section.key.section_day}" /> <br /> <d:time time="${section.key.section_time_start}" /> - <d:time time="${section.key.section_time_end}" /></td>
+                                        <td>${section.key.section_location}</td>
+                                        <td>${section.value.course_credits}</td>
+                                        <td><input type="radio" name="selectedSection" value="${section.key.section_num}" /></td>                                    
                                     </tr>
                                 </c:forEach>
                             </table>
