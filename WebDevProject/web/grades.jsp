@@ -29,6 +29,7 @@
                     
                     <c:if test="${requestScope.sections != null}">
                         <form action="grades" method="post" >
+                            kytcytcfiycfkyctc
                             <table>
                                 <thead>
                                     <tr>
@@ -39,7 +40,7 @@
                                         <td>Day/Time</td>
                                         <td>Location</td>
                                         <td>Credits</td>
-                                        <td>Grade</td>
+                                        <td>Grade</td> 
                                     </tr>
                                 </thead>
                                 <c:forEach varStatus="index" var="section" items="${requestScope.sections}" >

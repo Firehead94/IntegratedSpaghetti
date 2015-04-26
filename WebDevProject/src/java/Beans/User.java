@@ -104,6 +104,8 @@ public class User implements Serializable {
      */
     public void setUser_ID(int user_ID) {
         this.user_ID = user_ID;
+        faculty = PrivilegeDB.isFacultyByUser(this);
+        student = PrivilegeDB.isStudentByUser(this);
     }
 
     /**
@@ -247,8 +249,7 @@ public class User implements Serializable {
     }
     
     public User() {
-        faculty = PrivilegeDB.isFacultyByUser(this);
-        student = PrivilegeDB.isStudentByUser(this);
+        
     }
     
 }
