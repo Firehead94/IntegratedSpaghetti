@@ -30,7 +30,7 @@
                     <c:if test="${requestScope.errormsg != null}">
                         ${requestScope.errormsg}
                     </c:if>
-                    <c:if test="${requestScope.errormsg == null && requestScope.sections != null}">
+                    <c:if test="${requestScope.sections != null}">
                         <form action="grades" method="post" >
                             <table>
                                 <thead>
@@ -73,9 +73,9 @@
                                 </thead>
                                     <c:forEach items="${requestScope.students}" var="student" varStatus="loop" >
                                         <tr>                                        
-                                            <td><input type="textbox" name="${student.stu_ID}" placeholder="${student.grade}" /></td>
+                                            <td><input type="textbox" name="${student.stu_ID}" placeholder="${student.grade}" size="4" /></td>
                                             <td><d:student id="${student.stu_ID}" /></td>
-                                            <input type="hidden" name="${loop.index}" value="${student.stu_ID}"/>
+                                            <input type="hidden" name="listCounter" value="${student.stu_ID}"/>
                                         </tr>
                                     </c:forEach>
                                 </form>

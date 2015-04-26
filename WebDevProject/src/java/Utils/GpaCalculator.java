@@ -27,8 +27,8 @@ public class GpaCalculator {
         gpas.put("C-",1.7);
         gpas.put("D",1.0);
         gpas.put("F",0.0);
-        gpas.put("I",null);
-        gpas.put("W",null);
+        gpas.put("I",0.0);
+        gpas.put("W",0.0);
         
     }
     

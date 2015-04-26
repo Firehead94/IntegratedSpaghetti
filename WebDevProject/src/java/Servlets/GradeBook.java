@@ -67,22 +67,20 @@ public class GradeBook extends HttpServlet {
                     request.setAttribute("selectedSection",selectedSection);
                 }
                 else {
-    //            for (Registration tmp : RegistrationDB.getRegistrationByFacultyint(PrivilegeDB.getFacultyByUserID(user.getUser_ID()))) {
-    //                HashMap<Course, User> map = new HashMap<Course, User>();
-    //                map.put(CourseDB.getCourseByCourseIDAndDeptID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID(), (SectionDB.getSectionBySectionNum(tmp.getSection_num())).getDept_ID()), user);
-    //                grades.put(tmp, map);
                     Map<Section,Course> sectionMap = SectionDB.getSectionByFacultyID(PrivilegeDB.getFacultyByUserID(user.getUser_ID()));
                     request.setAttribute("sections",sectionMap);
                 }   
-    //            }
 
             }else if(user!= null && user.isStudent()) { //Is Student
-                HashMap<Course, User> map = new HashMap<Course, User>();
+                Map<Course, Map<Section,Registration>> map = new HashMap<>();
+                Map<Section,Registration> map2 = new HashMap<>();
                 for (Registration tmp : RegistrationDB.getRegistrationByStudent(PrivilegeDB.getStudentIDByUserID(user.getUser_ID()))) {
-                    map.put(CourseDB.getCourseByCourseIDAndDeptID((SectionDB.getSectionBySectionNum(tmp.getSection_num())).getCourse_ID(), (SectionDB.getSectionBySectionNum(tmp.getSection_num())).getDept_ID()), user);
-                    request.setAttribute("grades",map);
-                    url = "/grades.jsp";
+                    int sectionNum = tmp.getSection_num();
+                    map2.put(SectionDB.getSectionBySectionNum(sectionNum),tmp);
+                    map.put(CourseDB.getCourseBySectionID(sectionNum),map2);                    
                 }
+                request.setAttribute("grades",map);
+                url = "/grades.jsp";
             }
         } else {
             request.setAttribute("errormsg","User is not logged in");

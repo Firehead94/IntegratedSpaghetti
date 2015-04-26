@@ -159,7 +159,7 @@ public class RegistrationDB {
         try {
             rs = ps.executeQuery();
             registrations = new ArrayList<Registration>();
-            if (rs.next()) {                
+            while (rs.next()) {                
                 Registration registration = new Registration();
                 
                 registration.setGpa(rs.getInt("GPA"));

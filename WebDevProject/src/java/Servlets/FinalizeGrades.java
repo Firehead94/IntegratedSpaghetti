@@ -1,23 +1,11 @@
 
 package Servlets;
 
-import Beans.Course;
-import Beans.Registration;
-import Beans.Section;
-import Beans.User;
-import DataBase.CourseDB;
-import DataBase.PrivilegeDB;
 import DataBase.RegistrationDB;
-import DataBase.SectionDB;
-import DataBase.UserDB;
 import Utils.GpaCalculator;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,25 +48,23 @@ public class FinalizeGrades extends HttpServlet {
         
         Map<String,String[]> map = request.getParameterMap();
         
-        int counter = 0;
         boolean success = true;
-        while(map.containsKey(String.valueOf(counter))) {
-            Integer stu_ID = Integer.parseInt(map.get(String.valueOf(counter))[0]);
+        for(String studentId : map.get("listCounter")) {
+            Integer stu_ID = Integer.parseInt(studentId);
             String grade = map.get(String.valueOf(stu_ID))[0];
             System.err.println(request.getParameter("selectedSection"));
-//            Integer section = Integer.parseInt(request.getParameter("selectedSection"));
-//            if(GpaCalculator.validGrade(grade)) {
-//                double gpa = GpaCalculator.calcGpa(grade);
-//                RegistrationDB.updateRegistrationByStudentIDAndSectionNum(stu_ID, section, gpa, grade);
-//                if(success)
-//                    success = true;
-//                else
-//                    success = false;
-//            }
-            counter++;
+            Integer section = Integer.parseInt(request.getParameter("selectedSection"));
+            if(GpaCalculator.validGrade(grade)) {
+                double gpa = GpaCalculator.calcGpa(grade);
+                RegistrationDB.updateRegistrationByStudentIDAndSectionNum(stu_ID, section, gpa, grade);
+            }
+            else
+                    success = false;
         }
-        
-        request.setAttribute("success",success);
+        if(!success) {
+            request.setAttribute("errormsg","Failed to set values. Incorrect Grade input.");
+            url = "/grades";
+        }
         
         getServletContext()
             .getRequestDispatcher(url) //.getRequestRedirect for php
