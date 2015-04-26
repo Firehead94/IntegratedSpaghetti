@@ -27,9 +27,8 @@
             <section class="content">
                 <article class="info">
                     
-                    <c:if test="${requestScope.sections != null}">
+                    <c:if test="${requestScope.grades != null}">
                         <form action="grades" method="post" >
-                            kytcytcfiycfkyctc
                             <table>
                                 <thead>
                                     <tr>
@@ -43,16 +42,17 @@
                                         <td>Grade</td> 
                                     </tr>
                                 </thead>
-                                <c:forEach varStatus="index" var="section" items="${requestScope.sections}" >
+                                <!-- Map<Course, Map<Section,Registration>> -->
+                                <c:forEach varStatus="index" var="course" items="${requestScope.grades}" >
                                     <tr>
-                                        <td><d:semester semester="${section.key.getSection_semester()}" /></td>
-                                        <td>${section.key.getSection_num()}</td>
-                                        <td><d:department id="${section.key.getDept_ID()}" />${section.key.getCourse_ID()}</td>
-                                        <td style="width: 150px">${section.value.getCourse_title()}</td>
-                                        <td><d:day code="${section.key.getSection_day()}" /> <br /> <d:time time="${section.key.getSection_time_start()}" /> - <d:time time="${section.key.getSection_time_end()}" /></td>
-                                        <td>${section.key.getSection_location()}</td>
-                                        <td>${section.value.getCourse_credits()}</td>
-                                        <td></td>                              
+                                        <td><d:semester semester="${course.value.key.getSection_semester()}" /></td>
+                                        <td>${course.value.key.getSection_num()}</td>
+                                        <td><d:department id="${course.value.key.getDept_ID()}" />${course.key.getCourse_ID()}</td>
+                                        <td style="width: 150px">${course.key.getCourse_title()}</td>
+                                        <td><d:day code="${course.value.key.getSection_day()}" /> <br /> <d:time time="${course.value.key.getSection_time_start()}" /> - <d:time time="${course.value.key.getSection_time_end()}" /></td>
+                                        <td>${course.value.key.getSection_location()}</td>
+                                        <td>${course.key.getCourse_credits()}</td>
+                                        <td>${course.value.value.grade}</td>                              
                                     </tr>
                                 </c:forEach>
                             </table>

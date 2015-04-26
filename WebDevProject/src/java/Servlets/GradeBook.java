@@ -55,38 +55,33 @@ public class GradeBook extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = "/gradeBook.jsp";
-        User user = null;
-        
-        if(request.getSession().getAttribute("user")!=null) {
-            user = (User)request.getSession().getAttribute("user");
-            if (user!= null && user.isFaculty()) { //Is Teacher   
-                System.err.println("User is not null");
-            System.out.println(user.isFaculty() + "|" + user.isStudent());
-            if (user!= null && user.isFaculty()) { //Is Teacher   ]
-                if(request.getParameterMap().containsKey("selectedSection")){
-                    String selectedSection = request.getParameter("selectedSection");
-                    int sectionInt = Integer.parseInt(request.getParameter("selectedSection"));
-                    ArrayList<Registration> regList = RegistrationDB.getRegistrationBySection(sectionInt);
-                    request.setAttribute("students",regList);
-                    request.setAttribute("selectedSection",selectedSection);
-                }
-                else {
-                    Map<Section,Course> sectionMap = SectionDB.getSectionByFacultyID(PrivilegeDB.getFacultyByUserID(user.getUser_ID()));
-                    request.setAttribute("sections",sectionMap);
-                }   
-
-            }else if(user != null && user.isStudent()) { //Is Student
-                Map<Course, Map<Section,Registration>> map = new HashMap<>();
-                Map<Section,Registration> map2 = new HashMap<>();
-                for (Registration tmp : RegistrationDB.getRegistrationByStudent(PrivilegeDB.getStudentIDByUserID(user.getUser_ID()))) {
-                    int sectionNum = tmp.getSection_num();
-                    map2.put(SectionDB.getSectionBySectionNum(sectionNum),tmp);
-                    map.put(CourseDB.getCourseBySectionID(sectionNum),map2);                    
-                }
-                request.setAttribute("grades",map);
-                url = "/grades.jsp";
+        User user = (User)request.getSession().getAttribute("user");
+        if (user!= null && user.isFaculty()) { //Is Teacher   ]
+            if(request.getParameterMap().containsKey("selectedSection")){
+                String selectedSection = request.getParameter("selectedSection");
+                int sectionInt = Integer.parseInt(request.getParameter("selectedSection"));
+                ArrayList<Registration> regList = RegistrationDB.getRegistrationBySection(sectionInt);
+                request.setAttribute("students",regList);
+                request.setAttribute("selectedSection",selectedSection);
             }
-        } else {
+            else {
+                Map<Section,Course> sectionMap = SectionDB.getSectionByFacultyID(PrivilegeDB.getFacultyByUserID(user.getUser_ID()));
+                request.setAttribute("sections",sectionMap);
+            }   
+
+        }
+        else if(user != null && user.isStudent()) { //Is Student
+            Map<Course, Map<Section,Registration>> map = new HashMap<>();
+            Map<Section,Registration> map2 = new HashMap<>();
+            for (Registration tmp : RegistrationDB.getRegistrationByStudent(PrivilegeDB.getStudentIDByUserID(user.getUser_ID()))) {
+                int sectionNum = tmp.getSection_num();
+                map2.put(SectionDB.getSectionBySectionNum(sectionNum),tmp);
+                map.put(CourseDB.getCourseBySectionID(sectionNum),map2);                    
+            }
+            request.setAttribute("grades",map);
+            url = "/grades.jsp";
+        }
+        else {
             request.setAttribute("errormsg","User is not logged in");
         }
         
@@ -94,6 +89,5 @@ public class GradeBook extends HttpServlet {
         getServletContext()
             .getRequestDispatcher(url) //.getRequestRedirect for php
             .forward(request, response);
-    }
     }
 }
