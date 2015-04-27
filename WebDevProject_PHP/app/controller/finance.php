@@ -66,5 +66,20 @@ class finance extends Controller {
         }
         $this->view('finance/invoices', []);
     }
+    
+    public function payselect()
+    {
+        session_start();
+        if (isset($_POST['paymentoptions'])) {
+            if ($_POST['paymentoptions'] == 'new') {
+                echo $_POST['ccn'];
+            }else {
+                $test = json_decode($_POST['paymentoptions']);
+                echo $test->CREDITCARD_NUM;
+            }
+        }else {
+            echo 'fail';
+        }
+    }
        
 }

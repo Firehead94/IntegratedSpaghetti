@@ -1,34 +1,58 @@
-<form id="pay" action="payment" method="post" >
-    <script>
-    function selected() {
-        var url = window.location.href;
-        if (document.getElementById('select').value === 'new') {            
-            if (url.indexOf('?') > -1){
-                url = url.substring(0,url.indexOf('?')) + '?option=' + document.getElementById('select').value
-             }else{
-                 url += '?option=' + document.getElementById('select').value
-             }
-           
-            window.location.href = url;
-        } else {
-            window.location.href = url.substring(0,url.indexOf('?'));
+<script>
+    function set() 
+    {
+        var str = document.getElementById('select').value;
+        if (str !== '' && str !=='new') {
+            var json = document.getElementById('select').value;
+            var arr = JSON.parse(json);
+            document.getElementById('ccn').value = arr['CREDITCARD_NUM'];
+            document.getElementById('expdate').value = arr['EXP_DATE'];
+            document.getElementById('billingaddress').value = arr['BILLING_ADDRESS'];
+            document.getElementById('billingname').value = arr['BILLING_NAME'];
+            document.getElementById('billingcity').value = arr['BILLING_CITY'];
+            document.getElementById('billingstate').value = arr['BILLING_STATE'];
+            document.getElementById('billingzip').value = arr['BILLING_ZIP'];            
+            
+        }else {
+            document.getElementById('ccn').value = "";
+            document.getElementById('expdate').value = '';
+            document.getElementById('billingname').value = '';
+            document.getElementById('billingaddress').value = '';
+            document.getElementById('billingcity').value = '';
+            document.getElementById('billingstate').value = '';
+            document.getElementById('billingzip').value = '';
         }
-    }    
+    }
     
-    </script>
-        
+    function swap(json)
+    {
+        var ret = {};
+        for(var key in json){
+          ret[json[key]] = key;
+        }
+        return ret;
+    }
 
-    <select name="paymentoptions" form="pay" onchange="selected()" id="select">
+</script>
+
+<form id="pay" action="payselect" method="post" >
+    <select name="paymentoptions" form="pay" id="select" onclick="set()">
         <option value="">Select...</option>
         <?php foreach($_SESSION['financialinfo'] as $key => $val )  {?>
-        <option value="<?php $val['CREDITCARD_NUM'] ?>">CCN:<?php echo $val['CREDITCARD_NUM'] ?>
+        <option value='<?php echo json_encode($val) ?>' >CCN:<?php echo $val['CREDITCARD_NUM'] ?>
             &nbsp;&nbsp;EXP:<?php echo $val['EXP_DATE'] ?></option>
         <?php } ?>
-        <option value="new">New Payment Method</option>
+        <option value="new" >New Payment Option</option>
     </select>
     
-    <?php if(isset($_REQUEST['option']) && $_REQUEST['option'] = 'new') { ?>
-        place input form here for getting financial info for new card
-    <?php }?>
+    <input type="textbox" name="ccn" id="ccn" size='20' placeholder="Credit Card Number" required />
+    <input type="textbox" name="expdate" id="expdate" size='5' placeholder="EXP Date" required />
+    <input type="textbox" name="billingname" id="billingname" size='20' placeholder="Billing Name" required />
+    <input type="textbox" name="billingaddress" id="billingaddress" size='20' placeholder="Billing Address" required />
+    <input type="textbox" name="billingcity" id="billingcity" size='20' placeholder="Billing City" required />
+    <input type="textbox" name="billingstate" id="billingstate" size='20' placeholder="Billing State" required />
+    <input type="textbox" name="billingzip" id="billingzip" size='20' placeholder="Billing Zip" required />
+    <input type="submit" value="Submit" />
+
     
 </form>
