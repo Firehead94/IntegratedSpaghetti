@@ -18,6 +18,26 @@ import java.util.logging.Logger;
 public class RegistrationDB {
     
     
+    public static void register(int stu_id, int section_num) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query = "INSERT INTO REGISTRATION (STU_ID, SECTION_NUM) VALUES (?,?);";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, stu_id);
+            ps.setInt(2, section_num);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(RegistrationDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    
     public static int updateRegistrationByStudentIDAndSectionNum(int student_ID, int section_num, double gpa, String grade) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();

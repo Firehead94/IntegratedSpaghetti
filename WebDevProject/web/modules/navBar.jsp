@@ -12,7 +12,7 @@
     <ul>
         <li><a href="home">HOME</a></li>
         <li><a href="courseSelect">SELECT COURSES</a></li>
-        <li><a href="payment">PAYMENT</a></li>
+        <li><a href="#" onclick="window.open('http://localhost/WebDevProject_PHP/public/finance', 'Popup', 'width=400,height=600,scrollbars=yes,resizable=0');" title="popup">PAYMENT</a></li>
         <li><a href="#" onclick="window.open('http://localhost/WebDevProject_PHP/public/finance', 'Popup', 'width=400,height=600,scrollbars=yes,resizable=0');" title="popup">FINANCIAL RECORDS</a></li>
         <li><a href="grades">GRADES</a></li>
     </ul>

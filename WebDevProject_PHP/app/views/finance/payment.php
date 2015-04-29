@@ -35,9 +35,9 @@
 
 </script>
 
-<form id="pay" action="payselect" method="post" >
+<form id="pay" action="payselect" method="post" style="display: inline-block; text-align: left; zoom: 1.5">
     <select name="paymentoptions" form="pay" id="select" onclick="set()">
-        <option value="">Select...</option>
+        <option value="new">Select...</option>
         <?php foreach($_SESSION['financialinfo'] as $key => $val )  {?>
         <option value='<?php echo json_encode($val) ?>' >CCN:<?php echo $val['CREDITCARD_NUM'] ?>
             &nbsp;&nbsp;EXP:<?php echo $val['EXP_DATE'] ?></option>
@@ -51,8 +51,10 @@
     <input type="textbox" name="billingaddress" id="billingaddress" size='20' placeholder="Billing Address" required />
     <input type="textbox" name="billingcity" id="billingcity" size='20' placeholder="Billing City" required />
     <input type="textbox" name="billingstate" id="billingstate" size='20' placeholder="Billing State" required />
-    <input type="textbox" name="billingzip" id="billingzip" size='20' placeholder="Billing Zip" required />
+    <input type="textbox" name="billingzip" id="billingzip" size='20' placeholder="Billing Zip" required /><br />
     <input type="submit" value="Submit" />
 
     
 </form>
+
+<?php if(isset($_GET['error'])) echo 'Record already exists'; ?>

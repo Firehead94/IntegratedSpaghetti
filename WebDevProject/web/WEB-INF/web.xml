@@ -65,8 +65,8 @@
         <servlet-class>Servlets.ClearCart</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RemoveSelection</servlet-name>
-        <servlet-class>Servlets.RemoveCourse</servlet-class>
+        <servlet-name>UpdateSelection</servlet-name>
+        <servlet-class>Servlets.UpdateSelection</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FinalizeGrades</servlet-name>
@@ -142,8 +142,8 @@
         <url-pattern>/removeall</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RemoveSelection</servlet-name>
-        <url-pattern>/removeSelection</url-pattern>
+        <servlet-name>UpdateSelection</servlet-name>
+        <url-pattern>/updateSelection</url-pattern>
     </servlet-mapping>
     
             

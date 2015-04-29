@@ -7,9 +7,14 @@ package Servlets;
 
 import Beans.Course;
 import Beans.Section;
+import Beans.User;
+import DataBase.PrivilegeDB;
+import DataBase.RegistrationDB;
 import DataBase.SectionDB;
+import DataBase.StudentDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Justin
  */
-public class RemoveCourse extends HttpServlet {
+public class UpdateSelection extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -51,14 +56,29 @@ public class RemoveCourse extends HttpServlet {
             throws ServletException, IOException {
         String url = "/viewSelection.jsp";
         Map<String, String[]> map = request.getParameterMap();
+        User user = (User)request.getSession().getAttribute("user");
         
-        if (request.getSession().getAttribute("selectedlist") != null && map.get("removeCourses") != null) {
-            for (String str : map.get("removeCourses")) {
-                ((Map<Section, Course>)request.getSession().getAttribute("selectedlist")).remove(SectionDB.getSectionBySectionNum(Integer.parseInt(str)));              
-            }
-            
+        if (request.getSession().getAttribute("selectedlist") != null && map.get("selected") != null) {
+            Map<Section, Course> secMap = (Map<Section, Course>)request.getSession().getAttribute("selectedlist");
+            if (map.containsKey("Remove")) {
+                for (String str : map.get("removeCourses")) {
+                    secMap.remove(SectionDB.getSectionBySectionNum(Integer.parseInt(str)));              
+                }
+            }else if (map.containsKey("Register")) {
+                if (!PrivilegeDB.isStudentByUser(user)) {
+                    PrivilegeDB.newStudent(user.getUser_ID(), 12);
+                }
+                for (Map.Entry<Section, Course> tmp : secMap.entrySet()) {
+                    if(SectionDB.isAlreadyRegistered(user.getUser_ID(), tmp.getKey().getSection_num()));
+                        RegistrationDB.register(PrivilegeDB.getStudentIDByUserID(user.getUser_ID()), tmp.getKey().getSection_num());
+                }
+
+                StudentDB.updateBalance(user.getUser_ID(), StudentDB.getCourseCreditsAndCost(user.getUser_ID()));
+                request.getSession().removeAttribute("selectedlist");                
+                              
+            }           
         }
-        
+
         getServletContext()
             .getRequestDispatcher(url) 
             .forward(request, response);

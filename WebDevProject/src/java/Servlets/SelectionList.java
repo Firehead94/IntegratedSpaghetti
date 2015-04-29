@@ -68,7 +68,6 @@ public class SelectionList extends HttpServlet {
             for (String tmp : map.get("selectedCourses")) {
                 section = SectionDB.getSectionBySectionNum(Integer.parseInt(tmp));
                 selectedList.put(section, CourseDB.getCourseBySectionID(Integer.parseInt(tmp)));
-                System.out.println(section.getSection_num());
             }
         }else {
             error_msg = "No courses were selected.";

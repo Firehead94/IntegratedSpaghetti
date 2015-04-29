@@ -3,6 +3,14 @@
     Created on : Mar 19, 2015, 4:50:21 PM
     Author     : Justin
 --%>
+<script>
+function isLoggedIn(var user_id) {
+    
+    
+    
+}    
+</script>
+
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="d" uri="/WEB-INF/tlds/decoder" %>
@@ -28,7 +36,7 @@
                         Your cart is empty.
                     </c:if>
                     <c:if test="${requestScope.errormsg == null && sessionScope.selectedlist != null}">
-                        <form action="removeSelection" method="post">
+                        <form action="updateSelection" method="post">
                             <table>
                                 <thead>
                                     <tr>
@@ -51,11 +59,18 @@
                                         <td><d:day code="${course.key.getSection_day()}" /> <br /> <d:time time="${course.key.getSection_time_start()}" /> - <d:time time="${course.key.getSection_time_end()}" /></td>
                                         <td>${course.key.getSection_location()}</td>
                                         <td>${course.value.getCourse_credits()}</td>
-                                        <td><input type="checkbox" name="removeCourses" value="${course.key.getSection_num()}" /></td>
+                                        <td><input type="checkbox" name="selected" value="${course.key.getSection_num()}" /></td>
                                     </tr>
                                 </c:forEach>
                             </table>
-                            <input type="submit" value="Remove Selected" onclick="alert('Are you sure you want to remove these courses?')"/><button type="button" onclick="alert('Removed All Sections'); location.href = 'removeall'" value="Clear" >Clear</button>
+                            <c:if test="${sessionScope.user == null}" >
+                                <input type="button" name="Register" value="Register" onclick="alert('You need to be Logged in to register'); location.href" />
+                            </c:if>
+                            <c:if test="${sessionScope.user != null}" >
+                                <input type="submit" name="Register" value="Register" />
+                            </c:if>
+                            <input type="submit" name="Remove" value="Remove Selected" onclick="alert('Are you sure you want to remove these courses?')" />
+                            <input type="button" onclick="alert('Removed All Sections'); location.href = 'removeall'" value="Clear" />
                         </form>
                     </c:if>
                 </article>

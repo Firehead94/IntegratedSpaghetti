@@ -20,10 +20,11 @@
             <nav>                
                 <jsp:include page="modules/navBar.jsp" />
             </nav>
-
-
             <section class="content">
                 <article class="info">
+                    <p>Welcome to our CIS 2454 project. Hope you enjoy. To create an account please create one in the top left corner. You can then proceed to course registration via "SELECT COURSES".</p>
+                    
+                    <p>To use an already created account, run the SQL in a database called "integratedweb" and login with student account "booth.jesse:abc123" and teacher account "ingram.laura:abc123".</p>
                 </article>
             </section>  
         </section>

@@ -62,7 +62,8 @@ public class SelectCourse extends HttpServlet {
         
         if (!sectionNum.equals("")) {
             sectionList = new HashMap<Section, Course>();
-            sectionList.put(SectionDB.getSectionBySectionNum(Integer.parseInt(sectionNum)),CourseDB.getCourseBySectionID(Integer.parseInt(sectionNum)));
+            Section section = SectionDB.getSectionBySectionNum(Integer.parseInt(sectionNum));
+            sectionList.put(section ,CourseDB.getCourseBySectionID(Integer.parseInt(sectionNum)));
         } else if (!courseNum.equals("")){
             sectionList = new HashMap<Section, Course>();
             sectionList = SectionDB.getSectionsByCourseIDAndDeptIDAndSemester(Integer.parseInt(courseNum), DepartmentDB.getDeptIDFromAbr(dept), Integer.parseInt(semester));

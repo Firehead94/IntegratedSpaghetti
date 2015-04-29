@@ -65,6 +65,9 @@ public class Login extends HttpServlet {
                 url = "/index.jsp";
                 session.setAttribute("user",UserDB.getUserByUsername(username).get(0));                
             }
+            if (request.getSession().getAttribute("selectedlist") != null) {
+                request.getSession().removeAttribute("selectedlist"); 
+            }
 
             
         }

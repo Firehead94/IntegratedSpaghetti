@@ -21,6 +21,34 @@ import java.util.logging.Logger;
  */
 public class SectionDB {
     
+    public static boolean isAlreadyRegistered(int user_id, int section_num) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String query = "SELECT COUNT(*) FROM REGISTRATION " +
+                "WHERE STU_ID = ? AND SECTION_NUM = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, PrivilegeDB.getStudentIDByUserID(user_id));
+            ps.setInt(2, section_num);
+            rs = ps.executeQuery();
+            if (rs.next() && rs.getInt("COUNT(*)") > 0) {
+                return true;
+            }
+            
+            
+        } catch (SQLException e) {
+            Logger.getLogger(SectionDB.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+        return false;
+        
+    }
+    
     public static Section getSectionBySectionNum (int section_num) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();

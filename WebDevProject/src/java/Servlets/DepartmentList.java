@@ -45,9 +45,7 @@ public class DepartmentList extends HttpServlet {
             throws ServletException, IOException {
         String url = "/courseSelect.jsp";
         String[] depts = DepartmentDB.getDeptAbr();
-        
-        
-        System.out.println(depts);
+
         request.setAttribute("departmentlist", depts);
         getServletContext()
             .getRequestDispatcher(url) 
