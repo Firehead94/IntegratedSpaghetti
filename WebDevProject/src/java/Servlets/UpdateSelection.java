@@ -61,7 +61,7 @@ public class UpdateSelection extends HttpServlet {
         if (request.getSession().getAttribute("selectedlist") != null && map.get("selected") != null) {
             Map<Section, Course> secMap = (Map<Section, Course>)request.getSession().getAttribute("selectedlist");
             if (map.containsKey("Remove")) {
-                for (String str : map.get("removeCourses")) {
+                for (String str : map.get("selected")) {
                     secMap.remove(SectionDB.getSectionBySectionNum(Integer.parseInt(str)));              
                 }
             }else if (map.containsKey("Register")) {
