@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home</title>
-        
+
         <link rel="stylesheet" href="css/main.css" type="text/css" />
     </head>
     <body class="body">
@@ -56,6 +56,10 @@
                             </c:forEach>
                         </table>
                     </c:if>
+                    
+                    
+                            <% request.getParameter("grades"); %> test1 <br />
+        <%= request.getParameter("grades") %> test2 <br />
                 </article>
             </section>  
         </section>
